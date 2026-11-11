@@ -1,0 +1,54 @@
+{
+  "ranAt": "2026-11-10T19:00:16.652Z",
+  "evidenceBoundary": "Independent isolated controllers and source assertions; no simulator manipulation or implementation writes.",
+  "cases": [
+    {
+      "name": "pagination refresh session failure releases loadingMore",
+      "pass": true
+    },
+    {
+      "name": "moderation terminal risky response refreshes final state",
+      "pass": true
+    },
+    {
+      "name": "shared input has16px minimum logical font",
+      "pass": true
+    },
+    {
+      "name": "native WXML role property and selected filters",
+      "pass": true
+    },
+    {
+      "name": "settings row label expands native switch hit target",
+      "pass": true
+    },
+    {
+      "name": "member reason is preserved when filter discard is cancelled",
+      "pass": true
+    },
+    {
+      "name": "repeated reason choice preserves entered management reason",
+      "pass": true
+    },
+    {
+      "name": "admin reason input activates native leave protection",
+      "pass": true
+    },
+    {
+      "name": "member pull refresh cancellation retains reason and stops spinner",
+      "pass": true
+    },
+    {
+      "name": "member retry cancellation retains reason without refresh",
+      "pass": true
+    },
+    {
+      "name": "member refresh confirmed discard clears reason before loading",
+      "pass": true
+    },
+    {
+      "name": "press phase wins normal shorthand cascade at60ms with120ms recovery",
+      "pass": true
+    }
+  ]
+}

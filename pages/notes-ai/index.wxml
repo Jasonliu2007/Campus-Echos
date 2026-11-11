@@ -1,0 +1,40 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <campus-hero title="AI 帮我挑笔记" subtitle="不评绝对好坏，只看是否适合你。" icon="book" small />
+  <view class="content">
+    <view class="notice">演示推荐 · 此页展示点选流程，尚未接入真实模型或资料库。</view>
+    <view class="section">
+      <view class="label">你想找哪门课的笔记？</view>
+      <view class="row-wrap">
+        <button wx:for="{{courses}}" wx:key="*this" class="chip {{course === item ? 'active' : ''}}" data-key="course"
+          data-value="{{item}}" bindtap="choose" aria-label="课程：{{item}}，{{course === item ? '已选择' : '未选择'}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{item}}</button>
+      </view>
+    </view>
+    <view class="section">
+      <view class="label">学习目的是什么？</view>
+      <view class="row-wrap">
+        <button wx:for="{{purposes}}" wx:key="*this" class="chip {{purpose === item ? 'active' : ''}}"
+          data-key="purpose" data-value="{{item}}" bindtap="choose" aria-label="学习目的：{{item}}，{{purpose === item ? '已选择' : '未选择'}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{item}}
+        </button>
+      </view>
+    </view>
+    <view class="section">
+      <view class="label">目前的学习基础？</view>
+      <button wx:for="{{bases}}" wx:key="*this" class="radio-row {{basis === item ? 'active' : ''}}" data-key="basis"
+        data-value="{{item}}" bindtap="choose" aria-role="radio" aria-label="学习基础：{{item}}，{{basis === item ? '已选择' : '未选择'}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{item}}
+        <view class="radio-dot" />
+      </button>
+    </view>
+    <button class="primary full" bindtap="recommend" hover-class="press" hover-start-time="0" hover-stay-time="120">看推荐笔记</button>
+    <view wx:if="{{result}}" id="ai-result" class="card result">
+      <view class="between"><text class="name">{{course}} · 入门与易错点笔记</text><text class="demo">演示结果</text></view>
+      <view class="card-copy result-copy">针对“{{basis}}”，适合在“{{purpose}}”时先梳理概念，再用典型题检查理解。</view>
+      <view class="result-line"><image class="icon-small" src="/static/campus/check.svg" aria-hidden="true" /><text
+          class="sub">先讲概念，再展示解题过程</text></view>
+      <view class="result-line"><image class="icon-small" src="/static/campus/check.svg" aria-hidden="true" /><text
+          class="sub">章节索引清楚，方便定位薄弱点</text></view>
+      <view class="result-line"><image class="icon-small" src="/static/campus/check.svg" aria-hidden="true" /><text
+          class="sub">附易错提醒，适合按需补漏</text></view>
+      <button class="secondary full" bindtap="unavailable" data-label="推荐资料试读" hover-class="press" hover-start-time="0" hover-stay-time="120">了解开放情况</button>
+    </view>
+  </view>
+</view>

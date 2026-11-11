@@ -1,0 +1,37 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="content with-actions">
+    <campus-state wx:if="{{loading}}" kind="loading" title="正在读取审核内容" description="请稍候。" />
+    <campus-state wx:elif="{{!post}}" kind="error" title="暂时无法处理" description="{{error}}" action="重新加载"
+      bind:action="load" />
+    <block wx:else>
+      <view class="between"><text class="tag {{post.status}}">{{post.statusLabel}}</text><text
+          class="sub">{{post.category}}</text></view>
+      <view class="detail-title">{{post.title || '已删除的帖子'}}</view>
+      <view class="meta">
+        <view class="avatar" aria-hidden="true">{{post.authorName[0]}}</view>
+        <view>
+          <view class="name">{{post.authorName}}</view>
+          <view class="sub">{{post.displayTime}}</view>
+        </view>
+      </view>
+      <view class="review-content review-body" user-select>{{post.content || '内容已删除，不再展示。'}}</view>
+      <view wx:if="{{post.reviewReason}}" class="notice warning status-block">处理说明：{{post.reviewReason}}</view>
+      <block wx:if="{{post.status === 'pending' || post.status === 'published'}}">
+        <label class="label" for="review-reason">处理说明</label><textarea id="review-reason" focus="{{focusReason}}" aria-invalid="{{!!reasonError}}" aria-describedby="review-reason-error" class="textarea short" value="{{reason}}" bindinput="input" maxlength="-1" disabled="{{processing}}" placeholder="驳回或下架时必填，2–200 字" adjust-position cursor-spacing="32" aria-label="审核处理说明，2至200字"/>
+        <view wx:if="{{reasonError}}" id="review-reason-error" class="field-error" aria-role="text">{{reasonError}}</view><view class="help-copy status-block">核对是否涉及违规、个人敏感信息、学术不端或骚扰。人工批准仍需通过微信文本审核。</view>
+      </block>
+      <view wx:if="{{error}}" class="notice error" aria-role="text">{{error}}</view>
+      <view wx:if="{{post.status !== 'pending' && post.status !== 'published'}}" class="notice">
+        此内容已完成处理。返回列表可继续查看其他内容。</view>
+    </block>
+  </view>
+  <view wx:if="{{post && admin && (post.status === 'pending' || post.status === 'published')}}"
+    class="sticky-actions">
+    <button wx:if="{{post.status === 'pending'}}" class="danger" data-decision="reject" bindtap="decide"
+      disabled="{{processing}}" hover-class="press" hover-start-time="0" hover-stay-time="120">驳回</button>
+    <button wx:if="{{post.status === 'pending'}}" class="primary" data-decision="approve" bindtap="decide"
+      disabled="{{processing}}" loading="{{processing}}" hover-class="press" hover-start-time="0" hover-stay-time="120">审核通过</button>
+    <button wx:if="{{post.status === 'published'}}" class="danger" data-decision="hide" bindtap="decide"
+      disabled="{{processing}}" loading="{{processing}}" hover-class="press" hover-start-time="0" hover-stay-time="120">下架这条内容</button>
+  </view>
+</view>

@@ -1,0 +1,31 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <campus-hero title="学习资料广场" subtitle="让认真整理的笔记，被需要的人找到。" icon="book" />
+  <view class="content tab-content">
+    <view class="notice">演示内容 · 资料、价格与人物仅用于展示，交易尚未开放。</view>
+    <button class="search" bindtap="unavailable" data-label="资料搜索" hover-class="press" hover-start-time="0" hover-stay-time="120"><image class="icon" src="/static/campus/search.svg"
+        aria-hidden="true" /><text>搜索课程、笔记</text></button>
+    <view class="toolbar"><text class="section-title">全部资料</text>
+      <button class="text-button" bindtap="unavailable" data-label="上传资料" hover-class="press" hover-start-time="0" hover-stay-time="120">上传资料</button>
+    </view>
+    <button class="list-link ai-entry" bindtap="goAI" hover-class="press" hover-start-time="0" hover-stay-time="120"><image class="icon" src="/static/campus/spark.svg"
+        aria-hidden="true" />
+      <view class="grow">
+        <view class="name">AI 帮我挑笔记</view>
+        <view class="sub">按学习目的，挑适合你的资料</view>
+      </view><image class="icon-small" src="/static/campus/next.svg" aria-hidden="true" />
+    </button>
+    <view class="grid-two">
+      <view wx:for="{{materials}}" wx:key="id" class="card resource-card">
+        <view class="book-cover {{item.color}}"><image class="icon" src="/static/campus/book.svg"
+            aria-hidden="true" /><text class="book-cover-title">{{item.course}}</text><text class="sub">原创学习笔记</text>
+        </view>
+        <view class="book-info">
+          <view class="card-title">{{item.title}}</view><text class="sub">{{item.badge}} · {{item.pages}} 页</text>
+          <view class="between"><text class="price">¥{{item.price}}</text>
+            <button class="text-button" bindtap="unavailable" data-label="资料试读" hover-class="press" hover-start-time="0" hover-stay-time="120">试读</button>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

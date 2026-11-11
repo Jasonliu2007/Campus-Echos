@@ -1,0 +1,68 @@
+ .hero {
+   position: relative;
+   min-height: 346rpx;
+   overflow: hidden;
+   border-radius: 0 0 52rpx 52rpx;
+   background: #E4F3FC
+ }
+
+ .campus-image {
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   inset: 0;
+   object-position: right center
+ }
+
+ .overlay {
+   position: absolute;
+   inset: 0;
+   background: linear-gradient(90deg, rgba(232, 246, 255, .98), rgba(232, 246, 255, .94) 38%, rgba(232, 246, 255, .25) 100%)
+ }
+
+ .hero-copy {
+   position: relative;
+   padding: 38rpx 32rpx 48rpx;
+   max-width: 85%;
+   color: #102D46
+ }
+
+ .brand {
+   display: flex;
+   align-items: center;
+   gap: 12rpx;
+   font-size: 24rpx;
+   font-weight: 600;
+   color: #376C91
+ }
+
+ .brand-icon {
+   width: 32rpx;
+   height: 32rpx
+ }
+
+ .title {
+   font-size: 48rpx;
+   line-height: 1.35;
+   font-weight: 700;
+   margin: 22rpx 0 14rpx
+ }
+
+ .subtitle {
+   font-size: 26rpx;
+   line-height: 1.6;
+   color: #416783;
+   max-width: 520rpx
+ }
+
+ .small {
+   min-height: 300rpx
+ }
+
+ .small .hero-copy {
+   padding-bottom: 34rpx
+ }
+
+ .small .title {
+   font-size: 44rpx
+ }

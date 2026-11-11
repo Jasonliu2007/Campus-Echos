@@ -1,0 +1,43 @@
+{
+  "version": "1.1",
+  "screens": 36,
+  "checks": {
+    "mainNavigation": "pass",
+    "aiSelectionAndResult": "pass",
+    "characterCounter": "pass",
+    "reducedMotion": "pass",
+    "categoryFilter": "pass",
+    "confirmAndDelete": "pass",
+    "requiredValidation": "pass",
+    "publishPendingResult": "pass",
+    "reviewRejectReason": "pass",
+    "reducedTransparency": "pass",
+    "runtimeErrors": [],
+    "mobileViewport": {
+      "width": 375,
+      "viewport": 375,
+      "body": 375
+    },
+    "contrastRatios": {
+      "正文白底": 14.13,
+      "辅助白底": 5.13,
+      "白字蓝按钮": 4.74,
+      "青色选中字": 8.12
+    },
+    "multiViewport": {
+      "cases": 108,
+      "widths": [
+        320,
+        375,
+        430
+      ],
+      "overflow": 0
+    },
+    "largeFontApproximation": "390px no overflow; not native dynamic type",
+    "disabledDecorativeLoops": true
+  },
+  "limitations": [
+    "不等同于微信小程序实现验收",
+    "真机键盘、读屏及云服务需后续验证"
+  ]
+}

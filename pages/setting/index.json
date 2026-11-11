@@ -1,9 +1,10 @@
 {
-  "navigationStyle": "custom",
+  "navigationBarTitleText": "设置与帮助",
+  "navigationStyle": "default",
   "usingComponents": {
-    "t-navbar": "tdesign-miniprogram/navbar/navbar",
-    "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
-    "t-cell": "tdesign-miniprogram/cell/cell",
-    "t-icon": "tdesign-miniprogram/icon/icon"
-  }
+    "campus-hero": "/components/campus-hero/index",
+    "campus-state": "/components/campus-state/index",
+    "campus-post": "/components/campus-post/index"
+  },
+  "enablePullDownRefresh": false
 }

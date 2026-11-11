@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": {
+        "requestID": "5aca03ca-2264-417b-a861-c29f3aba236c",
+        "version": "wall-20261111-v1.1",
+        "count": 0,
+        "hasMore": false
+      }
+    }
+  }
+}

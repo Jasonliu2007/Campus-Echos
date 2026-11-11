@@ -1,0 +1,35 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <campus-hero title="先从小范围，认真做好" subtitle="校园回声目前仅向获准账号开放。" icon="shield" small />
+  <view class="content">
+    <campus-state wx:if="{{loading}}" kind="loading" title="正在获取内测状态" description="请稍候。" />
+    <block wx:elif="{{access === 'none'}}">
+      <view class="notice">内测资格由管理员人工批准，不代表学生实名认证。</view>
+      <label class="label" for="nickname">怎么称呼你？ <text class="required">*</text></label>
+      <input id="nickname" focus="{{focusNickname}}" class="input" value="{{nickname}}" bindinput="input" data-key="nickname" maxlength="-1"
+        disabled="{{submitting}}" placeholder="填写昵称，2–16 字" aria-label="昵称，2至16字" aria-invalid="{{!!nicknameError}}" aria-describedby="nickname-error" />
+      <view wx:if="{{nicknameError}}" id="nickname-error" class="field-error" aria-role="text">{{nicknameError}}</view><label class="label" for="apply-reason">想参与什么测试？ <text class="required">*</text></label><textarea id="apply-reason" focus="{{focusReason}}" class="textarea short" value="{{reason}}" bindinput="input" data-key="reason" maxlength="-1" disabled="{{submitting}}" placeholder="例如：校园墙发帖与阅读体验，2–200 字" adjust-position cursor-spacing="32" aria-label="内测申请说明，2至200字" aria-invalid="{{!!reasonError}}" aria-describedby="reason-error"/>
+      <view wx:if="{{reasonError}}" id="reason-error" class="field-error" aria-role="text">{{reasonError}}</view><checkbox-group bindchange="terms">
+        <label class="checkline">
+          <checkbox value="agreed" checked="{{terms}}" disabled="{{submitting}}" color="#0878BD" />
+          <text>我已了解封闭内测范围，愿意遵守内容规则，不发布他人敏感信息。</text>
+        </label>
+      </checkbox-group>
+      <view wx:if="{{error}}" class="field-error" aria-role="text">{{error}}</view>
+      <button class="primary full" bindtap="submit" loading="{{submitting}}" disabled="{{submitting}}"
+        hover-class="press" hover-start-time="0" hover-stay-time="120">{{submitting ? '正在提交申请…' : '提交内测申请'}}</button>
+      <view class="footnote">申请提交后，可在此页查看处理状态。</view>
+    </block>
+    <block wx:elif="{{member && access !== 'error'}}">
+      <campus-state kind="{{access === 'approved' ? 'success' : 'access'}}"
+        title="{{access === 'approved' ? '内测资格已获准' : access === 'pending' ? '申请已收到' : access === 'rejected' ? '本次申请未获批准' : '内测资格已撤销'}}"
+        description="{{access === 'approved' ? '你现在可以使用真实文字校园墙。' : access === 'pending' ? '管理员正在核对你的申请。批准后即可使用真实校园墙。' : (member.reviewReason || '当前账号暂不能使用校园墙。如有疑问，请向项目负责人反馈。')}}"
+        action="刷新资格状态" bind:action="refresh" />
+      <button wx:if="{{access === 'approved'}}" class="primary full" bindtap="wall" hover-class="press" hover-start-time="0" hover-stay-time="120">进入校园墙</button>
+      <button wx:if="{{access === 'rejected' || access === 'revoked'}}" class="primary full" bindtap="explain" hover-class="press" hover-start-time="0" hover-stay-time="120">申请重新核对
+      </button>
+      <view wx:if="{{error}}" class="notice error">{{error}}</view>
+      <button class="secondary full" bindtap="my" hover-class="press" hover-start-time="0" hover-stay-time="120">返回我的</button>
+    </block>
+    <campus-state wx:else kind="error" title="暂时无法获取资格" description="{{error}}" action="重新加载" bind:action="refresh" />
+  </view>
+</view>

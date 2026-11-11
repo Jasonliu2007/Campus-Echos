@@ -1,0 +1,10 @@
+{
+  "filesChecked": 20,
+  "syntaxFailures": [],
+  "routes": 13,
+  "gitDiffCheck": true,
+  "latestClientTests": 27,
+  "latestServerTests": 19,
+  "independentBoundaryChecks": 9,
+  "remainingFailures": 0
+}

@@ -1,0 +1,38 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view wx:if="{{result}}" class="content">
+    <campus-state kind="{{result.status === 'published' ? 'success' : 'pending'}}"
+      title="{{result.status === 'published' ? '发布成功，已出现在校园墙' : result.status === 'pending' ? '已提交，等待人工复核' : '这条发布请求已有结果'}}"
+      description="{{result.status === 'published' ? '同学现在可以读到你的帖子。你可以在“我的帖子”查看或删除。' : result.status === 'pending' ? '帖子尚未公开，处理结果会更新在“我的帖子”，无需重复提交。' : '本次重试未重复创建帖子。请在“我的帖子”查看最新审核、下架或删除状态。'}}"
+      action="查看我的帖子" bind:action="mine" />
+    <button class="secondary full" bindtap="wall" hover-class="press" hover-start-time="0" hover-stay-time="120">返回校园墙</button>
+  </view>
+  <block wx:else>
+    <view class="content with-actions">
+      <campus-state wx:if="{{loading}}" kind="loading" title="正在核对内测资格" description="请稍候。" />
+      <campus-state wx:elif="{{!allowed}}" kind="access" title="需要获准的内测资格"
+        description="{{error || '当前账号暂不能发布。草稿会保存在本机。'}}" action="查看内测资格" bind:action="goAccess" />
+      <block wx:else>
+        <view class="notice">目前仅支持文字帖。图片、匿名、评论与点赞将在后续开放。</view>
+        <view class="label">选择分区 <text class="required">*</text></view>
+        <picker range="{{categories}}" bindchange="category" disabled="{{submitting}}">
+          <view class="picker between" aria-label="当前分区：{{category}}">{{category}}<image class="icon-small"
+              src="/static/campus/next.svg" aria-hidden="true" /></view>
+        </picker>
+        <label class="label" for="post-title">标题 <text class="required">*</text></label>
+        <input id="post-title" focus="{{focusTitle}}" class="input" value="{{title}}" data-key="title" bindinput="input"
+          disabled="{{submitting}}" maxlength="-1" placeholder="一句话说清你想分享的事" aria-label="帖子标题，最多60字" aria-describedby="title-error" aria-invalid="{{!!titleError}}" />
+        <view wx:if="{{titleError}}" id="title-error" class="field-error" aria-role="text">{{titleError}}</view><view class="field-hint"><text>清晰的标题更容易被同学看到</text><text class="counter">{{titleCount}} / 60</text></view>
+        <label class="label" for="post-body">正文 <text class="required">*</text></label><textarea id="post-body" focus="{{focusContent}}" class="textarea" value="{{content}}" data-key="content" bindinput="input" disabled="{{submitting}}" maxlength="-1" placeholder="说说发生了什么，或你需要什么帮助" aria-label="帖子正文，最多2000字" aria-describedby="content-error" aria-invalid="{{!!contentError}}" adjust-position show-confirm-bar cursor-spacing="32"/>
+        <view wx:if="{{contentError}}" id="content-error" class="field-error" aria-role="text">{{contentError}}</view><view class="field-hint"><text>不发布个人敏感信息和违规内容</text><text class="counter">{{contentCount}} / 2000</text></view>
+        <view wx:if="{{error}}" class="field-error" aria-role="text">{{error}}</view>
+        <view class="rule" />
+        <view class="help-copy">发布后先经过微信内容审核。需人工复核的帖子显示“待审核”，通过后才出现在校园墙。网络超时后原样重试可避免重复发帖。</view>
+      </block>
+    </view>
+    <view class="sticky-actions">
+      <button class="secondary" bindtap="cancel" disabled="{{submitting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">取消</button>
+      <button class="primary" bindtap="submit" loading="{{submitting}}" disabled="{{submitting || loading || !allowed}}"
+        hover-class="press" hover-start-time="0" hover-stay-time="120">{{submitting ? '正在提交审核…' : error ? '重试发布' : '发布'}}</button>
+    </view>
+  </block>
+</view>

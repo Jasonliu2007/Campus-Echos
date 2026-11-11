@@ -1,0 +1,66 @@
+{
+  "existingFileProtection": {
+    "unexpectedChanges": [],
+    "missing": [],
+    "checked": 126
+  },
+  "configOnlyAddsTwoMdIgnores": true,
+  "existingLogPreserved": true,
+  "readmeOnlyAddsHandoffEntry": true,
+  "archivedSourceFiles": {
+    "count": 95,
+    "mismatches": []
+  },
+  "prototypeScreens": 36,
+  "markdownLinks": {
+    "count": 75,
+    "broken": []
+  },
+  "prototypeHtmlMissingAssets": [],
+  "readOnlyCloudPreflight": {
+    "exitCode": 0,
+    "result": {
+      "mode": "read-only-preflight",
+      "version": "wall-20261111-v1.1",
+      "appid": "wxa16f2146b48a2c2e",
+      "env": "cloud1-d7gueyve330686b55",
+      "function": "xiaopinWall",
+      "collections": [
+        {
+          "name": "xiaopin_trial_posts",
+          "indexCount": 4
+        },
+        {
+          "name": "xiaopin_members",
+          "indexCount": 2
+        },
+        {
+          "name": "xiaopin_moderation_audit",
+          "indexCount": 0
+        }
+      ],
+      "permissions": {
+        "read": false,
+        "write": false
+      },
+      "serverConfiguration": {
+        "timeoutSeconds": 20,
+        "environmentVariable": "BOOTSTRAP_ADMIN_OPENID"
+      },
+      "note": "No cloud changes were made. Use docs/cloud-setup.md for explicit resource and deployment steps."
+    }
+  },
+  "gitDiffCheck": {
+    "exitCode": 0,
+    "output": ""
+  },
+  "scope": {
+    "cloudMutations": false,
+    "businessTestsRerun": false,
+    "simulatorRerun": false,
+    "physicalDeviceRerun": false,
+    "historicalEvidenceOnly": true
+  },
+  "checkedAtShanghai": "2026-11-11 10:11:36",
+  "passed": true
+}

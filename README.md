@@ -1,70 +1,45 @@
-# TDesign 通用页面模板
+# 校园回声
 
-基于 TDesign 打造的通用页面模板，包含通用的登陆注册、个人中心、设置中心、信息流等等功能。
+**新 AI 接手先读：[项目交接](项目交接.md) → [工程协作规则](AGENTS.md) → [开发日志最近记录](开发日志.md)。** 每批改动同步更新交接与日志；当前原型与历史验收已保存在工程内。
 
-## 模版功能预览
+微信原生小程序，基于 TDesign 社区模板继续开发。当前交付为指定账号封闭内测：真实文字校园墙、成员审批与人工审核；学习资料、AI 挑笔记、找搭子提供明确标注的演示交互。用户界面统一使用“校园回声”，历史技术名称 `xiaopinWall` 保留。
 
-### 首页
+## 启动与设计
 
-<div style="display: flex">
-  <img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/home-1.png">
-  <img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/home-2.png">
-</div>
+用微信开发者工具打开本目录。AppID 已配置；云环境读取 `config.js`，当前为 `cloud1-d7gueyve330686b55`，`isMock: false`。工程保留构建好的 `miniprogram_npm`；更新依赖时运行 `npm ci` 后在工具中构建 npm。
 
-### 信息发布
+四个主入口为校园墙、学习资料、找搭子、我的。AI 是学习资料二级页；管理入口按真实云端资格显示。`app.json` 登记 13 个页面，其余模板代码不在当前页面路由中运行。
 
-<img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/publish-1.png">
+原型版本 v1.1，规范见 `design-system/campus-echo/MASTER.md`。页面变动先同步原型，再实现并审计。玻璃只用于导航、搜索和操作层，内容卡片保持实白；不支持背景模糊时降级为近白实色。“设置与帮助”中可分别启用减弱动态和减少透明度。
 
-### 搜索页
+## 本地检查
 
-<img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/search-1.png">
-
-### 个人中心
-<div style="display: flex">
-  <img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/user-1.png">
-  <img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/user-2.png">
-  <img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/user-3.png">
-</div>
-
-
-### 设置中心
-
-<img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/setting-1.png">
-
-### 消息中心
-
-<img width="375" alt="image" src="https://tdesign.gtimg.com/miniprogram/template/message-1.png">
-
-
-## 开发预览
-### 目录结构（TODO: 生成目录结构树）
-
-
-### 在开发者工具中预览
-
-```bash
-# 安装项目依赖
-npm install
-
+```sh
+npm test
+node scripts/cloud-setup.mjs
+git diff --check
 ```
 
-打开[微信开发者工具](https://mp.weixin.qq.com/debug/wxadoc/dev/devtools/download.html)，导入整个项目，构建 npm 包，就可以预览示例了。
+测试覆盖服务端审核、权限、幂等和并发，以及前端草稿、异步列表、重复提交和辅助设置。内存仓库测试不能替代真实云环境验证。`cloud-setup.mjs` 仅检查部署清单，不修改云资源。
 
-### 基础库版本
+## 云开发
 
-最低基础库版本`^2.6.5`
+详见 `docs/cloud-setup.md` 与 `docs/cloud-api.md`。当前服务版本 `wall-20261111-v1.1`，唯一函数 `xiaopinWall`。三集合 `xiaopin_trial_posts`、`xiaopin_members`、`xiaopin_moderation_audit` 的客户端读写均关闭；全部数据操作通过逐项校验权限的云函数完成。初始管理员配置只能留在服务器端，不提交身份配置。
 
+云函数发布前先保存线上快照，发布后下载源文件比对并检查真实 session 返回版本。微信文本审核异常或结果未通过时不能公开；人工复核同样不能绕过微信审核。每次设计、代码和部署改动立即追加 `开发日志.md`，使用上海时间，记明原型版本、证据、待测和回退方法。
 
-## 贡献成员
+## 复测重点
 
-<a href="https://github.com/TDesignOteam/tdesign-miniprogram-starter/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=TDesignOteam/tdesign-miniprogram-starter" />
-</a>
+1. 当前管理员发布一条带“验收”的正常文字帖，刷新、退出重进并打开详情，确认来自真实云端；验收后通过作者删除接口清理。
+2. 用第二个账号申请内测，管理员批准后可读写，撤销后下一次请求被拒绝；普通成员不能调用管理操作或查看他人未公开内容。
+3. 检查待审核、驳回、下架、删除状态及并发冲突；分别验证微信实际 review/risky/异常分支。不可用本地模拟结果替代此项。
+4. 检查切换分区、每页20条分页、快速重复点击、失败后输入保留、返回导航与两个辅助设置保存。
+5. 在 iOS/Android 真机检查软键盘、安全区、小屏、大字体、读屏及模糊效果性能。
 
-## 反馈
+交付记录严格区分本地检查、模拟器真实云调用和真机结果。当前未完成真机与第二账号验证，不应直接视为公开发布就绪。
 
-有任何问题，建议通过 [Github issues](https://github.com/TDesignOteam/tdesign-miniprogram-starter/issues) 反馈。
+## 版本与回退
 
-## 开源协议
+接手时已有未提交接入和发帖代码，保留在本地工作区。本轮未向远程推送；`origin` 仍指向 TDesign 上游，团队远程仓库尚未绑定。不要把业务代码推送到模板上游。回退仅恢复对应批次文件或函数快照，保留数据库、去重记录及审核日志，不开放集合客户端权限。
 
-TDesign 遵循 [MIT 协议](https://github.com/TDesignOteam/tdesign-miniprogram-starter/blob/main/LICENSE)。
+本项目源于 [TDesign 小程序社区模板](https://github.com/TDesignOteam/tdesign-miniprogram-starter)，原作者署名与 [MIT 许可](LICENSE) 保留。

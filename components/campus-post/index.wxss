@@ -1,0 +1,29 @@
+@import "../campus-ui/page.wxss";
+
+.excerpt {
+  font-size: 28rpx;
+  color: #567184;
+  line-height: 1.7;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  word-break: break-word
+}
+
+.post-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 20rpx;
+  gap: 12rpx
+}
+
+.reason {
+  font-size: 26rpx;
+  background: #FFF4E5;
+  border-radius: 16rpx;
+  padding: 16rpx;
+  margin-top: 20rpx;
+  color: #775A1E
+}

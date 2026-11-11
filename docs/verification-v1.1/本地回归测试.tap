@@ -1,0 +1,286 @@
+TAP version 13
+# Subtest: 成员筛选取消放弃时保留原因；确认才切换并解除离开提醒
+ok 1 - 成员筛选取消放弃时保留原因；确认才切换并解除离开提醒
+  ---
+  duration_ms: 4.507917
+  type: 'test'
+  ...
+# Subtest: 重复选择同一成员处理不会清输入；另目标及取消可拒绝放弃
+ok 2 - 重复选择同一成员处理不会清输入；另目标及取消可拒绝放弃
+  ---
+  duration_ms: 0.608125
+  type: 'test'
+  ...
+# Subtest: 成员处理失败保留说明，成功才清输入和离开提醒
+ok 3 - 成员处理失败保留说明，成功才清输入和离开提醒
+  ---
+  duration_ms: 1.578
+  type: 'test'
+  ...
+# Subtest: 管理原因离开提醒仅由当前表单启用并在清空或卸载时解除
+ok 4 - 管理原因离开提醒仅由当前表单启用并在清空或卸载时解除
+  ---
+  duration_ms: 1.205375
+  type: 'test'
+  ...
+# Subtest: 帖子审核失败保留说明，成功才解除离开提醒
+ok 5 - 帖子审核失败保留说明，成功才解除离开提醒
+  ---
+  duration_ms: 1.265084
+  type: 'test'
+  ...
+# Subtest: 成员原因未提交时取消刷新保留，确认刷新才清除，断网保留已读列表
+ok 6 - 成员原因未提交时取消刷新保留，确认刷新才清除，断网保留已读列表
+  ---
+  duration_ms: 0.594125
+  type: 'test'
+  ...
+# Subtest: 成员正在处理或确认中不刷新，且结束下拉指示
+ok 7 - 成员正在处理或确认中不刷新，且结束下拉指示
+  ---
+  duration_ms: 0.383583
+  type: 'test'
+  ...
+# Subtest: 重复发布只发送一次请求；超时后保留输入和去重键，成功后清草稿
+ok 8 - 重复发布只发送一次请求；超时后保留输入和去重键，成功后清草稿
+  ---
+  duration_ms: 3.700083
+  type: 'test'
+  ...
+# Subtest: 超时后改动内容会使用新的发布去重键
+ok 9 - 超时后改动内容会使用新的发布去重键
+  ---
+  duration_ms: 0.592875
+  type: 'test'
+  ...
+# Subtest: 草稿存储失败时保存离开仍留在原页，恢复存储后才导航
+ok 10 - 草稿存储失败时保存离开仍留在原页，恢复存储后才导航
+  ---
+  duration_ms: 0.494625
+  type: 'test'
+  ...
+# Subtest: 草稿恢复保留分区、正文及既有请求键
+ok 11 - 草稿恢复保留分区、正文及既有请求键
+  ---
+  duration_ms: 0.920458
+  type: 'test'
+  ...
+# Subtest: 发布字段错误保留输入并聚焦首个错误，超过Unicode字数不请求云端
+ok 12 - 发布字段错误保留输入并聚焦首个错误，超过Unicode字数不请求云端
+  ---
+  duration_ms: 0.4275
+  type: 'test'
+  ...
+# Subtest: 新分区先返回时，旧分区晚返回不能覆盖当前列表
+ok 13 - 新分区先返回时，旧分区晚返回不能覆盖当前列表
+  ---
+  duration_ms: 3.160208
+  type: 'test'
+  ...
+# Subtest: 分页失败保留已读内容和游标，重试去重并追加下一页
+ok 14 - 分页失败保留已读内容和游标，重试去重并追加下一页
+  ---
+  duration_ms: 0.526416
+  type: 'test'
+  ...
+# Subtest: 重复加载下一页只发一次云请求
+ok 15 - 重复加载下一页只发一次云请求
+  ---
+  duration_ms: 0.375875
+  type: 'test'
+  ...
+# Subtest: 资格撤销后清除缓存，撤销前在途列表晚到也不能重新显示
+ok 16 - 资格撤销后清除缓存，撤销前在途列表晚到也不能重新显示
+  ---
+  duration_ms: 0.4825
+  type: 'test'
+  ...
+# Subtest: 读帖被拒绝时清除可见缓存并立即转资格撤销状态
+ok 17 - 读帖被拒绝时清除可见缓存并立即转资格撤销状态
+  ---
+  duration_ms: 0.440458
+  type: 'test'
+  ...
+# Subtest: 普通网络刷新失败保留现有帖子并提供错误信息
+ok 18 - 普通网络刷新失败保留现有帖子并提供错误信息
+  ---
+  duration_ms: 0.362625
+  type: 'test'
+  ...
+# Subtest: 申请未提交时提醒离开，失败保留输入；提交成功后清除提醒
+ok 19 - 申请未提交时提醒离开，失败保留输入；提交成功后清除提醒
+  ---
+  duration_ms: 0.843334
+  type: 'test'
+  ...
+# Subtest: 重复删除点击只弹出一个确认，取消不会发送删除请求
+ok 20 - 重复删除点击只弹出一个确认，取消不会发送删除请求
+  ---
+  duration_ms: 0.438375
+  type: 'test'
+  ...
+# Subtest: 两个辅助设置独立保存并在重新进入时恢复
+ok 21 - 两个辅助设置独立保存并在重新进入时恢复
+  ---
+  duration_ms: 0.897583
+  type: 'test'
+  ...
+# Subtest: 设置存储失败恢复原值并报错，重试成功不影响另一设置
+ok 22 - 设置存储失败恢复原值并报错，重试成功不影响另一设置
+  ---
+  duration_ms: 0.358125
+  type: 'test'
+  ...
+# Subtest: 快速连续导航不重复跳转，完成后解锁并同步两个辅助设置
+ok 23 - 快速连续导航不重复跳转，完成后解锁并同步两个辅助设置
+  ---
+  duration_ms: 0.489916
+  type: 'test'
+  ...
+# Subtest: 审核违规终态响应后重新读取状态并解除处理中状态
+ok 24 - 审核违规终态响应后重新读取状态并解除处理中状态
+  ---
+  duration_ms: 1.680917
+  type: 'test'
+  ...
+# Subtest: 审核及成员处理原因缺失时聚焦错误且不提交
+ok 25 - 审核及成员处理原因缺失时聚焦错误且不提交
+  ---
+  duration_ms: 0.606917
+  type: 'test'
+  ...
+# Subtest: 分页中刷新资格失败会解锁；旧响应丢弃且保留游标可重试
+ok 26 - 分页中刷新资格失败会解锁；旧响应丢弃且保留游标可重试
+  ---
+  duration_ms: 0.387333
+  type: 'test'
+  ...
+# Subtest: 资格撤销会清空分页游标并释放旧分页状态
+ok 27 - 资格撤销会清空分页游标并释放旧分页状态
+  ---
+  duration_ms: 0.369167
+  type: 'test'
+  ...
+# Subtest: context APPID and OPENID are required; client identity cannot grant access
+ok 28 - context APPID and OPENID are required; client identity cannot grant access
+  ---
+  duration_ms: 2.108333
+  type: 'test'
+  ...
+# Subtest: bootstrap is explicit, transactional and one-time; no first-visitor promotion
+ok 29 - bootstrap is explicit, transactional and one-time; no first-visitor promotion
+  ---
+  duration_ms: 0.845667
+  type: 'test'
+  ...
+# Subtest: pending, rejected, revoked and unknown members cannot read or publish
+ok 30 - pending, rejected, revoked and unknown members cannot read or publish
+  ---
+  duration_ms: 0.390208
+  type: 'test'
+  ...
+# Subtest: member application is moderated and idempotent; approval grants only member
+ok 31 - member application is moderated and idempotent; approval grants only member
+  ---
+  duration_ms: 0.581375
+  type: 'test'
+  ...
+# Subtest: risky applications and malformed form data never create records
+ok 32 - risky applications and malformed form data never create records
+  ---
+  duration_ms: 0.151458
+  type: 'test'
+  ...
+# Subtest: publish validates category, title, body and request id before moderation
+ok 33 - publish validates category, title, body and request id before moderation
+  ---
+  duration_ms: 0.405666
+  type: 'test'
+  ...
+# Subtest: published posts come only from safe checks; all failure modes fail closed
+ok 34 - published posts come only from safe checks; all failure modes fail closed
+  ---
+  duration_ms: 0.352667
+  type: 'test'
+  ...
+# Subtest: concurrent publish retries create one post and one audit; payload mutation conflicts
+ok 35 - concurrent publish retries create one post and one audit; payload mutation conflicts
+  ---
+  duration_ms: 0.417917
+  type: 'test'
+  ...
+# Subtest: audit failure rolls back the entire write, including post content
+ok 36 - audit failure rolls back the entire write, including post content
+  ---
+  duration_ms: 0.133708
+  type: 'test'
+  ...
+# Subtest: stable cursor pagination handles equal timestamps and rejects cross-filter cursor
+ok 37 - stable cursor pagination handles equal timestamps and rejects cross-filter cursor
+  ---
+  duration_ms: 16.158292
+  type: 'test'
+  ...
+# Subtest: public lists exclude pending content and private detail is owner/admin only
+ok 38 - public lists exclude pending content and private detail is owner/admin only
+  ---
+  duration_ms: 0.405542
+  type: 'test'
+  ...
+# Subtest: review rechecks safety, rejects risky content, and version conflict prevents double action
+ok 39 - review rechecks safety, rejects risky content, and version conflict prevents double action
+  ---
+  duration_ms: 0.376333
+  type: 'test'
+  ...
+# Subtest: manual approval requires an explicit pass; review, unknown and outage remain private
+ok 40 - manual approval requires an explicit pass; review, unknown and outage remain private
+  ---
+  duration_ms: 0.255208
+  type: 'test'
+  ...
+# Subtest: risky recheck is an audited terminal rejection and cannot later be approved
+ok 41 - risky recheck is an audited terminal rejection and cannot later be approved
+  ---
+  duration_ms: 0.163167
+  type: 'test'
+  ...
+# Subtest: audit outage rolls back a risky recheck rejection as well as content changes
+ok 42 - audit outage rolls back a risky recheck rejection as well as content changes
+  ---
+  duration_ms: 0.12
+  type: 'test'
+  ...
+# Subtest: author can delete, others cannot, and hidden content is excluded from public view
+ok 43 - author can delete, others cannot, and hidden content is excluded from public view
+  ---
+  duration_ms: 0.445792
+  type: 'test'
+  ...
+# Subtest: membership revocation takes effect on next request and cannot remove initial admin
+ok 44 - membership revocation takes effect on next request and cannot remove initial admin
+  ---
+  duration_ms: 0.167417
+  type: 'test'
+  ...
+# Subtest: unknown action, malformed event and low-level errors return safe bounded responses
+ok 45 - unknown action, malformed event and low-level errors return safe bounded responses
+  ---
+  duration_ms: 0.078917
+  type: 'test'
+  ...
+# Subtest: SDK repository preserves collection errors and uses timestamp/id cursor conjunction
+ok 46 - SDK repository preserves collection errors and uses timestamp/id cursor conjunction
+  ---
+  duration_ms: 0.197166
+  type: 'test'
+  ...
+1..46
+# tests 46
+# suites 0
+# pass 46
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 77.557584

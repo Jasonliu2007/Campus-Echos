@@ -1,0 +1,81 @@
+{
+  "ranAt": "2026-11-10T19:01:09.930Z",
+  "scope": [
+    "components/campus-ui/page.wxss",
+    "custom-tab-bar/index.wxss",
+    "components/campus-state/index.wxss",
+    "pages/notes-ai/index.js"
+  ],
+  "verdict": "APPROVE_CODE_WITH_DEVICE_CHECKS_PENDING",
+  "standards": [
+    {
+      "standard": "justified",
+      "result": "pass",
+      "evidence": "按压反馈和筛选状态，无装饰循环/整页入场。"
+    },
+    {
+      "standard": "frequency",
+      "result": "pass",
+      "evidence": "Tab/筛选轻量颜色和按压反馈，无持续入场/常用导航滑动。"
+    },
+    {
+      "standard": "easing",
+      "result": "pass",
+      "evidence": "共享主要按钮、chip及Tab的transform均使用cubic-bezier(.22,1,.36,1)。"
+    },
+    {
+      "standard": "sub300",
+      "result": "pass",
+      "evidence": "按压60ms、恢复120ms、筛选颜色160ms；页面和确认使用微信原生动效。"
+    },
+    {
+      "standard": "origin",
+      "result": "pass",
+      "evidence": "无自绘触发式弹层；原生确认由宿主控制，不虚造220/160ms测量。"
+    },
+    {
+      "standard": "interruptibility",
+      "result": "pass",
+      "evidence": "CSS transition可重定向；无状态keyframe、JS动画计时器。实际手势中断需真机。"
+    },
+    {
+      "standard": "properties",
+      "result": "pass",
+      "evidence": "只transform/opacity/颜色，不animate blur、layout或transition:all。"
+    },
+    {
+      "standard": "reduced",
+      "result": "pass",
+      "evidence": "应用开关/CSS媒体双路径，帖子组件隔离显式传值，AI滚动duration0。"
+    },
+    {
+      "standard": "asymmetry",
+      "result": "pass",
+      "evidence": "按压/恢复60/120ms；共享最后置press已覆盖正常简写，应用内减弱规则更高优先级，媒体减弱规则随后；筛选颜色160ms。"
+    },
+    {
+      "standard": "cohesion",
+      "result": "pass",
+      "evidence": "同一共享响应、不额外加弹跳/逐卡入场；静态玻璃只承载功能操作层。"
+    }
+  ],
+  "pending": [
+    "实际设备快速重复切换/中断",
+    "0.1倍速录屏",
+    "原生确认进退/焦点/触控",
+    "低端Android滚动帧率和blur fallback",
+    "次日fresh-eyes复看"
+  ],
+  "beforeAfter": [
+    {
+      "before": "role是网页属性，辅助设置只命中switch",
+      "after": "原生aria-role与整行label",
+      "why": "减少触控和辅助操作摩擦，不通过动画弥补。"
+    },
+    {
+      "before": "按压/松手对称且chip transform无显式缓动",
+      "after": "下压60ms，恢复120ms，显式强缓出；级联已独立复核",
+      "why": "反馈即时且松手平稳，CSS可中断。"
+    }
+  ]
+}

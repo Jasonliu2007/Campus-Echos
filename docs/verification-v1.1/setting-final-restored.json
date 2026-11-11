@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": {
+        "route": "pages/setting/index",
+        "motion": false,
+        "transparency": false,
+        "storedMotion": false,
+        "storedTransparency": false
+      }
+    }
+  }
+}

@@ -1,0 +1,9 @@
+@import "../../components/campus-ui/page.wxss";
+
+.result {
+  margin-top: 28rpx
+}
+
+.result-copy {
+  margin-top: 24rpx
+}

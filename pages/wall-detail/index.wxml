@@ -1,0 +1,29 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="content">
+    <campus-state wx:if="{{loading}}" kind="loading" title="正在读取帖子" description="请稍候。" />
+    <campus-state wx:elif="{{error && !post}}" kind="error" title="暂时无法查看这条帖子" description="{{error}}"
+      action="重新加载" bind:action="load" />
+    <block wx:elif="{{post}}">
+      <campus-state wx:if="{{post.status === 'deleted'}}" title="这条内容已删除" description="内容不再展示，你可以返回校园墙看看其他内容。"
+        action="返回校园墙" bind:action="wall" />
+      <block wx:else>
+        <view class="meta">
+          <view class="avatar" aria-hidden="true">{{post.authorName[0]}}</view>
+          <view>
+            <view class="name">{{post.authorName}}</view>
+            <view class="sub">{{post.displayTime}} · {{post.category}}</view>
+          </view>
+        </view>
+        <view wx:if="{{post.status !== 'published'}}" class="notice warning status-block">{{post.statusLabel}} ·
+          内容尚未公开。{{post.reviewReason}}</view>
+        <view class="detail-title">{{post.title}}</view><text class="tag {{post.status}}">{{post.statusLabel}}</text>
+        <view class="detail-body" user-select>{{post.content}}</view>
+        <view class="rule" />
+        <view class="sub">图片、匿名、评论与点赞将在后续开放。</view>
+        <view wx:if="{{error}}" class="notice error">{{error}}</view>
+        <button wx:if="{{post.isOwner}}" class="text-button danger-text full" bindtap="remove" loading="{{deleting}}"
+          disabled="{{deleting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">删除我的帖子</button>
+      </block>
+    </block>
+  </view>
+</view>

@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": {
+        "route": "pages/admin-review/detail",
+        "status": "published",
+        "revision": 2,
+        "error": ""
+      }
+    }
+  }
+}

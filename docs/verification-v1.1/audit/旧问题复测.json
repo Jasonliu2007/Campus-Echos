@@ -1,0 +1,12 @@
+{
+  "passed": [
+    "storage failure blocks navigation and keeps warning",
+    "storage recovery allows saved leave",
+    "unsent access application warns before leave",
+    "successful application clears leave warning",
+    "review reason focuses first invalid field",
+    "member reason focuses first invalid field",
+    "text button minimum width44px",
+    "all AI result icons decorative"
+  ]
+}

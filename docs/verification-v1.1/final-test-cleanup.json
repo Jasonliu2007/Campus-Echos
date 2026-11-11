@@ -1,0 +1,19 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": {
+        "requestID": "d3b99e17-e5fb-4c8b-ab94-91e018760ec1",
+        "ok": true,
+        "version": "wall-20261111-v1.1",
+        "traceId": "516d22a6-9e25-44ea-851e-a6928a5bd1ea",
+        "postId": "3293afb56e08f5d2e33e9d805c0f9bb6",
+        "status": "deleted",
+        "revision": 3
+      }
+    }
+  }
+}

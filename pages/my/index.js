@@ -1,87 +1,52 @@
-import request from '~/api/request';
-import useToastBehavior from '~/behaviors/useToast';
-
+const C = require('../../utils/campus');
 Page({
-  behaviors: [useToastBehavior],
-
   data: {
-    isLoad: false,
-    service: [],
-    personalInfo: {},
-    gridList: [
-      {
-        name: '全部发布',
-        icon: 'root-list',
-        type: 'all',
-        url: '',
-      },
-      {
-        name: '审核中',
-        icon: 'search',
-        type: 'progress',
-        url: '',
-      },
-      {
-        name: '已发布',
-        icon: 'upload',
-        type: 'published',
-        url: '',
-      },
-      {
-        name: '草稿箱',
-        icon: 'file-copy',
-        type: 'draft',
-        url: '',
-      },
-    ],
-
-    settingList: [
-      { name: '联系客服', icon: 'service', type: 'service' },
-      { name: '设置', icon: 'setting', type: 'setting', url: '/pages/setting/index' },
-    ],
+    loading: true,
+    error: '',
+    member: null,
+    access: 'none',
+    accessLabel: '尚未开通内测',
+    reducedMotion: false,
+    reducedTransparency: false
   },
-
-  onLoad() {
-    this.getServiceList();
+  onShow() {
+    C.syncTab(this, 'pages/my/index');
+    this.setData({
+      reducedMotion: C.getReducedMotion(),
+      reducedTransparency: C.getReducedTransparency()
+    });
+    this.refresh()
   },
-
-  async onShow() {
-    const Token = wx.getStorageSync('access_token');
-    const personalInfo = await this.getPersonalInfo();
-
-    if (Token) {
+  async refresh() {
+    if (this._loading) return;
+    this._loading = true;
+    this.setData({
+      loading: true,
+      error: ''
+    });
+    try {
+      const r = await C.callWall('session');
       this.setData({
-        isLoad: true,
-        personalInfo,
-      });
+        member: r.member,
+        access: r.access,
+        accessLabel: C.accessLabels[r.access] || '尚未开通内测'
+      })
+    } catch (e) {
+      this.setData({
+        error: e.message
+      })
+    } finally {
+      this._loading = false;
+      this.setData({
+        loading: false
+      })
     }
   },
-
-  getServiceList() {
-    request('/api/getServiceList').then((res) => {
-      const { service } = res.data.data;
-      this.setData({ service });
-    });
-  },
-
-  async getPersonalInfo() {
-    const info = await request('/api/genPersonalInfo').then((res) => res.data.data);
-    return info;
-  },
-
-  onLogin(e) {
+  go(e) {
     wx.navigateTo({
-      url: '/pages/login/login',
-    });
+      url: e.currentTarget.dataset.url
+    })
   },
-
-  onNavigateTo() {
-    wx.navigateTo({ url: `/pages/my/info-edit/index` });
-  },
-
-  onEleClick(e) {
-    const { name, url } = e.currentTarget.dataset.data;
-    if (url) return;
-    this.onShowToast('#t-toast', name);
-  },
+  unavailable: C.showUnavailable,
+  goAccess: C.goAccess
 });

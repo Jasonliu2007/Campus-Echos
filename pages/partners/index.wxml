@@ -1,0 +1,27 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <campus-hero title="从一件事，找到同路人" subtitle="比赛、活动和课题，一起做成。" icon="users" />
+  <view class="content tab-content">
+    <view class="notice">演示内容 · 活动与参与者为示例，创建、加入和邀约尚未开放。</view>
+    <view class="toolbar"><text class="section-title">正在找队友</text>
+      <button class="text-button" bindtap="unavailable" data-label="创建活动" hover-class="press" hover-start-time="0" hover-stay-time="120">创建活动</button>
+    </view>
+    <scroll-view class="chip-scroll" scroll-x>
+      <view class="chip-list">
+        <button wx:for="{{filters}}" wx:key="*this" class="chip {{filter === item ? 'active' : ''}}" bindtap="filter"
+          data-value="{{item}}" aria-label="{{item}}，{{filter === item ? '已选择' : '未选择'}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{item}}</button>
+      </view>
+    </scroll-view>
+    <campus-state wx:if="{{!items.length}}" title="暂时没有这类演示" description="试试其他活动分区。" />
+    <view wx:for="{{items}}" wx:key="id" class="card">
+      <view class="between"><text class="tag">{{item.type}}</text><text class="demo">演示活动</text></view>
+      <view class="card-title">{{item.title}}</view>
+      <view class="card-copy">{{item.description}}</view>
+      <view class="row-wrap role-tags"><text wx:for="{{item.roles}}" wx:for-item="role" wx:key="*this"
+          class="tag">{{role}}</text></view>
+      <view class="rule" />
+      <view class="between"><text class="sub">每周 5–10 小时 · 校内</text>
+        <button class="primary small-button" bindtap="unavailable" data-label="了解并加入" hover-class="press" hover-start-time="0" hover-stay-time="120">了解并加入</button>
+      </view>
+    </view>
+  </view>
+</view>

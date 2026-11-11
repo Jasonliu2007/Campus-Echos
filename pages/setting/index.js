@@ -1,56 +1,32 @@
-import useToastBehavior from '~/behaviors/useToast';
-
+const C = require('../../utils/campus');
 Page({
-  behaviors: [useToastBehavior],
   data: {
-    menuData: [
-      [
-        {
-          title: '通用设置',
-          url: '',
-          icon: 'app',
-        },
-        {
-          title: '通知设置',
-          url: '',
-          icon: 'notification',
-        },
-      ],
-      [
-        {
-          title: '深色模式',
-          url: '',
-          icon: 'image',
-        },
-        {
-          title: '字体大小',
-          url: '',
-          icon: 'chart',
-        },
-        {
-          title: '播放设置',
-          url: '',
-          icon: 'sound',
-        },
-      ],
-      [
-        {
-          title: '账号安全',
-          url: '',
-          icon: 'secured',
-        },
-        {
-          title: '隐私',
-          url: '',
-          icon: 'info-circle',
-        },
-      ],
-    ],
+    reducedMotion: false,
+    reducedTransparency: false,
+    settingsError: ''
   },
-
-  onEleClick(e) {
-    const { title, url } = e.currentTarget.dataset.data;
-    if (url) return;
-    this.onShowToast('#t-toast', title);
+  onShow() {
+    this.setData({
+      reducedMotion: C.getReducedMotion(),
+      reducedTransparency: C.getReducedTransparency()
+    });
   },
+  motion(e) {
+    this.savePreference('reducedMotion', e.detail.value, C.setReducedMotion);
+  },
+  transparency(e) {
+    this.savePreference('reducedTransparency', e.detail.value, C.setReducedTransparency);
+  },
+  savePreference(key, value, save) {
+    const enabled = value === true;
+    try {
+      save(enabled);
+      this.setData({ [key]: enabled, settingsError: '' });
+    } catch (error) {
+      this.setData({
+        [key]: key === 'reducedMotion' ? C.getReducedMotion() : C.getReducedTransparency(),
+        settingsError: '设置未能保存，请检查本机存储后重试。'
+      });
+    }
+  }
 });

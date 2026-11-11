@@ -1,21 +1,33 @@
-<t-navbar title="设置" left-arrow />
-<view class="setting">
-  <t-cell-group wx:for="{{menuData}}" wx:for-item="item" wx:key="index" t-class="cell-group-class" theme="card">
-    <t-cell
-      wx:for="{{item}}"
-      wx:for-item="carditem"
-      wx:key="cardkey"
-      title="{{carditem.title}}"
-      hover
-      arrow
-      left-icon="app"
-      url="{{carditem.url}}"
-      bordered="true"
-      leftIcon="{{carditem.icon}}"
-      data-data="{{carditem}}"
-      bindclick="onEleClick"
-    />
-  </t-cell-group>
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="content">
+    <view class="section-head"><text class="section-title">体验设置</text></view>
+    <label class="list-link" for="motion-preference">
+      <view class="grow">
+        <view class="name">减弱动态效果</view>
+        <view class="sub">减少位移，状态即时切换</view>
+      </view>
+      <switch id="motion-preference" checked="{{reducedMotion}}" bindchange="motion" color="#0878BD" aria-label="减弱动态效果" />
+    </label>
+    <label class="list-link" for="transparency-preference">
+      <view class="grow">
+        <view class="name">减少透明度</view>
+        <view class="sub">导航与操作浮层使用实色背景</view>
+      </view>
+      <switch id="transparency-preference" checked="{{reducedTransparency}}" bindchange="transparency" color="#0878BD" aria-label="减少透明度" />
+    </label>
+    <view wx:if="{{settingsError}}" class="notice error" aria-role="text">{{settingsError}}</view>
+    <view class="help-copy">
+      <view class="help-heading">关于校园回声</view>
+      <view>面向本校同学的校园信息、学习资料和活动组队平台，目前处于指定账号封闭内测阶段。</view>
+      <view class="help-heading">哪些功能使用真实数据？</view>
+      <view>文字校园墙、内测资格、人工审核接入云服务。学习资料、AI 推荐与找搭子均明确标为演示内容。</view>
+      <view class="help-heading">发帖后为什么看不到？</view>
+      <view>需要人工复核的内容不会直接公开。请前往“我的帖子”查看待审核、未通过或下架原因。审核异常时内容不会公开，输入保留后可重试。</view>
+      <view class="help-heading">内容与隐私</view>
+      <view>不发布他人学号、手机号、宿舍号等敏感信息，不发布违规内容、代写或考试答案。封闭内测资格不等于学生实名认证。</view>
+      <view class="help-heading">遇到问题怎么反馈？</view>
+      <view>向项目负责人说明页面、操作与发生时间，无需重复提交相同帖子。此版本尚未开放图片、搜索、匿名、评论点赞、编辑与举报。</view>
+    </view>
+    <view class="footnote">校园回声 · 界面 v1.1</view>
+  </view>
 </view>
-
-<t-toast id="t-toast" />

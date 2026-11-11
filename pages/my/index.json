@@ -1,16 +1,10 @@
 {
-  "navigationStyle": "custom",
+  "navigationBarTitleText": "校园回声",
+  "navigationStyle": "default",
   "usingComponents": {
-    "t-cell": "tdesign-miniprogram/cell/cell",
-    "t-cell-group": "tdesign-miniprogram/cell-group/cell-group",
-    "t-avatar": "tdesign-miniprogram/avatar/avatar",
-    "t-divider": "tdesign-miniprogram/divider/divider",
-    "t-icon": "tdesign-miniprogram/icon/icon",
-    "t-image": "tdesign-miniprogram/image/image",
-    "t-navbar": "tdesign-miniprogram/navbar/navbar",
-    "t-grid": "tdesign-miniprogram/grid/grid",
-    "t-grid-item": "tdesign-miniprogram/grid-item/grid-item",
-    "t-tag": "tdesign-miniprogram/tag/tag",
-    "nav": "/components/nav"
-  }
+    "campus-hero": "/components/campus-hero/index",
+    "campus-state": "/components/campus-state/index",
+    "campus-post": "/components/campus-post/index"
+  },
+  "enablePullDownRefresh": false
 }

@@ -1,0 +1,25 @@
+<view wx:if="{{kind === 'loading'}}" class="skeleton-list" aria-role="text" aria-label="{{title}}">
+  <view wx:for="{{[1,2]}}" wx:key="*this" class="skeleton-card">
+    <view class="skeleton-row">
+      <view class="skeleton-avatar" />
+      <view class="skeleton-lines">
+        <view class="skeleton-bar short" />
+        <view class="skeleton-bar" />
+      </view>
+    </view>
+    <view class="skeleton-bar title-bar" />
+    <view class="skeleton-bar" />
+    <view class="skeleton-bar short" />
+  </view>
+  <view class="loading-copy">{{title}} · {{description}}</view>
+</view>
+<block wx:else>
+  <view class="state" aria-role="text" aria-live="polite">
+    <view class="symbol"><image
+        src="/static/campus/{{kind === 'error' ? 'alert' : kind === 'pending' ? 'clock' : kind === 'success' ? 'check' : kind === 'access' ? 'shield' : 'wall'}}.svg"
+        aria-hidden="true" /></view>
+    <view class="title">{{title}}</view>
+    <view class="description">{{description}}</view>
+    <button wx:if="{{action}}" class="primary" bindtap="onAction" hover-class="press" hover-start-time="0" hover-stay-time="120">{{action}}</button>
+  </view>
+</block>

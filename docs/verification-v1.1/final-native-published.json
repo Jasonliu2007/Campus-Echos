@@ -1,0 +1,24 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": {
+        "route": "pages/wall-publish/index",
+        "error": "",
+        "result": {
+          "ok": true,
+          "version": "wall-20261111-v1.1",
+          "traceId": "17bee4ea-cf99-443e-b06b-b8466d17ada7",
+          "postId": "3293afb56e08f5d2e33e9d805c0f9bb6",
+          "status": "pending",
+          "revision": 1
+        },
+        "submitting": false,
+        "draft": ""
+      }
+    }
+  }
+}

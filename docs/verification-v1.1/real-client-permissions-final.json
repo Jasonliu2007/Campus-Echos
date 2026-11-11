@@ -1,0 +1,27 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": [
+        {
+          "name": "xiaopin_trial_posts",
+          "read": -502003,
+          "write": -502003
+        },
+        {
+          "name": "xiaopin_members",
+          "read": -502003,
+          "write": -502003
+        },
+        {
+          "name": "xiaopin_moderation_audit",
+          "read": -502003,
+          "write": -502003
+        }
+      ]
+    }
+  }
+}

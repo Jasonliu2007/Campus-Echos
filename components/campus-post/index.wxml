@@ -1,0 +1,16 @@
+<view class="card {{reducedMotion ? 'reduced' : ''}}">
+  <view class="meta">
+    <view class="avatar" aria-hidden="true">{{post.authorName ? post.authorName[0] : '同'}}</view>
+    <view class="grow">
+      <view class="name">{{post.authorName || '内测成员'}}</view>
+      <view class="sub">{{post.displayTime}}</view>
+    </view><text class="tag {{showStatus ? post.status : ''}}">{{showStatus ? post.statusLabel : post.category}}</text>
+  </view>
+  <view class="card-title">{{post.title || '这条帖子已删除'}}</view>
+  <view class="excerpt">{{post.content || (post.status === 'deleted' ? '内容已删除，不再展示。' : '')}}</view>
+  <view wx:if="{{post.reviewReason}}" class="reason">处理说明：{{post.reviewReason}}</view>
+  <view class="post-footer"><text class="sub">{{showStatus ? post.category : '校园回声 · 文字帖'}}</text>
+    <button class="text-button" bindtap="open" aria-label="查看帖子：{{post.title}}" hover-class="press" hover-start-time="0" hover-stay-time="120">查看全文<image class="icon-small"
+        src="/static/campus/next.svg" aria-hidden="true" /></button>
+  </view>
+</view>

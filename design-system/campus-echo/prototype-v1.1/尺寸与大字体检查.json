@@ -1,0 +1,16 @@
+{
+  "version": "1.1",
+  "pages": 36,
+  "checks": 108,
+  "errors": [],
+  "overflow": [],
+  "largeFontApproximation": {
+    "doc": 390,
+    "content": 390,
+    "viewport": 390
+  },
+  "limitations": [
+    "浏览器放大文字只是布局压力测试，不能代替微信大字体与真机",
+    "原生读屏/键盘/模糊性能待小程序实测"
+  ]
+}

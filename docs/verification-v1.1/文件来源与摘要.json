@@ -1,0 +1,576 @@
+{
+  "archivedAtShanghai": "2026-11-11 10:07:19",
+  "note": "历史文件原样复制；交付报告链接改写另记，不属于原样摘要。未进行云端或业务复测。",
+  "files": [
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/README.md",
+      "archived": "design-system/campus-echo/prototype-v1.1/README.md",
+      "sha256": "d76fe65bf056109055ea2228e1ded67cc2e7e72dd3015961f76931ad2fddde78",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/UI优化差异.md",
+      "archived": "design-system/campus-echo/prototype-v1.1/UI优化差异.md",
+      "sha256": "6d48284ce9d0a9ff7c8324ed9767302a379a58cf3ae6fe470e90f29acbba6eb8",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/alert.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/alert.svg",
+      "sha256": "4b371654f2fd945625587c026163620c0a163aa58f3899622e810c5b939fd27a",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/arrow.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/arrow.svg",
+      "sha256": "699d2e1dab952c7f0108f35c937d74c2cca9ac49a3486f9b633d151e7b4a6d8e",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/back.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/back.svg",
+      "sha256": "b074ae39157a02bfe006cabe7dbfd4fbbafdaf99ee6cd5ef35337834e4c32b67",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/bag.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/bag.svg",
+      "sha256": "612cfba6c6d3debd97398a4d26d726ff56c312c3e399b9e0976fff82c31a7771",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/book.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/book.svg",
+      "sha256": "4d1ca3ed330c1801aaee9838a4df16071f4bd7a7092d26737958f72b431cac22",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/calendar.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/calendar.svg",
+      "sha256": "b7122272b5c40f78bb87ee6cce3e9e696095eb1a3aa67c2bf498e6755951f673",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/campus-header.jpg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/campus-header.jpg",
+      "sha256": "913b8375adb46396d405f6581bcc62f567e5c19b457828fd9869295c7349a967",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/check.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/check.svg",
+      "sha256": "ce29ac7ea3d922dee2c9b3847c3e54e6db85edb4381b299a896ed5f7acec1288",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/clock.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/clock.svg",
+      "sha256": "29a0daa62e1da60b9201949c98249b7acd39cf3a37f88177d6ec6eb14efe4f4f",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/file.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/file.svg",
+      "sha256": "fb36e3562392020a1ac478a3cfa2bf67c243a94744716f047594f936d061448b",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/filter.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/filter.svg",
+      "sha256": "c8d012d1068a010ce56fa5a184bf26d643ffdaa20306a23d92704312d2655a7d",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/heart.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/heart.svg",
+      "sha256": "73fd1a5b9684c332876d65b775b3ce498806a91b6a0d485aa33f63d0be147f31",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/info.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/info.svg",
+      "sha256": "5da66e1fc72a3b66e927a03edf017cc5223289f61edf6560ba7e0df3b281856d",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/next.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/next.svg",
+      "sha256": "81259cb2ca2609607dd47fdbea29d325a318bdc2a49a89bd4a0465cb227b7001",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/plus.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/plus.svg",
+      "sha256": "ec01440f4dafa125a28dc7b6f402ad7a91919768e8b555d10921c58186794ee0",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/search.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/search.svg",
+      "sha256": "dedaa6d8fb90282d35a0252c7db6905153b6aeea54ca7891e09e7e3ae9eff7fd",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/settings.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/settings.svg",
+      "sha256": "20c9d31779c667111c7884581989bd1e18dd9c83de9a63662dda8c41c1c4f201",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/shield.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/shield.svg",
+      "sha256": "714216f2a4772ead2b162f9fa74a70a28adbcbb1db39ff3bb8a55c35692dfe3c",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/spark.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/spark.svg",
+      "sha256": "a80dea10e39b672a45c694ded3f1857c9873b0ff2018a8adec9ea29a24bd9792",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/trash.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/trash.svg",
+      "sha256": "97a4441b4644c2e3257a57799fe2576e27d297be5fa259a1c1c4e93b295ba324",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/user.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/user.svg",
+      "sha256": "f89cca8a8b9889ac3ebd9aec5da39585c6112b808abe7f2e291bd4653c581d5a",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/users.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/users.svg",
+      "sha256": "83814b2847a27dc498093d992188b5537b03903eab1e14d8cf1cb8390972f728",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/wall.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/wall.svg",
+      "sha256": "70da85c70aa245274857b5861c782ba1b021ab83111b0e20105609ef1c35407f",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/assets/x.svg",
+      "archived": "design-system/campus-echo/prototype-v1.1/assets/x.svg",
+      "sha256": "aceab04527618c07d3101975ae3cdc675e36f3b81dcf84cdd1c108b6a6b0db7e",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/index.html",
+      "archived": "design-system/campus-echo/prototype-v1.1/index.html",
+      "sha256": "0b180950cbffb8a2f08e160025485d091b5a43a6036230fe5801bd8e26162f78",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/prototype.css",
+      "archived": "design-system/campus-echo/prototype-v1.1/prototype.css",
+      "sha256": "504d7e0209310e7c31879f9eb3131687a931682138caf2f265f9f7f53368db11",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/prototype.js",
+      "archived": "design-system/campus-echo/prototype-v1.1/prototype.js",
+      "sha256": "9a1df600aa8936f5a8cc1a08d3c896ee9e96512c040aa739d2059674945195b5",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/01-wall.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/01-wall.png",
+      "sha256": "8149b2be852e4640b1c10ce8d26f5e374ba066a7752190441a6cff922b65cd31",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/02-resources.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/02-resources.png",
+      "sha256": "539c77b763ce1c9b610aae6b92bead1ce52f902624cb7e469054e776d320f1a7",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/03-ai.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/03-ai.png",
+      "sha256": "794ef529b0c8ffdca43817b060b94afe2c991defed43e22c612606c804631697",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/04-activities.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/04-activities.png",
+      "sha256": "177bef6baab3add5c7bb883c6238bec58e2bfe743d5def2e5bdf36bdbe7d7234",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/05-my.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/05-my.png",
+      "sha256": "50d18243595f7de69c3f6b36c7fb7008045ec15a7f84fe164b582a657c643aa9",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/06-compose.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/06-compose.png",
+      "sha256": "b6a355c1fd5bd551ad1f929e40fe2fb1f624af1af9cb56f325ff09b06df4677e",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/07-detail.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/07-detail.png",
+      "sha256": "544297298afe0ff8365f6e3f77d1f7393cf9e756642699372945d225741e41c2",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/08-mine.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/08-mine.png",
+      "sha256": "ff6ffe3184822d2feb55b5f4e714a611c51fed6ca1d034d11d6e194bf942ff76",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/09-access.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/09-access.png",
+      "sha256": "71aafdbad8d96ba8518cc0e0080f8f18e9a235a547d8b8f903959d818dadb219",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/10-access-pending.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/10-access-pending.png",
+      "sha256": "7f8e10bf1bf4e2b8ee1aadf8e2d12f934695faf44e79aae6e65c57ff903822a8",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/11-access-denied.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/11-access-denied.png",
+      "sha256": "348f27d414c364f7816ebb29632d43e77e1c9684723da3abbf34cb7aa91a9f9e",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/12-access-revoked.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/12-access-revoked.png",
+      "sha256": "b56d1b555a357eb5c6e5fe272bff82a39474e3cd4adb6f674f5bf18d03b654c7",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/13-review.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/13-review.png",
+      "sha256": "3b5bde8e3c24e41a8921d89fe8065ffb7ad175ef0025ef4772227643e1514a56",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/14-review-detail.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/14-review-detail.png",
+      "sha256": "17d227588a7ce3ec858b8e2b3f439ee7b73f9973efeab9e8f8865aeac5bfbe54",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/15-members.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/15-members.png",
+      "sha256": "95fdc30444a1d6db97070602c64804e262705e5ab07249fb25f635207a4eb352",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/16-settings.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/16-settings.png",
+      "sha256": "765dffa533b41250daa843ac2ff903b5a0e9f9d09d497baa524e19426fa90b8e",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/17-empty.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/17-empty.png",
+      "sha256": "203ebcccab23e81a5f1f75dba545e3569946ddc29c628d115be0c49cf886aa06",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/18-loading.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/18-loading.png",
+      "sha256": "9d42631209973ba497b4341d7b097fbbd8742baaec313eebd9c5d239022e274a",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/19-error.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/19-error.png",
+      "sha256": "706acbfc26bf6d5af29be04ec5fa431fcff67f99fd2a3160e281ca5309a5869e",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/20-compose-error.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/20-compose-error.png",
+      "sha256": "b39791f45e7370f4e70c6181fc193ae4e4838eb4f74b7bd52d8d8fe2dccb29e0",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/21-compose-pending.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/21-compose-pending.png",
+      "sha256": "acf5050b9f97b311773e9e74bd5dd8fdba5b937a3f3b0b15320ea3db1efb6f7e",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/22-published.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/22-published.png",
+      "sha256": "06e86a983eb9eff66d7562a86f6f56ad4bb4101efe8d9e9a14027bfefdfb11cc",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/23-submitted.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/23-submitted.png",
+      "sha256": "320a01f10dc7e1ed4f3344dbfc85ebddd45d07abf5a931c7a05c0dd96b757793",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/24-rejected.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/24-rejected.png",
+      "sha256": "349e296ab05dce5207d7cece8801dc11b10e65498e71960b451bb88e1b691d7d",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/25-hidden.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/25-hidden.png",
+      "sha256": "7829023614288ac49ad7005c5bd067dd36a38888c1e0b5b51a1452bf8416135a",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/26-deleted.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/26-deleted.png",
+      "sha256": "fc371a5892f82e6e2afc37eece0a7798c4c7f0d3498c39c297b27107eb9120ba",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/27-delete-confirm.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/27-delete-confirm.png",
+      "sha256": "5213840b0270597dd2d437aad0253164043c6a609ba3340723dc22ee74844f7b",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/28-leave-confirm.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/28-leave-confirm.png",
+      "sha256": "e9f0808b18b1ad9c53e524a22de83c345097a2899f7cfbaabb7463d1a494620b",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/29-review-confirm.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/29-review-confirm.png",
+      "sha256": "38511fcc59184c9e137d41ba06eb464d82c9a3c4f4d9d002f4f914951b130f77",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/30-review-processed.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/30-review-processed.png",
+      "sha256": "171ee898e808bcda765b42d863bb2735790419a86b50e6330540cbbf3bc7dbb5",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/31-pagination.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/31-pagination.png",
+      "sha256": "8149b2be852e4640b1c10ce8d26f5e374ba066a7752190441a6cff922b65cd31",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/32-demo-unavailable.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/32-demo-unavailable.png",
+      "sha256": "5c78f507ab73f5a16bb14dadd2d71e303cadf6492f5116789c361544da31caa3",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/33-ai-result.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/33-ai-result.png",
+      "sha256": "37b728ebe0803a0a4428c379493ee59420902595a3c2502e747a5dac48647705",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/34-members-approved.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/34-members-approved.png",
+      "sha256": "b55a1375acb362dac347c1ab09e5b771125bfee06c6a82ee1174dd68ba671c17",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/35-member-revoke.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/35-member-revoke.png",
+      "sha256": "b73a9fa93e0666e211fb85c3b43a583c543582bad71a7c6aa53bec5c9dd86d85",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/screens/36-settings-solid.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/screens/36-settings-solid.png",
+      "sha256": "910d9d36f8c793610225880b9440b00f36aa04beaf18f61847622ecb865148a5",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/全部页面总览.jpg",
+      "archived": "design-system/campus-echo/prototype-v1.1/全部页面总览.jpg",
+      "sha256": "ca4d460f26992bae2fd4e5285f8b51f13658b5ae745a344873700e3dc8530e85",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/原型总览.png",
+      "archived": "design-system/campus-echo/prototype-v1.1/原型总览.png",
+      "sha256": "5d2b286a05cbd47632f0383c140a9ede240d0bf4508f9e91ed9abb4e84a6c932",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/原型检查记录.json",
+      "archived": "design-system/campus-echo/prototype-v1.1/原型检查记录.json",
+      "sha256": "58bb4e95e002e061b6607759aa34f16c8d24fce7d414f322fe50fbe22a2c98eb",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/尺寸与大字体检查.json",
+      "archived": "design-system/campus-echo/prototype-v1.1/尺寸与大字体检查.json",
+      "sha256": "c18409ddc5bc3e66631466b7f76fdc64bbadf522956cb10554bdc58f6ba77ade",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/设计规范.md",
+      "archived": "design-system/campus-echo/prototype-v1.1/设计规范.md",
+      "sha256": "de7d7c80c3babe725df9c75969294966a5943924d8206cc3212cdb19cba37739",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/prototype-v1.1/页面与状态索引.md",
+      "archived": "design-system/campus-echo/prototype-v1.1/页面与状态索引.md",
+      "sha256": "42ba6930a1bb840601588413910099a96f6a3158fd088905fb3cc95fc4217c31",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Library/Containers/com.tencent.xinWeChat/Data/Documents/xwechat_files/wxid_kxec7rxa4ra622_ca33/temp/drag/校园平台手机端界面设计稿.pdf",
+      "archived": "design-system/campus-echo/source/校园平台手机端界面设计稿.pdf",
+      "sha256": "f18c4e7fc745dd0c0cc07cb841cf45b80a17cb9f3224bed2480f7152bf0ab4e4",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/ui-audit-v1.1/motion-review.json",
+      "archived": "docs/verification-v1.1/audit/motion-review.json",
+      "sha256": "9b8a6c1308a554a40f34becebe6d0cb83d0b6def84d8be3294c1f32c0c1480df",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/ui-audit-v1.1/motion-review.md",
+      "archived": "docs/verification-v1.1/audit/motion-review.md",
+      "sha256": "da93d4f8161e2cf20ebf72c09c353fa67969a9ed8247dce49509d08df851ee9b",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/ui-audit-v1.1/ui-audit.json",
+      "archived": "docs/verification-v1.1/audit/ui-audit.json",
+      "sha256": "99e1909ed746202d9cedb31b1c1f99728a6705e0d20ae0cf362b40cc855eff7b",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/ui-audit-v1.1/ui-audit.md",
+      "archived": "docs/verification-v1.1/audit/ui-audit.md",
+      "sha256": "eb8d4c15f94a58c7adaea2c417ead0a9eea516cc3799d7bef4db200dd3adf013",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/ui-audit-v1.1/基础控制器复测.json",
+      "archived": "docs/verification-v1.1/audit/基础控制器复测.json",
+      "sha256": "79f52af654ca3f189cfeb9dfad70b2e552ee01b44bdf18b8f5c05f39d280a754",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/ui-audit-v1.1/审计源文件摘要.json",
+      "archived": "docs/verification-v1.1/audit/审计源文件摘要.json",
+      "sha256": "247a6da57e43df86fedc47c8307a5dffdb4afc69131c9591cf3296f07cfb123f",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/ui-audit-v1.1/旧问题复测.json",
+      "archived": "docs/verification-v1.1/audit/旧问题复测.json",
+      "sha256": "132823b4f2661eae2afd27b666b2661cf27efb5426496a37876071298f9b1063",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/ui-audit-v1.1/独立新增边界复测.json",
+      "archived": "docs/verification-v1.1/audit/独立新增边界复测.json",
+      "sha256": "a73d39143a0bb25af83a0c6feb35374b2ecb96a56dd1984cd249d49a5f76ca7d",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/最终模拟器页面总览.jpg",
+      "archived": "docs/verification-v1.1/最终模拟器页面总览.jpg",
+      "sha256": "6eb0c11aa30b21826b79d64572c960305fbc53e4c9533fbff94c0593880c3c2c",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/本地回归测试.tap",
+      "archived": "docs/verification-v1.1/本地回归测试.tap",
+      "sha256": "d3a09c351dc24d13157af610a8c299f7b6f48a6d4fae02ab448dc60e26b64b81",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/最终静态检查.json",
+      "archived": "docs/verification-v1.1/最终静态检查.json",
+      "sha256": "2d57b880b0db1469fb73d8b99a90a0aa45d55176cd9503d681f4b49d7b6ec524",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/final-native-published.json",
+      "archived": "docs/verification-v1.1/final-native-published.json",
+      "sha256": "f78f40fbd509ff246a44e18ca6fde268baa84c0373717be3aee3503cadff20f9",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/final-real-approve.json",
+      "archived": "docs/verification-v1.1/final-real-approve.json",
+      "sha256": "7e9164ebcf948dab09061a47bdc9214cb87f7577bd4b9e16282252b597decc40",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/final-approved-refresh.json",
+      "archived": "docs/verification-v1.1/final-approved-refresh.json",
+      "sha256": "f3b7c50a228e31cc804f6100c1d67e12d1d603018410a5376ed39d69adb26343",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/final-public-read.json",
+      "archived": "docs/verification-v1.1/final-public-read.json",
+      "sha256": "24f34a2867927ed2fb01d5f3c35dbf539107550a677da6b9c895c8df29dce880",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/final-test-cleanup.json",
+      "archived": "docs/verification-v1.1/final-test-cleanup.json",
+      "sha256": "25f2715f8a28b952d140429d77d78396cb59d3aecc94dace27b5a93d3a309834",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/final-public-empty.json",
+      "archived": "docs/verification-v1.1/final-public-empty.json",
+      "sha256": "86ad3341b85f8721cdabefcc29f9cef5c1d46d54f5866d1e87e2cef74611cc45",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/final-ui-pagination-cleanup.json",
+      "archived": "docs/verification-v1.1/final-ui-pagination-cleanup.json",
+      "sha256": "9e959f0ad011721f9c868f9b16b6e4d682607db7a566562d8a3e314905c52ac8",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/setting-label-after-tap.json",
+      "archived": "docs/verification-v1.1/setting-label-after-tap.json",
+      "sha256": "1c316731ed486aa9a93ed2ab84728f369ac5fb81dbc8fead8b4fe60b4c496932",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1.1/setting-final-restored.json",
+      "archived": "docs/verification-v1.1/setting-final-restored.json",
+      "sha256": "38b03cae82878ce825b56ab1b7fbe131ad046baa8fc71e9e04843ef272ef101d",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1/real-client-permissions-final.json",
+      "archived": "docs/verification-v1.1/real-client-permissions-final.json",
+      "sha256": "44af3c2ee20396d299eb6e7b1cb45ced8a985b4fa5f871d1d6f27b923d0439af",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1/线上v1.1代码比对.json",
+      "archived": "docs/verification-v1.1/线上v1.1代码比对.json",
+      "sha256": "3f4b7c8e8beaa665b0304e1861d20cefeace6cb6c436ca3834b2d7d231663ff3",
+      "identical": true
+    },
+    {
+      "source": "/Users/jasonliu/Documents/Codex/2026-11-10/md-md-users-jasonliu-program-develop/outputs/verification-v1/real-pagination.json",
+      "archived": "docs/verification-v1.1/real-pagination.json",
+      "sha256": "11560e72035b67bbd12dd5e155490c493c292878af1c8d5e137a3ab9122431f2",
+      "identical": true
+    }
+  ]
+}

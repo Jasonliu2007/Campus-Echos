@@ -1,0 +1,6 @@
+{
+  "index.js": true,
+  "service.js": true,
+  "repository.js": true,
+  "package.json": true
+}

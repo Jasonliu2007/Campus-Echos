@@ -1,0 +1,28 @@
+[
+  {
+    "case": "storage-failure-cancel",
+    "navigated": 0,
+    "error": "本机草稿未能保存，请勿关闭页面。你仍可提交，失败时输入会保留。",
+    "pass": true
+  },
+  {
+    "case": "publish-retry-same-key-input-preserved",
+    "pass": true
+  },
+  {
+    "case": "publish-repeat-tap-single-request",
+    "pass": true
+  },
+  {
+    "case": "list-latest-filter-wins",
+    "pass": true
+  },
+  {
+    "case": "revoked-clears-visible-cache",
+    "pass": true
+  },
+  {
+    "case": "refresh-error-preserves-prefix",
+    "pass": true
+  }
+]

@@ -1,0 +1,5 @@
+@import "../../components/campus-ui/page.wxss";
+
+.review-body {
+  margin-top: 28rpx
+}

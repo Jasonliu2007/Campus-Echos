@@ -1,5 +1,8 @@
-<t-tab-bar value="{{ value }}" theme="tag" split="{{ false }}" bind:change="handleChange">
-  <t-tab-bar-item icon="home" value="home">首页</t-tab-bar-item>
-  <t-tab-bar-item icon="chat" value="message" badge-props="{{ { count: unreadNum } }}">消息</t-tab-bar-item>
-  <t-tab-bar-item icon="user" value="my">我的</t-tab-bar-item>
-</t-tab-bar>
+<view class="tabs {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}" aria-role="group" aria-label="主导航">
+  <button wx:for="{{items}}" wx:key="path" class="tab {{active === item.path ? 'active' : ''}}"
+    data-path="{{item.path}}" bindtap="switchTab" aria-role="button" aria-selected="{{active === item.path}}"
+    aria-label="{{item.label}}，{{active === item.path ? '当前页面' : '未选择'}}" hover-class="press" hover-start-time="0" hover-stay-time="120">
+    <view class="icon-wrap"><image src="/static/campus/{{item.icon}}.svg" aria-hidden="true" /></view>
+    <text>{{item.label}}</text>
+  </button>
+</view>

@@ -1,0 +1,10 @@
+<view class="hero {{small ? 'small' : ''}}"><image class="campus-image" src="/static/campus/campus-header.jpg"
+    mode="aspectFill" aria-hidden="true" />
+  <view class="overlay" />
+  <view class="hero-copy">
+    <view class="brand"><image class="brand-icon" src="/static/campus/{{icon}}.svg"
+        aria-hidden="true" /><text>校园回声</text></view>
+    <view class="title">{{title}}</view>
+    <view class="subtitle">{{subtitle}}</view>
+  </view>
+</view>

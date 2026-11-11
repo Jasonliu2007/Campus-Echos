@@ -1,0 +1,28 @@
+{
+  "version": "wall-20261111-v1.1",
+  "appid": "wxa16f2146b48a2c2e",
+  "env": "cloud1-d7gueyve330686b55",
+  "functionName": "xiaopinWall",
+  "timeoutSeconds": 20,
+  "bootstrapEnvironmentVariable": "BOOTSTRAP_ADMIN_OPENID",
+  "clientDatabasePermissions": { "read": false, "write": false },
+  "collections": [
+    {
+      "name": "xiaopin_trial_posts",
+      "indexes": [
+        { "name": "wall_status_time", "fields": [["kind", 1], ["status", 1], ["createdAt", -1], ["_id", -1]] },
+        { "name": "wall_category_time", "fields": [["kind", 1], ["status", 1], ["category", 1], ["createdAt", -1], ["_id", -1]] },
+        { "name": "wall_owner_time", "fields": [["kind", 1], ["authorId", 1], ["createdAt", -1], ["_id", -1]] },
+        { "name": "wall_owner_status_time", "fields": [["kind", 1], ["authorId", 1], ["status", 1], ["createdAt", -1], ["_id", -1]] }
+      ]
+    },
+    {
+      "name": "xiaopin_members",
+      "indexes": [
+        { "name": "members_time", "fields": [["kind", 1], ["createdAt", -1], ["_id", -1]] },
+        { "name": "members_status_time", "fields": [["kind", 1], ["status", 1], ["createdAt", -1], ["_id", -1]] }
+      ]
+    },
+    { "name": "xiaopin_moderation_audit", "indexes": [] }
+  ]
+}

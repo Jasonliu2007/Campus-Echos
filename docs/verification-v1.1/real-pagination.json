@@ -1,0 +1,387 @@
+{
+  "ok": true,
+  "tool": "automation_evaluate",
+  "clientName": "Codex",
+  "result": {
+    "success": true,
+    "result": {
+      "result": {
+        "first": {
+          "requestID": "e926803f-3cb7-481c-b4c8-5764513776af",
+          "ok": true,
+          "version": "wall-20261111-v1",
+          "traceId": "9700ad6d-e3ee-48ea-bcf7-b61a484ebd81",
+          "posts": [
+            {
+              "_id": "6eb1b8a6dcd18381411116f9453bd329",
+              "title": "分页验收记录 17",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "吐槽树洞",
+              "status": "published",
+              "createdAt": 1794331863862,
+              "updatedAt": 1794331863862,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "9e9eb2494f1230731bfc182b6516fd12",
+              "title": "分页验收记录 19",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "闲置转让",
+              "status": "published",
+              "createdAt": 1794331863853,
+              "updatedAt": 1794331863853,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "d5bfb89f7dbe52a78e29ed5801971cdd",
+              "title": "分页验收记录 15",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "闲置转让",
+              "status": "published",
+              "createdAt": 1794331863839,
+              "updatedAt": 1794331863839,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "ff7488cc82b0888c34f2dfb252c22122",
+              "title": "分页验收记录 18",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331863762,
+              "updatedAt": 1794331863762,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "9f0a2cfad8a3a1630c102ff91d68c22c",
+              "title": "分页验收记录 16",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "失物招领",
+              "status": "published",
+              "createdAt": 1794331863761,
+              "updatedAt": 1794331863761,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "29eb625e5159b1a8481acf075d3d362c",
+              "title": "分页验收记录 14",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331861458,
+              "updatedAt": 1794331861458,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "3d7e6f6fc2d8fff2f47b79d1949885e8",
+              "title": "分页验收记录 12",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "失物招领",
+              "status": "published",
+              "createdAt": 1794331861454,
+              "updatedAt": 1794331861454,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "0290c9ec3823f6d0095e4f7dacaf97f3",
+              "title": "分页验收记录 13",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "吐槽树洞",
+              "status": "published",
+              "createdAt": 1794331861303,
+              "updatedAt": 1794331861303,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "94ef4e9fcea91bf2861875b64b7cab95",
+              "title": "分页验收记录 11",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "闲置转让",
+              "status": "published",
+              "createdAt": 1794331861096,
+              "updatedAt": 1794331861096,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "44a1d3542300542728d4a1547aafad91",
+              "title": "分页验收记录 10",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331860898,
+              "updatedAt": 1794331860898,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "4ffb754c40f46bd98a71d7b4e163bfa7",
+              "title": "分页验收记录 01",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "吐槽树洞",
+              "status": "published",
+              "createdAt": 1794331854839,
+              "updatedAt": 1794331854839,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "da28d0dcf28111d395cc7dcf8fade6aa",
+              "title": "分页验收记录 02",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331854764,
+              "updatedAt": 1794331854764,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "1c3d4fa526f3c6cbb790a36fb604b41b",
+              "title": "分页验收记录 04",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "失物招领",
+              "status": "published",
+              "createdAt": 1794331854763,
+              "updatedAt": 1794331854763,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "d07ceb443f7a9a970c87bcd83cdef7ce",
+              "title": "分页验收记录 00",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "失物招领",
+              "status": "published",
+              "createdAt": 1794331854756,
+              "updatedAt": 1794331854756,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "5fbbc64a2969c47162d3ce0bd5eb399a",
+              "title": "分页验收记录 03",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "闲置转让",
+              "status": "published",
+              "createdAt": 1794331854718,
+              "updatedAt": 1794331854718,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "a172bdee8c8cdca555c3458b8e7f2376",
+              "title": "分页验收记录 09",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "吐槽树洞",
+              "status": "published",
+              "createdAt": 1794331820799,
+              "updatedAt": 1794331820799,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "eb078eb62e672cb44c5cf4b7847c5b12",
+              "title": "分页验收记录 05",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "吐槽树洞",
+              "status": "published",
+              "createdAt": 1794331819605,
+              "updatedAt": 1794331819605,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "444b3bb7587dc4a42e8b3064ac4174ce",
+              "title": "分页验收记录 07",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "闲置转让",
+              "status": "published",
+              "createdAt": 1794331818142,
+              "updatedAt": 1794331818142,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "c7180a26951b585c3962c89c6d1f4e82",
+              "title": "分页验收记录 08",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "失物招领",
+              "status": "published",
+              "createdAt": 1794331817264,
+              "updatedAt": 1794331817264,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "cbd7c1900bcf5f4e9cc776e672c02cd9",
+              "title": "分页验收记录 06",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331817260,
+              "updatedAt": 1794331817260,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            }
+          ],
+          "nextCursor": "eyJ0IjoxNzk0MzMxODE3MjYwLCJpIjoiY2JkN2MxOTAwYmNmNWY0ZTljYzc3NmU2NzJjMDJjZDkiLCJzIjoibGlzdDoifQ",
+          "hasMore": true
+        },
+        "second": {
+          "requestID": "c4e2875b-e035-40df-aa21-f3b26326b2fe",
+          "ok": true,
+          "version": "wall-20261111-v1",
+          "traceId": "57834456-8a0d-4738-8027-162020977726",
+          "posts": [
+            {
+              "_id": "178f7fee42f0ff2abe653dfebfe6ba64",
+              "title": "内测验收：重复提交验证",
+              "content": "这是一条验收记录，用于确认同一发布请求只保存一次，完成后删除。",
+              "category": "吐槽树洞",
+              "status": "published",
+              "createdAt": 1794331206120,
+              "updatedAt": 1794331206120,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "31cecfc175c6aa485ef99d27bbcf530c",
+              "title": "内测验收：校园回声文字发布",
+              "content": "这是一条开发验收帖子，用于检查真实云端发布、刷新和删除。验收结束后会清理。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331054327,
+              "updatedAt": 1794331054327,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            }
+          ],
+          "nextCursor": null,
+          "hasMore": false
+        },
+        "unique": true,
+        "category": {
+          "requestID": "e4e005ab-272c-4aea-85ed-38615faf56ae",
+          "ok": true,
+          "version": "wall-20261111-v1",
+          "traceId": "ad2d1a4d-2a09-4430-ac01-7905acbd35f2",
+          "posts": [
+            {
+              "_id": "ff7488cc82b0888c34f2dfb252c22122",
+              "title": "分页验收记录 18",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331863762,
+              "updatedAt": 1794331863762,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "29eb625e5159b1a8481acf075d3d362c",
+              "title": "分页验收记录 14",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331861458,
+              "updatedAt": 1794331861458,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "44a1d3542300542728d4a1547aafad91",
+              "title": "分页验收记录 10",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331860898,
+              "updatedAt": 1794331860898,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "da28d0dcf28111d395cc7dcf8fade6aa",
+              "title": "分页验收记录 02",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331854764,
+              "updatedAt": 1794331854764,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "cbd7c1900bcf5f4e9cc776e672c02cd9",
+              "title": "分页验收记录 06",
+              "content": "校园回声开发分页验收数据，检查二十条列表和分区，完成后删除。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331817260,
+              "updatedAt": 1794331817260,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            },
+            {
+              "_id": "31cecfc175c6aa485ef99d27bbcf530c",
+              "title": "内测验收：校园回声文字发布",
+              "content": "这是一条开发验收帖子，用于检查真实云端发布、刷新和删除。验收结束后会清理。",
+              "category": "学习互助",
+              "status": "published",
+              "createdAt": 1794331054327,
+              "updatedAt": 1794331054327,
+              "authorName": "校园回声管理员",
+              "isOwner": true,
+              "revision": 1
+            }
+          ],
+          "nextCursor": null,
+          "hasMore": false
+        },
+        "crossCursor": {
+          "requestID": "5eb94f12-87c7-47e7-b3bd-981a9d313b9f",
+          "ok": false,
+          "version": "wall-20261111-v1",
+          "traceId": "bdd9a823-1162-4758-96d5-dc33015014e6",
+          "code": "INVALID_CURSOR",
+          "message": "列表位置无效，请重新刷新。"
+        }
+      }
+    }
+  }
+}

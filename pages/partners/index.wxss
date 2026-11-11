@@ -1,0 +1,5 @@
+@import "../../components/campus-ui/page.wxss";
+
+.role-tags {
+  margin-top: 24rpx
+}
