@@ -1,6 +1,6 @@
 {
-  "navigationBarTitleText": "发布文字帖",
-  "navigationStyle": "default",
+  "navigationBarTitleText": "发布与编辑图文",
+  "navigationStyle": "custom",
   "usingComponents": {
     "campus-hero": "/components/campus-hero/index",
     "campus-state": "/components/campus-state/index",

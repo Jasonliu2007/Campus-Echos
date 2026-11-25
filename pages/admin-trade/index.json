@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "资料与交易管理",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  }
+}

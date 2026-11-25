@@ -17,6 +17,7 @@ Page({
       }]
     }
   }),
+  comments() { wx.navigateTo({ url: '/pages/admin-comments/index' }); },
   listParams() {
     return {
       status: this.data.filter

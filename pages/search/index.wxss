@@ -92,3 +92,6 @@
 .search-page .search-item .history-item {
   background: #e7e7e7;
 }
+
+/* v2 archive only; does not register this page. */
+@import "../../components/campus-ui/legacy-v2.wxss";

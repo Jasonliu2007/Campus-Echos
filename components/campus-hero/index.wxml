@@ -1,10 +1,12 @@
-<view class="hero {{small ? 'small' : ''}}"><image class="campus-image" src="/static/campus/campus-header.jpg"
-    mode="aspectFill" aria-hidden="true" />
-  <view class="overlay" />
+<view class="hero {{compact ? 'compact' : ''}} {{reducedTransparency ? 'solid' : ''}} {{small ? 'small' : ''}}">
+  <image class="campus-image" src="/static/campus/{{icon === 'book' ? 'study-header-glass.jpg' : 'campus-header-glass.jpg'}}" mode="aspectFill" aria-hidden="true" />
+  <view class="overlay" aria-hidden="true" />
+  <view class="light-wash" aria-hidden="true" />
+  <view class="wave wave-back" aria-hidden="true" />
+  <view class="wave wave-front" aria-hidden="true" />
   <view class="hero-copy">
-    <view class="brand"><image class="brand-icon" src="/static/campus/{{icon}}.svg"
-        aria-hidden="true" /><text>校园回声</text></view>
-    <view class="title">{{title}}</view>
+    <view class="brand"><image class="brand-icon" src="/static/campus/{{icon}}.svg" aria-hidden="true" /><text>校园回声</text></view>
+    <view class="title {{personalTitle ? '' : 'display-title'}}">{{title}}<view class="title-echo" aria-hidden="true" /></view>
     <view class="subtitle">{{subtitle}}</view>
   </view>
 </view>

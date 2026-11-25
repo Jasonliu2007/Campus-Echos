@@ -1,1 +1,47 @@
 @import "../../components/campus-ui/page.wxss";
+@import "../../components/campus-hero/display-font.wxss";
+
+.market-content { padding: 8rpx 16rpx calc(236rpx + env(safe-area-inset-bottom)); }
+.market-head, .market-head-actions { display: flex; align-items: center; }
+.market-head { min-height: 98rpx; padding: 0 8rpx; justify-content: space-between; gap: 8rpx; }
+.market-heading { font-family: "Campus Echo Display", "PingFang SC", sans-serif; font-size: 52rpx; line-height: 1.2; color: #162D43; }
+.market-head-actions { gap: 5rpx; flex: none; }
+.market-orders, .market-upload { min-height: 44px; min-width: 44px; display: flex; align-items: center; justify-content: center; gap: 5rpx; padding: 0 12rpx; font-size: 25rpx; font-weight: 650; color: #18344F; background: transparent; }
+.market-upload { color: #085C94; }
+.market-upload image { width: 26rpx; height: 26rpx; }
+
+.market-search { min-height: 48px; display: flex; align-items: center; padding: 3rpx; border: 2px solid #173550; border-radius: 60rpx; background: #FAFDFF; }
+.market-search input { flex: 1; min-width: 0; height: 42px; padding: 0 0 0 20rpx; font-size: 16px; color: #18344F; }
+.market-search-button, .market-clear { flex: none; display: flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0; border-radius: 60rpx; }
+.market-search-button { width: 105rpx; background: #153653; }
+.market-search-button image { width: 35rpx; height: 35rpx; filter: brightness(0) invert(1); }
+.market-clear { background: transparent; }
+.market-clear image { width: 27rpx; height: 27rpx; }
+
+.market-category-scroll { width: 100%; margin: 6rpx 0 7rpx; }
+.market-categories { display: inline-flex; align-items: center; min-width: 100%; justify-content: space-between; box-sizing: border-box; gap: 13rpx; padding: 0 6rpx; }
+.market-category { flex: none; min-height: 44px; position: relative; padding: 0 7rpx; color: #496477; background: transparent; font-size: 27rpx; white-space: nowrap; }
+.market-category.is-selected { color: #162D43; font-weight: 750; }
+.market-category.is-selected::before { content: ""; position: absolute; left: 50%; bottom: 10rpx; width: 31rpx; height: 5rpx; border-radius: 6rpx; transform: translateX(-50%); background: #1876B1; }
+
+.market-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13rpx; align-items: start; }
+.market-column { display: flex; min-width: 0; flex-direction: column; gap: 13rpx; }
+.market-card { display: block; min-width: 0; width: 100%; padding: 0; text-align: left; color: #172C40; background: #FCFEFF; border-radius: 17rpx; overflow: hidden; }
+.market-press { opacity: .76; }
+.market-cover { position: relative; height: 265rpx; background: #DCEAF2; overflow: hidden; }
+.market-card-tall .market-cover { height: 305rpx; }
+.market-cover-image { width: 100%; height: 100%; display: block; }
+.market-cover-type { position: absolute; left: 10rpx; bottom: 10rpx; max-width: calc(100% - 20rpx); padding: 4rpx 12rpx; background: #F5FBFF; color: #294A65; font-size: 21rpx; border-radius: 6rpx; }
+.market-card-body { padding: 12rpx 14rpx 15rpx; min-width: 0; }
+.market-card-title { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; overflow-wrap: anywhere; font-size: 29rpx; font-weight: 650; line-height: 1.35; }
+.market-course { color: #50677A; font-size: 23rpx; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 6rpx; }
+.market-card-meta { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4rpx 12rpx; margin-top: 11rpx; }
+.market-price { font-size: 31rpx; font-weight: 750; color: #0874AE; }
+.market-pages { font-size: 22rpx; color: #50677A; }
+
+.market-empty { display: flex; flex-direction: column; align-items: center; gap: 9rpx; margin: 25rpx 0 10rpx; padding: 38rpx 12rpx 18rpx; background: #F8FCFF; border-radius: 18rpx; }
+.market-empty > image { width: 49rpx; height: 49rpx; }
+.market-empty-title { font-size: 30rpx; font-weight: 650; }
+.market-tools { display: flex; justify-content: center; gap: 20rpx; margin-top: 13rpx; }
+.market-tools .text-button { font-size: 24rpx; color: #4D6E88; }
+.market-more { margin: 9rpx 0; }

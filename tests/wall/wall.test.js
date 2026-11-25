@@ -45,7 +45,7 @@ function fixture(options = {}) {
   const send = (action, data = {}, openid = 'admin-openid') => service({ action, ...data }, ctx(openid));
   return { repo, service, send, setSuggestion(value) { suggestion = value; }, setError(value) { moderationError = value; }, get calls() { return calls; } };
 }
-const payload = (index = 1) => ({ category: '学习互助', title: `复习讨论${index}`, content: '欢迎一起交流学习方法。', requestId: `request-valid-${index}` });
+const payload = (index = 1) => ({ category: '校园生活墙', title: `复习讨论${index}`, content: '欢迎一起交流学习方法。', requestId: `request-valid-${index}` });
 async function setupMember(f, openid = 'student-openid') {
   const application = await f.send('requestAccess', { nickname: '同学乙', reason: '本校同学申请参与封闭内测。' }, openid);
   assert.equal(application.ok, true);
@@ -170,7 +170,7 @@ test('stable cursor pagination handles equal timestamps and rejects cross-filter
   assert.deepEqual([first.posts.length, second.posts.length, third.posts.length], [20, 20, 5]);
   assert.equal(new Set([...first.posts, ...second.posts, ...third.posts].map((x) => x._id)).size, 45);
   assert.equal(third.nextCursor, null);
-  assert.equal((await f.send('list', { category: '学习互助', cursor: first.nextCursor })).code, 'INVALID_CURSOR');
+  assert.equal((await f.send('list', { category: '表白墙', cursor: first.nextCursor })).code, 'INVALID_CURSOR');
   assert.equal((await f.send('list', { cursor: 'not-json' })).code, 'INVALID_CURSOR');
   assert.equal(JSON.stringify(first).includes('authorId'), false);
 });

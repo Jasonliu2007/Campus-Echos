@@ -39,7 +39,25 @@
         "value": "AGENTS.md"
       }
     ],
-    "include": []
+    "include": [
+      { "type": "folder", "value": "static/stickers" },
+      {
+        "type": "folder",
+        "value": "static/presets"
+      },
+      {
+        "type": "folder",
+        "value": "static/material-covers"
+      },
+      {
+        "type": "file",
+        "value": "static/campus/heart-liked.svg"
+      },
+      {
+        "type": "file",
+        "value": "static/campus/heart.svg"
+      }
+    ]
   },
   "setting": {
     "bundle": false,

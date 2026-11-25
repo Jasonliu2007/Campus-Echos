@@ -1,0 +1,90 @@
+/* Liquid Glass v2 — archived template surfaces only. Does not enable routes or old services. */
+page {
+  --td-brand-color: #0876C4;
+  --td-brand-color-1: #E7F5FF;
+  --td-text-color-primary: #18344F;
+  --td-text-color-secondary: #486A86;
+  --td-bg-color-page: #DFEFFA;
+  --td-bg-color-container: #F8FCFF;
+  --td-font-size-body-large: 16px;
+  --td-button-border-radius: 999rpx;
+  --td-button-primary-bg-color: #0876C4;
+  --td-button-primary-border-color: #5DB9EF;
+  --td-button-large-height: 48px;
+  --td-navbar-bg-color: #E9F5FE;
+  --td-navbar-color: #18344F;
+  --td-cell-bg-color: rgba(255,255,255,.94);
+  --td-cell-title-color: #18344F;
+  --td-cell-note-color: #486A86;
+  --td-cell-description-color: #486A86;
+  --td-input-bg-color: #F8FCFF;
+  --td-input-border-color: #C8E1F2;
+  --td-search-bg-color: rgba(255,255,255,.72);
+  --td-search-color: #18344F;
+  --td-search-placeholder-color: #486A86;
+  --td-search-border-radius: 999rpx;
+  --td-search-height: 48px;
+  --td-tab-item-active-color: #0876C4;
+  --td-tab-track-color: #0876C4;
+  --td-tag-default-light-bg-color: #E5F3FC;
+  --td-tag-default-color: #365F7C;
+  --td-dialog-bg-color: #F8FCFF;
+  --td-dialog-border-radius: 40rpx;
+  --td-popup-border-radius: 40rpx;
+  background: #DFEFFA;
+  background-image: radial-gradient(ellipse at 10% 8%,rgba(255,255,255,.96),transparent 54%),linear-gradient(150deg,#D4ECFC,#F3F9FD 45%,#C9E6F8);
+  color: #18344F;
+  font-family: -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  font-size: 30rpx;
+}
+.page,.search-page,.chat-container,.home-container,.data-center,.info-edit { background: transparent; color:#18344F; }
+.search-input,.search-wrap,.login__content,.login-code__input,.info-edit,.release-container .box,.data-center .card {
+  box-sizing:border-box;
+  background:#F8FCFF;
+  border:2rpx solid rgba(255,255,255,.98);
+  border-radius:36rpx;
+  box-shadow:0 12rpx 30rpx rgba(63,119,157,.07),inset 0 2rpx 0 #fff;
+}
+.login__content,.login-code__input,.info-edit { margin:24rpx; padding:24rpx; }
+.login__title,.login-code__title { color:#18344F; line-height:1.4; letter-spacing:-1rpx; }
+.login__tips,.login-code__tips,.login__others-label,.time { color:#486A86; }
+.login__button,.login-code__button { margin:32rpx 0 8rpx; }
+.login__password--forget { margin:24rpx 0 0; }
+.login__others { gap:16rpx; flex-wrap:wrap; }
+.login__others-buttons { margin-left:0; flex-wrap:wrap; gap:12rpx; }
+.search-input { margin:24rpx; padding:4rpx; }
+.search-wrap { margin:24rpx; padding:28rpx; }
+.search-title { color:#18344F; font-weight:700; }
+.history-item,.popular-item { min-height:44px; border-radius:999rpx; }
+.home-container .home-card-list { background:transparent; gap:24rpx; }
+.home-release { bottom:calc(32rpx + env(safe-area-inset-bottom)); }
+.release-container { padding:24rpx 24rpx calc(200rpx + env(safe-area-inset-bottom)); gap:20rpx; }
+.release-container .box { overflow:hidden; }
+.release-container .btngroup {
+  position:fixed; left:24rpx; right:24rpx; bottom:calc(16rpx + env(safe-area-inset-bottom));
+  width:auto; display:flex; gap:20rpx; padding:20rpx; background:#F8FCFF;
+}
+.release-container .btn-class { width:auto; flex:1; min-width:0; }
+.data-center { padding:24rpx; }
+.data-center .card { width:100%; margin:0 0 24rpx; padding:28rpx; border-radius:36rpx; }
+.data-center .card-header__title { color:#18344F; }
+.data-center .card-header__desc,.data-center .card-content__item--desc { color:#486A86; }
+.data-center .card-content { flex-wrap:wrap; gap:24rpx; }
+.message-list { margin:20rpx 24rpx; border:2rpx solid #fff; border-radius:36rpx; overflow:hidden; }
+.chat-container .message { border:2rpx solid #fff; box-shadow:0 8rpx 20rpx rgba(48,113,159,.08); }
+.chat-container .message.self { background:linear-gradient(140deg,#BFE9FF,#D7F4FC); color:#18344F; }
+.chat-container .message.other { background:#F8FCFF; color:#18344F; }
+.bottom { left:20rpx; right:20rpx; bottom:calc(12rpx + env(safe-area-inset-bottom)); padding:20rpx; border:2rpx solid #fff; border-radius:44rpx; background:#F1F9FE; box-shadow:0 12rpx 28rpx rgba(46,105,145,.12),inset 0 2rpx 0 #fff; }
+.bottom .input { background:#fff; border-color:#C8E1F2; font-size:16px; }
+.info-edit__save { padding:16rpx; border:2rpx solid #fff; border-radius:40rpx; background:#EDF7FD; box-shadow:0 12rpx 28rpx rgba(46,105,145,.1); }
+@supports ((backdrop-filter:blur(12px)) or (-webkit-backdrop-filter:blur(12px))) {
+  .search-input,.bottom,.release-container .btngroup { background:rgba(244,251,255,.78); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); }
+}
+@media (prefers-reduced-transparency:reduce),(prefers-contrast:more) {
+  .search-input,.bottom,.release-container .btngroup { background:#fff; -webkit-backdrop-filter:none; backdrop-filter:none; }
+}
+@media (prefers-reduced-motion:reduce) {
+  button { transition:none; animation:none; }
+}
+
+.legacy-notice { margin:20rpx 24rpx; padding:18rpx 24rpx; border:2rpx solid rgba(255,255,255,.95); border-radius:28rpx; background:#EEF8FF; color:#3B607C; font-size:24rpx; line-height:1.6; box-shadow:inset 0 2rpx 0 #fff; }

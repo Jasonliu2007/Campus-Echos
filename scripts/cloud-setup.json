@@ -1,28 +1,438 @@
 {
-  "version": "wall-20261111-v1.1",
+  "version": "wall-20261115-v1.12",
   "appid": "wxa16f2146b48a2c2e",
   "env": "cloud1-d7gueyve330686b55",
   "functionName": "xiaopinWall",
   "timeoutSeconds": 20,
   "bootstrapEnvironmentVariable": "BOOTSTRAP_ADMIN_OPENID",
-  "clientDatabasePermissions": { "read": false, "write": false },
+  "clientDatabasePermissions": {
+    "read": false,
+    "write": false
+  },
   "collections": [
     {
       "name": "xiaopin_trial_posts",
       "indexes": [
-        { "name": "wall_status_time", "fields": [["kind", 1], ["status", 1], ["createdAt", -1], ["_id", -1]] },
-        { "name": "wall_category_time", "fields": [["kind", 1], ["status", 1], ["category", 1], ["createdAt", -1], ["_id", -1]] },
-        { "name": "wall_owner_time", "fields": [["kind", 1], ["authorId", 1], ["createdAt", -1], ["_id", -1]] },
-        { "name": "wall_owner_status_time", "fields": [["kind", 1], ["authorId", 1], ["status", 1], ["createdAt", -1], ["_id", -1]] }
+        {
+          "name": "wall_status_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "status",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "wall_category_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "status",
+              1
+            ],
+            [
+              "category",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "wall_owner_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "authorId",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "wall_owner_status_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "authorId",
+              1
+            ],
+            [
+              "status",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "wall_kind_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        }
       ]
     },
     {
       "name": "xiaopin_members",
       "indexes": [
-        { "name": "members_time", "fields": [["kind", 1], ["createdAt", -1], ["_id", -1]] },
-        { "name": "members_status_time", "fields": [["kind", 1], ["status", 1], ["createdAt", -1], ["_id", -1]] }
+        {
+          "name": "members_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "members_status_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "status",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        }
       ]
     },
-    { "name": "xiaopin_moderation_audit", "indexes": [] }
-  ]
+    {
+      "name": "xiaopin_moderation_audit",
+      "indexes": []
+    },
+    {
+      "name": "xiaopin_reports",
+      "indexes": [
+        {
+          "name": "reports_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "reports_status_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "status",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "reports_owner_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "reporterId",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "reports_owner_status_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "reporterId",
+              1
+            ],
+            [
+              "status",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xiaopin_report_evidence",
+      "indexes": [
+        {
+          "name": "evidence_expiry",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "retentionStatus",
+              1
+            ],
+            [
+              "expiresAt",
+              1
+            ],
+            [
+              "_id",
+              1
+            ]
+          ]
+        },
+        {
+          "name": "evidence_kind_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xiaopin_comments",
+      "indexes": [
+        {
+          "name": "comments_post_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "postId",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        },
+        {
+          "name": "comments_status_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "status",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xiaopin_media",
+      "indexes": [
+        {
+          "name": "media_kind_time",
+          "fields": [
+            [
+              "kind",
+              1
+            ],
+            [
+              "createdAt",
+              -1
+            ],
+            [
+              "_id",
+              -1
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "name": "xiaopin_likes",
+      "indexes": []
+    },
+    {
+      "name": "xiaopin_forum_mutations",
+      "indexes": []
+    },
+    {
+      "name": "xiaopin_media_traces",
+      "indexes": []
+    },
+    { "name": "xiaopin_campus_email", "indexes": [] },
+    {
+      "name": "xiaopin_direct_threads",
+      "indexes": [
+        {"name":"direct_sender_time","fields":[["sender",1],["createdAt",-1],["_id",-1]]},
+        {"name":"direct_recipient_time","fields":[["recipient",1],["createdAt",-1],["_id",-1]]}
+      ]
+    },
+    {
+      "name": "xiaopin_direct_messages",
+      "indexes": [
+        {"name":"direct_thread_time","fields":[["threadId",1],["createdAt",-1],["_id",-1]]}
+      ]
+    },
+    {
+      "name": "xiaopin_media_callbacks",
+      "indexes": []
+    }
+  ],
+  "cleanupFunction": {
+    "name": "xiaopinReportCleanup",
+    "version": "report-cleanup-20261113-v2.1",
+    "triggerName": "report-evidence-daily",
+    "type": "timer",
+    "cron": "0 10 3 * * * *",
+    "timezone": "Asia/Shanghai",
+    "timeoutSeconds": 60,
+    "runtime": "Nodejs16.13",
+    "memoryMB": 256,
+    "timezoneVerification": "Asia/Shanghai must be verified on platform; local cron alone is not evidence",
+    "dependencies": {
+      "wx-server-sdk": "3.0.1"
+    }
+  },
+  "deploymentState": "local-desired-not-verified-on-cloud",
+  "runtime": "Nodejs16.13",
+  "memoryMB": 256,
+  "allowedOpenapi": [
+    "security.msgSecCheck",
+    "security.mediaCheckAsync"
+  ],
+  "tradeManifest": "docs/implementation-v2.4/trade-deploy-manifest.json",
+  "onlineVerificationRequired": [
+    "Client reads and writes denied for all collections before deploying writers",
+    "Deployed source and actual response versions match desired versions",
+    "Indexes, timers, trusted image callback and file cleanup separately verified on cloud"
+  ],
+  "dependencies": {
+    "wx-server-sdk": "3.0.1",
+    "@cloudbase/node-sdk": "2.10.0"
+  }
 }

@@ -1,0 +1,92 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="content report-content">
+    <view class="page-intro">
+      <view class="intro-icon">
+        <image src="/static/campus/shield.svg" aria-hidden="true" />
+      </view>
+      <view class="grow">
+        <view class="intro-title">
+          让校园交流更安心
+        </view>
+        <view class="sub">
+          请根据实际情况选择原因。
+        </view>
+      </view>
+    </view>
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:if="{{loading}}" kind="loading" title="正在核对举报资格" description="正在连接校园回声。" />
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:elif="{{error && !post && !accessError}}" kind="error" title="暂时无法{{commentTarget ? '举报这条评论' : '举报这条帖子'}}" description="{{error}}" action="重新核对" bind:action="load" />
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:elif="{{!allowed}}" kind="access" title="需要有效内测资格" description="当前无法提交举报，已输入的内容保留在本页。" action="查看资格" bind:action="goAccess" />
+    <block wx:elif="{{result}}">
+      <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}"  kind="success" title="{{result.duplicate ? (commentTarget ? '你已举报过这条评论' : '你已举报过这条帖子') : '举报已收到'}}" description="{{result.duplicate ? '原始原因和说明保持不变，请查看已有记录。' : '管理员将人工核对，你可以在我的举报查看处理结果。'}}" action="查看举报结果" bind:action="result" />
+      <button class="secondary full report-state-gap" bindtap="wall" hover-class="press" hover-start-time="0" hover-stay-time="120">
+        返回论坛
+      </button>
+    </block>
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:elif="{{!post}}" kind="error" title="暂时无法{{commentTarget ? '举报这条评论' : '举报这条帖子'}}" description="{{error}}" action="重新核对" bind:action="load" />
+    <block wx:else>
+      <view class="form-panel">
+        <view class="report-post-summary">
+          <view class="sub">
+            {{commentTarget ? '举报的评论所在帖子' : '举报的帖子'}}
+          </view>
+          <view class="report-post-title">
+            {{post.title}}
+          </view>
+          <view class="sub">
+            {{post.category}}
+          </view>
+        </view>
+        <view class="label">
+          举报原因
+          <text class="required">
+            *
+          </text>
+        </view>
+        <view class="report-reasons" aria-role="radiogroup" aria-label="举报原因">
+          <button wx:for="{{reasons}}" wx:key="value" class="report-option {{reasonCode === item.value ? 'active' : ''}}" aria-role="radio" aria-label="{{item.label}}，{{reasonCode === item.value ? '已选择' : '未选择'}}" data-value="{{item.value}}" bindtap="choose" disabled="{{submitting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">
+            {{item.label}}
+            <view class="report-radio" aria-hidden="true" />
+          </button>
+        </view>
+        <label class="label" for="report-detail">
+          补充说明
+          <text class="{{reasonCode === 'other' ? 'required' : 'sub'}}">
+            {{reasonCode === 'other' ? '* 必填2–200字' : '选填'}}
+          </text>
+        </label>
+        <textarea id="report-detail" class="textarea short" value="{{detail}}" bindinput="input" maxlength="-1" disabled="{{submitting}}" focus="{{focusDetail}}" adjust-position cursor-spacing="100" show-confirm-bar placeholder="请描述需要核对的问题，不要填写他人敏感信息" aria-label="举报补充说明，最多200字。{{fieldError}}" />
+        <view class="field-hint">
+          <text>
+            说明仅你与管理员可见
+          </text>
+          <text class="counter">
+            {{detailCount}} / 200
+          </text>
+        </view>
+        <view class="field-error report-form-error" aria-role="alert">
+          {{fieldError}}
+        </view>
+        <view class="help-copy">
+          在「我的举报」查看处理进度。
+        </view>
+      </view>
+      <view wx:if="{{error}}" class="notice error" aria-role="alert">
+        {{error}}
+        <view>
+          原因和说明已保留。
+        </view>
+        <button wx:if="{{unavailable}}" class="secondary full report-retry" bindtap="load" hover-class="press" hover-start-time="0" hover-stay-time="120">
+          重新核对帖子
+        </button>
+      </view>
+    </block>
+  </view>
+  <view wx:if="{{allowed && !loading && !result && post}}" class="sticky-actions report-actions">
+    <button class="secondary" bindtap="cancel" disabled="{{submitting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">
+      取消
+    </button>
+    <button class="primary" bindtap="submit" disabled="{{submitting || unavailable}}" aria-label="{{submitting ? '举报正在提交' : '提交举报'}}" hover-class="press" hover-start-time="0" hover-stay-time="120">
+      {{submitting ? '正在提交…' : '提交举报'}}
+    </button>
+  </view>
+</view>

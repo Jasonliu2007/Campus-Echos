@@ -1,38 +1,124 @@
-<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+<import src="../../components/campus-post/content.wxml" />
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}" style="padding-top: {{topInset}}px;">
   <view wx:if="{{result}}" class="content">
-    <campus-state kind="{{result.status === 'published' ? 'success' : 'pending'}}"
-      title="{{result.status === 'published' ? '发布成功，已出现在校园墙' : result.status === 'pending' ? '已提交，等待人工复核' : '这条发布请求已有结果'}}"
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" kind="{{result.status === 'published' ? 'success' : 'pending'}}"
+      title="{{result.status === 'published' ? '发布成功，已出现在论坛' : result.status === 'pending' ? '已提交，等待人工复核' : '这条发布请求已有结果'}}"
       description="{{result.status === 'published' ? '同学现在可以读到你的帖子。你可以在“我的帖子”查看或删除。' : result.status === 'pending' ? '帖子尚未公开，处理结果会更新在“我的帖子”，无需重复提交。' : '本次重试未重复创建帖子。请在“我的帖子”查看最新审核、下架或删除状态。'}}"
       action="查看我的帖子" bind:action="mine" />
-    <button class="secondary full" bindtap="wall" hover-class="press" hover-start-time="0" hover-stay-time="120">返回校园墙</button>
+    <button wx:if="{{result.status === 'published' && shareAfterPost}}" class="secondary full" open-type="share">分享到微信</button>
+    <button class="secondary full" bindtap="wall" hover-class="press" hover-start-time="0" hover-stay-time="120">返回论坛</button>
   </view>
   <block wx:else>
-    <view class="content with-actions">
-      <campus-state wx:if="{{loading}}" kind="loading" title="正在核对内测资格" description="请稍候。" />
-      <campus-state wx:elif="{{!allowed}}" kind="access" title="需要获准的内测资格"
-        description="{{error || '当前账号暂不能发布。草稿会保存在本机。'}}" action="查看内测资格" bind:action="goAccess" />
+    <view class="compose-header">
+      <button class="compose-button" bindtap="cancel" disabled="{{submitting}}">取消</button>
+      <text>{{editing ? '编辑帖子' : '新帖子'}}</text>
+      <view class="compose-header-tools">
+        <button class="compose-button" bindtap="preview" disabled="{{!allowed || submitting}}" aria-label="预览"><image src="/static/campus/file.svg" /></button>
+        <button class="compose-button" bindtap="openPanel" data-panel="header" disabled="{{!allowed || submitting}}" aria-label="编辑菜单">···</button>
+      </view>
+    </view>
+    <view class="compose-scroll">
+      <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:if="{{loading}}" kind="loading" title="正在核对内测资格" description="请稍候。" />
+      <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:elif="{{needsCampusEmail}}" kind="access" title="验证学校邮箱后发帖" description="实名帖和匿名帖均需绑定学校邮箱。已有草稿会保存在本机。" action="验证学校邮箱" bind:action="goCampusEmail" />
+      <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:elif="{{!allowed}}" kind="access" title="需要获准的内测资格"
+        description="{{editExpired ? '首次提交已满30分钟或帖子不可编辑。本机草稿仍保留。' : error || '当前账号暂不能发布。草稿会保存在本机。'}}" action="查看内测资格" bind:action="goAccess" />
       <block wx:else>
-        <view class="notice">目前仅支持文字帖。图片、匿名、评论与点赞将在后续开放。</view>
-        <view class="label">选择分区 <text class="required">*</text></view>
-        <picker range="{{categories}}" bindchange="category" disabled="{{submitting}}">
-          <view class="picker between" aria-label="当前分区：{{category}}">{{category}}<image class="icon-small"
-              src="/static/campus/next.svg" aria-hidden="true" /></view>
-        </picker>
-        <label class="label" for="post-title">标题 <text class="required">*</text></label>
-        <input id="post-title" focus="{{focusTitle}}" class="input" value="{{title}}" data-key="title" bindinput="input"
-          disabled="{{submitting}}" maxlength="-1" placeholder="一句话说清你想分享的事" aria-label="帖子标题，最多60字" aria-describedby="title-error" aria-invalid="{{!!titleError}}" />
-        <view wx:if="{{titleError}}" id="title-error" class="field-error" aria-role="text">{{titleError}}</view><view class="field-hint"><text>清晰的标题更容易被同学看到</text><text class="counter">{{titleCount}} / 60</text></view>
-        <label class="label" for="post-body">正文 <text class="required">*</text></label><textarea id="post-body" focus="{{focusContent}}" class="textarea" value="{{content}}" data-key="content" bindinput="input" disabled="{{submitting}}" maxlength="-1" placeholder="说说发生了什么，或你需要什么帮助" aria-label="帖子正文，最多2000字" aria-describedby="content-error" aria-invalid="{{!!contentError}}" adjust-position show-confirm-bar cursor-spacing="32"/>
-        <view wx:if="{{contentError}}" id="content-error" class="field-error" aria-role="text">{{contentError}}</view><view class="field-hint"><text>不发布个人敏感信息和违规内容</text><text class="counter">{{contentCount}} / 2000</text></view>
-        <view wx:if="{{error}}" class="field-error" aria-role="text">{{error}}</view>
-        <view class="rule" />
-        <view class="help-copy">发布后先经过微信内容审核。需人工复核的帖子显示“待审核”，通过后才出现在校园墙。网络超时后原样重试可避免重复发帖。</view>
+        <view wx:if="{{previewing}}" class="reading-panel">
+          <button class="compose-button" bindtap="preview">返回编辑</button>
+          <template is="post-author" data="{{avatarId: isAnonymous ? 'anonymous' : official ? 'official' : avatarId, authorName: isAnonymous ? '匿名同学' : authorName, category}}" />
+          <template is="post-body" data="{{title: titlePreview, blocks: previewBlocks, coverId, images, stickerId, location, poll}}" />
+        </view>
+        <view wx:else class="compose-line">
+          <view class="compose-rail">
+            <button class="compose-button avatar-button" data-kind="avatar" bindtap="togglePresets" disabled="{{isAnonymous || official || submitting}}" aria-label="更换头像"><image class="post-avatar" src="/static/presets/{{isAnonymous ? 'anonymous' : official ? 'official' : avatarId || 'avatar-1'}}.jpg" mode="aspectFill" /></button>
+            <view class="compose-stem" />
+          </view>
+          <view class="compose-writing">
+            <view class="compose-byline">
+              <text class="compose-author">{{isAnonymous ? '匿名同学' : authorName || '校园同学'}}</text>
+              <picker wx:if="{{community !== 'experience'}}" range="{{categories}}" bindchange="category" disabled="{{submitting}}"><text>› {{category}}</text></picker>
+              <text wx:else>› 学长学姐</text>
+            </view>
+            <input wx:if="{{editing || title || showTitle}}" class="compose-title-field" focus="{{focusTitle}}" value="{{title}}" data-key="title" bindinput="input" maxlength="60" placeholder="标题" />
+            <textarea class="compose-body" id="post-body" focus="{{focusContent}}" cursor="{{cursor}}" bindblur="rememberCursor" value="{{content}}" data-key="content"
+              bindinput="input" bindkeyboardheightchange="keyboardChange" placeholder="有什么新鲜事？" maxlength="-1" auto-height adjust-position="{{false}}" show-confirm-bar="{{false}}" disabled="{{submitting}}" aria-label="正文" />
+            <view wx:if="{{contentError || titleError}}" class="field-error">{{contentError || titleError}}</view>
+            <view wx:if="{{presetPicker === 'avatar'}}" class="preset-grid"><button wx:for="{{avatarOptions}}" wx:key="*this" class="preset-choice" data-kind="avatar" data-id="{{'avatar-' + (index + 1)}}" bindtap="choosePreset"><image class="post-avatar" src="/static/presets/avatar-{{index + 1}}.jpg" />{{item}}</button></view>
+            <view wx:if="{{quotePostId}}" class="quote-card"><text>{{quote.title || '原帖暂不可查看'}}</text><button class="compose-button" bindtap="removeQuote" aria-label="移除引用">×</button></view>
+            <view wx:if="{{location}}" class="compose-attachment"><text>地点 · {{location}}</text><button class="compose-button" data-panel="location" bindtap="openPanel">编辑</button></view>
+            <view wx:if="{{poll.length}}" class="compose-attachment"><text>投票 · {{poll.length}} 个选项</text><button class="compose-button" data-panel="poll" bindtap="openPanel">编辑</button></view>
+            <view wx:if="{{stickerId}}" class="compose-attachment"><image class="compose-sticker" src="/static/stickers/{{stickerId}}.webp" mode="aspectFit" /><button class="compose-button" data-id="0" bindtap="chooseSticker" aria-label="移除贴纸">×</button></view>
+            <view wx:if="{{coverId}}" class="compose-attachment"><image class="preset-cover" src="/static/presets/{{coverId}}.jpg" mode="aspectFill" /><button class="compose-button" data-kind="cover" data-id="" bindtap="choosePreset">移除</button></view>
+            <view wx:if="{{images.length}}" class="media-grid">
+              <view wx:for="{{images}}" wx:key="key" class="media-tile">
+                <image wx:if="{{item.path || item.url}}" src="{{item.path || item.url}}" mode="aspectFill" data-key="{{item.key}}" bindtap="previewImage" />
+                <view class="sub">{{item.label}}</view>
+                <view class="row-wrap">
+                  <button wx:if="{{item.status === 'failed'}}" class="text-button" data-key="{{item.key}}" bindtap="retryImage">重试</button>
+                  <button class="text-button" data-key="{{item.key}}" bindtap="removeImage">移除</button>
+                </view>
+              </view>
+            </view>
+            <view class="compose-tools">
+              <button class="compose-button" bindtap="chooseImages" disabled="{{imageBusy || submitting}}" aria-label="相册"><image src="/static/campus/photo.svg" /></button>
+              <button class="compose-button" data-panel="stickers" bindtap="openPanel" aria-label="贴纸"><image src="/static/campus/sticker.svg" /></button>
+              <button class="compose-button" data-panel="more" bindtap="openPanel" aria-label="更多附件"><image src="/static/campus/compose-more.svg" /></button>
+              <view wx:if="{{composerPanel === 'more'}}" class="compose-menu">
+                <button data-panel="snippet" bindtap="openPanel"><image src="/static/campus/file.svg" /> 片段</button>
+                <button wx:if="{{community !== 'experience' && !editing}}" bindtap="openQuotePicker"><image src="/static/campus/quote.svg" /> 引用</button>
+                <button bindtap="chooseCamera"><image src="/static/campus/camera.svg" /> 相机</button>
+                <button bindtap="addPoll"><image src="/static/campus/poll.svg" /> 投票</button>
+                <button data-panel="location" bindtap="openPanel"><image src="/static/campus/pin.svg" /> 地点</button>
+              </view>
+            </view>
+          </view>
+        </view>
+        <button wx:if="{{!previewing}}" class="compose-add-thread" bindtap="addToThread" disabled="{{!content || submitting}}"><image src="/static/presets/{{isAnonymous ? 'anonymous' : official ? 'official' : avatarId || 'avatar-1'}}.jpg" />添加一段</button>
+        <view wx:if="{{conflict}}" class="notice warning"><button class="text-button" bindtap="latest">查看最新版本</button><button class="text-button" bindtap="rebaseEdit">核对草稿版本</button></view>
+        <view wx:if="{{error}}" class="field-error" role="alert">{{error}}</view>
+        <checkbox-group wx:if="{{community === 'experience' && !previewing}}" bindchange="experienceDeclaration"><label class="checkline"><checkbox value="confirmed" checked="{{experienceDeclared}}" color="#0878BD" /><text>我确认分享的是本人真实经历。</text></label></checkbox-group>
       </block>
     </view>
-    <view class="sticky-actions">
-      <button class="secondary" bindtap="cancel" disabled="{{submitting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">取消</button>
-      <button class="primary" bindtap="submit" loading="{{submitting}}" disabled="{{submitting || loading || !allowed}}"
-        hover-class="press" hover-start-time="0" hover-stay-time="120">{{submitting ? '正在提交审核…' : error ? '重试发布' : '发布'}}</button>
+    <view wx:if="{{allowed}}" class="compose-footer {{keyboardHeight ? 'above-keyboard' : ''}}" style="bottom: {{keyboardHeight}}px">
+      <button class="compose-button compose-options" data-panel="options" bindtap="openPanel"><image src="/static/campus/filter.svg" />发布选项</button>
+      <button class="compose-identity {{isAnonymous ? 'is-anonymous' : ''}}" bindtap="toggleAnonymous" disabled="{{anonymousLocked || submitting}}"><image src="/static/presets/{{isAnonymous ? 'anonymous' : official ? 'official' : avatarId || 'avatar-1'}}.jpg" /><text>{{isAnonymous ? '匿名' : '公开昵称'}}</text></button>
+      <button class="primary compose-post" bindtap="submit" loading="{{submitting}}" disabled="{{submitting || imageBusy || conflict || !content}}">{{editing ? '保存' : '发布'}}</button>
+    </view>
+    <view wx:if="{{composerPanel && composerPanel !== 'more'}}" class="compose-mask" bindtap="closePanel">
+      <view class="compose-sheet" catchtap="noop" role="dialog">
+        <view class="sheet-handle" />
+        <block wx:if="{{composerPanel === 'options'}}">
+          <view class="sheet-label">谁可以回复和引用</view>
+          <view class="sheet-group">
+            <button class="sheet-row" data-scope="members" bindtap="chooseScope">所有内测成员<text class="sheet-radio {{replyScope === 'members' ? 'checked' : ''}}" /></button>
+            <button class="sheet-row" data-scope="author" bindtap="chooseScope">仅自己<text class="sheet-radio {{replyScope === 'author' ? 'checked' : ''}}" /></button>
+          </view>
+          <view class="sheet-group spaced"><label class="sheet-row">审批后显示回复<switch checked="{{reviewReplies}}" disabled="{{replyScope === 'author'}}" bindchange="reviewRepliesChange" color="#0878BD" /></label></view>
+          <view class="sheet-label">受众</view>
+          <view class="sheet-group"><button class="sheet-row" bindtap="audience">同时分享至<text class="sub">{{shareAfterPost ? '微信' : '关闭'}} ›</text></button><view wx:if="{{audienceOpen}}" class="sheet-note"><label class="sheet-row">发布后分享到微信<switch checked="{{shareAfterPost}}" bindchange="shareAfterPostChange" color="#0878BD" /></label></view></view>
+        </block>
+        <block wx:elif="{{composerPanel === 'stickers'}}">
+          <view class="sheet-label">校园贴纸</view><view class="sticker-grid"><button wx:for="{{stickers}}" wx:key="*this" data-id="{{item}}" bindtap="chooseSticker" aria-label="贴纸 {{item}}"><image src="/static/stickers/{{item}}.webp" mode="aspectFit" /></button></view>
+        </block>
+        <block wx:elif="{{composerPanel === 'snippet'}}">
+          <view class="sheet-label">插入片段</view><view class="row-wrap"><button class="secondary" data-kind="heading" bindtap="insert">小标题</button><button class="secondary" data-kind="list" bindtap="insert">清单</button><button class="secondary" data-kind="divider" bindtap="insert">分隔线</button><button class="secondary" data-kind="template" bindtap="insert">分区模板</button></view>
+          <view class="symbol-grid"><button wx:for="{{symbols}}" wx:key="*this" class="symbol-button" data-symbol="{{item}}" bindtap="insert">{{item}}</button></view>
+        </block>
+        <block wx:elif="{{composerPanel === 'poll'}}">
+          <view class="sheet-label">投票选项</view>
+          <input wx:for="{{poll}}" wx:key="index" class="input sheet-input" data-index="{{index}}" value="{{item}}" bindinput="editPoll" maxlength="40" placeholder="选项 {{index + 1}}" />
+          <view class="row-wrap"><button wx:if="{{poll.length < 4}}" class="text-button" bindtap="addPollOption">添加选项</button><button class="text-button" bindtap="removePoll">移除投票</button></view>
+        </block>
+        <block wx:elif="{{composerPanel === 'location'}}">
+          <view class="sheet-label">地点</view><input class="input sheet-input" value="{{location}}" bindinput="editLocation" maxlength="40" placeholder="例如：图书馆" />
+        </block>
+        <block wx:else>
+          <view class="sheet-label">编辑菜单</view>
+          <view class="sheet-group"><button class="sheet-row" bindtap="showTitleField">编辑标题</button><button class="sheet-row" data-kind="cover" bindtap="togglePresets">选择配图</button><button wx:if="{{images.length}}" class="sheet-row" bindtap="checkImages">刷新图片状态</button></view>
+          <view wx:if="{{presetPicker === 'cover'}}" class="preset-grid cover-grid"><button wx:for="{{coverOptions}}" wx:key="*this" class="preset-choice" data-kind="cover" data-id="{{'cover-' + (index + 1)}}" bindtap="choosePreset"><image src="/static/presets/cover-{{index + 1}}.jpg" mode="aspectFill" />{{item}}</button></view>
+        </block>
+        <button class="primary sheet-done" bindtap="closePanel">完成</button>
+      </view>
     </view>
   </block>
 </view>

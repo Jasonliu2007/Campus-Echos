@@ -3,12 +3,14 @@ Page({
   data: {
     reducedMotion: false,
     reducedTransparency: false,
+    tabHaptics: true,
     settingsError: ''
   },
   onShow() {
     this.setData({
       reducedMotion: C.getReducedMotion(),
-      reducedTransparency: C.getReducedTransparency()
+      reducedTransparency: C.getReducedTransparency(),
+      tabHaptics: C.getTabHaptics()
     });
   },
   motion(e) {
@@ -17,6 +19,7 @@ Page({
   transparency(e) {
     this.savePreference('reducedTransparency', e.detail.value, C.setReducedTransparency);
   },
+  haptics(e) { this.savePreference('tabHaptics', e.detail.value, C.setTabHaptics); },
   savePreference(key, value, save) {
     const enabled = value === true;
     try {
@@ -24,7 +27,7 @@ Page({
       this.setData({ [key]: enabled, settingsError: '' });
     } catch (error) {
       this.setData({
-        [key]: key === 'reducedMotion' ? C.getReducedMotion() : C.getReducedTransparency(),
+        [key]: key === 'reducedMotion' ? C.getReducedMotion() : key === 'tabHaptics' ? C.getTabHaptics() : C.getReducedTransparency(),
         settingsError: '设置未能保存，请检查本机存储后重试。'
       });
     }

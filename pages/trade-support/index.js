@@ -1,0 +1,36 @@
+const V = require('../../utils/trade-view');
+const C=require('../../utils/campus');const T=require('../../utils/trade');
+Page({
+ data:{mode:'afterSale',case:null,order:null,types:T.AFTER_SALE_TYPES,type:'文件损坏',description:'',descriptionCount:0,coordination:'',coordinationCount:0,result:'statementsRecorded',results:['statementsRecorded','coordinated','technicalFixed','unresolved'],resultLabels:['记录双方陈述','已完成协调','技术问题已修复','仍未解决'],resultIndex:0,error:'',notice:'',loading:false,busy:false,canAdmin:false,localDraftRetained:false,reducedMotion:false,reducedTransparency:false},
+
+ onLoad(q={}){this.orderId=q.orderId;this.caseId=q.caseId;this.materialId=q.materialId;this.setData({mode:q.mode==='complaint'?'complaint':'afterSale'});this._draftKey='trade-support-'+(q.caseId||q.orderId||q.materialId);try{const d=wx.getStorageSync(this._draftKey);if(d){this.setData({description:d.description||'',descriptionCount:Array.from(d.description||'').length,coordination:d.coordination||'',coordinationCount:Array.from(d.coordination||'').length,type:T.AFTER_SALE_TYPES.includes(d.type)?d.type:'文件损坏',localDraftRetained:d.localDraftRetained===true});this._request=d.requestId||'';}}catch(_){}this.alert();},
+
+ onShow(){V.show(this);this._confirming=false;this.setData({busy:false});this.setData({canAdmin:false});this.setData({reducedMotion:C.getReducedMotion(),reducedTransparency:C.getReducedTransparency()});if(this.orderId||this.caseId)this.load();},
+
+ onHide(){V.hide(this);this.setData({canAdmin:false});},
+  onUnload(){V.unload(this);},
+
+ clearAccess(message){V.invalidate(this);this.setData({busy:false,case:null,order:null,canAdmin:false,error:message,notice:'',loading:false});},
+
+ async load(){if(this._loading)return;this._loading=true;const view=V.token(this);this.setData({loading:true,error:''});try{if(this.caseId){const r=await T.call('getAfterSale',{caseId:this.caseId});if(!V.current(this,view))return;this.orderId=r.afterSale.orderId;this.setData({case:{...r.afterSale,displayTime:C.formatTime(r.afterSale.createdAt)}});}if(this.orderId){const r=await T.call('getOrder',{orderId:this.orderId});if(!V.current(this,view))return;this.setData({order:T.order(r.order)});}const s=await C.callWall('session');if(!V.current(this,view))return;this.setData({canAdmin:s.access==='approved'&&s.member&&s.member.role==='admin'});}catch(e){if(V.current(this,view)){if(T.invalidAccess(e))this.clearAccess(e.message);else this.setData({error:e.message,canAdmin:false});}}finally{if(V.current(this,view)){this._loading=false;this.setData({loading:false});}}},
+
+ input(e){const key=e.currentTarget.dataset.key;if(!['description','coordination'].includes(key))return;const value=e.detail.value;this.setData({[key]:value,[key+'Count']:Array.from(value).length,error:''});this._request='';this._draftVersion=(this._draftVersion||0)+1;this.save();this.alert();},
+
+ type(e){this.setData({type:this.data.types[Number(e.detail.value)]});this._request='';this._draftVersion=(this._draftVersion||0)+1;this.save();},
+
+ result(e){const i=Number(e.detail.value);this.setData({resultIndex:i,result:this.data.results[i]});this._draftVersion=(this._draftVersion||0)+1;this.save();},
+
+ save(){try{wx.setStorageSync(this._draftKey,{description:this.data.description,coordination:this.data.coordination,type:this.data.type,requestId:this._request||'',localDraftRetained:this.data.localDraftRetained});return true;}catch(_){this.setData({error:'草稿未能保存，请勿关闭页面。'});return false;}},
+
+ alert(){if(this.data.description||this.data.coordination){if(wx.enableAlertBeforeUnload)wx.enableAlertBeforeUnload({message:'本次说明尚未提交，确认离开？'});}else if(wx.disableAlertBeforeUnload)wx.disableAlertBeforeUnload();},
+
+ clear(){try{wx.removeStorageSync(this._draftKey);}catch(_){}if(wx.disableAlertBeforeUnload)wx.disableAlertBeforeUnload();this.setData({description:'',descriptionCount:0,coordination:'',coordinationCount:0,localDraftRetained:false});this._request='';},
+
+ finishDraft(version){if((this._draftVersion||0)===version){this.clear();return false;}this.setData({localDraftRetained:true});this.save();this.alert();return true;},
+
+ async submit(){const view=V.token(this);if(this.data.busy)return;const description=this.data.description.trim(),max=this.data.mode==='complaint'?200:1000;if(Array.from(description).length<2||Array.from(description).length>max){this.setData({error:'请填写2–'+max+'字事实说明。'});return;}this._request=this._request||C.requestId();this.save();const draftVersion=this._draftVersion||0;this.setData({busy:true,error:''});try{if(this.data.mode==='complaint'){const r=await T.call('reportMaterial',{materialId:this.materialId,requestId:this._request,reason:description});if(!V.current(this,view))return;const retained=this.finishDraft(draftVersion);this.setData({notice:(r.duplicate?'已存在本人的投诉，未重复提交。':'投诉已提交，资料暂停新售卖与新的文件签发，等待核查。')+(retained?' 后续输入仅保留在本机，尚未提交。':'')});}else{const r=await T.call('openAfterSale',{orderId:this.orderId,requestId:this._request,type:this.data.type,description});if(!V.current(this,view))return;this.caseId=r.caseId;const previousDraftKey=this._draftKey;if((this._draftVersion||0)!==draftVersion)this._draftKey='trade-support-'+r.caseId;const retained=this.finishDraft(draftVersion);if(retained&&this._draftKey!==previousDraftKey&&this.save()){try{wx.removeStorageSync(previousDraftKey);}catch(_){}}this.setData({notice:'售后已提交，平台将记录事实并人工协调。'+(retained?' 后续输入仅保留在本机，尚未提交。':'')});await this.load();}}catch(e){if(V.current(this,view)){if(T.invalidAccess(e))this.clearAccess(e.message);else this.setData({error:e.message});}}finally{if(V.current(this,view))this.setData({busy:false});}},
+
+ async resolve(){const view=V.token(this);if(this.data.busy||this._confirming||!this.data.canAdmin||!this.data.case)return;const coordination=this.data.coordination.trim(),result=this.data.result,draftVersion=this._draftVersion||0;const selected=this.data.case;if(Array.from(coordination).length<2||Array.from(coordination).length>1000){this.setData({error:'核查与协调记录请填写2–1000字。'});return;}this._confirming=true;const yes=await C.confirm({title:'记录协调结果并结案？',content:'此操作只记录核查与双方陈述，不确认退款到账，不裁决款项。将核对当前售后版本。',confirmText:'记录并结案'});this._confirming=false;if(!yes||!V.current(this,view))return;this.setData({busy:true,error:''});try{await T.call('resolveAfterSale',{caseId:selected._id||this.caseId,revision:selected.revision,result,coordination});if(!V.current(this,view))return;const retained=this.finishDraft(draftVersion);await this.load();this.setData({notice:'协调记录已保存；不代表退款到账。'+(retained?' 后续输入仅保留在本机，尚未提交。':'')});}catch(e){if(!V.current(this,view))return;if(T.invalidAccess(e)){this.clearAccess(e.message);return;}const message=e.message;if(e.code==='CONFLICT')await this.load();this.setData({error:message+' 本次输入已保留。'});}finally{if(V.current(this,view))this.setData({busy:false});}},
+
+ async cancel(){const view=V.token(this);if(this.data.busy||this._confirming)return;if(this.data.description||this.data.coordination){this._confirming=true;const yes=await C.confirm({title:'保留说明后离开？',content:'输入保存在本机，尚未提交到平台。',confirmText:'保存离开',cancelText:'继续填写'});if(!V.current(this,view))return;this._confirming=false;if(!yes||!this.save())return;}if(!V.current(this,view))return;if(wx.disableAlertBeforeUnload)wx.disableAlertBeforeUnload();C.goBack();}
+});

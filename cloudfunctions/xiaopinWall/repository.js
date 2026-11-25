@@ -1,6 +1,6 @@
 'use strict';
 
-const COLLECTIONS = { posts: 'xiaopin_trial_posts', members: 'xiaopin_members', audit: 'xiaopin_moderation_audit' };
+const COLLECTIONS = { materials: 'xiaopin_materials', orders: 'xiaopin_trade_orders', campusEmail: 'xiaopin_campus_email', directThreads: 'xiaopin_direct_threads', directMessages: 'xiaopin_direct_messages', posts: 'xiaopin_trial_posts', members: 'xiaopin_members', audit: 'xiaopin_moderation_audit', reports: 'xiaopin_reports', reportEvidence: 'xiaopin_report_evidence', comments: 'xiaopin_comments', likes: 'xiaopin_likes', mutations: 'xiaopin_forum_mutations', media: 'xiaopin_media', mediaTraces: 'xiaopin_media_traces', mediaCallbacks: 'xiaopin_media_callbacks' };
 
 function createRepository(db) {
   // wx-server-sdk 3.0.1 supports this runtime option; missing documents return null,
@@ -23,6 +23,21 @@ function createRepository(db) {
       get: (type, key) => getFrom(tx, type, key),
       set: (type, key, value) => setIn(tx, type, key, value),
     })),
+    async findDirectMembers(nickname) {
+      const result = await db.collection(COLLECTIONS.members).where({ nickname, status: 'approved', kind: 'member' })
+        .field({ _id: true, nickname: true, banned: true }).limit(20).get();
+      return result.data;
+    },
+    async queryExpiredEvidence({ at, cursor, limit }) {
+      const command = db.command;
+      const where = { kind: 'reportEvidence', retentionStatus: 'expiring', expiresAt: command.lte(at) };
+      const condition = cursor ? command.and(where, command.or(
+        { expiresAt: command.gt(cursor.expiresAt) },
+        { expiresAt: command.eq(cursor.expiresAt), _id: command.gt(cursor._id) },
+      )) : where;
+      const result = await db.collection(COLLECTIONS.reportEvidence).where(condition).orderBy('expiresAt', 'asc').orderBy('_id', 'asc').limit(limit).get();
+      return result.data;
+    },
     async query(type, { where, cursor, limit }) {
       const command = db.command;
       const condition = cursor ? command.and(

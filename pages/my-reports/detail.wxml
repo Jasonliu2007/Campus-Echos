@@ -1,0 +1,74 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="content report-content">
+    <view class="page-intro">
+      <view class="intro-icon">
+        <image src="/static/campus/shield.svg" aria-hidden="true" />
+      </view>
+      <view class="grow">
+        <view class="intro-title">
+          举报结果
+        </view>
+        <view class="sub">
+          每一条反馈，都认真核对。
+        </view>
+      </view>
+    </view>
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:if="{{loading}}" kind="loading" title="正在读取举报" description="正在核对最新权限和记录。" />
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:elif="{{error && !report && !accessError}}" kind="error" title="举报记录暂时无法读取" description="{{error}}" action="重新加载" bind:action="load" />
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:elif="{{!allowed}}" kind="access" title="当前资格无法查看本页" description="权限可能已发生变化，请核对账号状态。" action="查看资格" bind:action="goAccess" />
+    <block wx:elif="{{report}}">
+      <view wx:if="{{info}}" class="notice success" aria-role="status">
+        {{info}}
+      </view>
+      <view class="reading-panel">
+        <view class="between">
+          <text class="tag {{report.status === 'pending' ? 'pending' : report.status === 'hidden' ? 'hidden' : ''}}">
+            {{report.statusLabel}}
+          </text>
+          <text class="report-number">
+            R · {{report.number}}
+          </text>
+        </view>
+        <view class="report-heading report-copy">
+          {{report.reasonLabel}}
+        </view>
+        <view class="report-record sub">
+          <text>
+            提交于 {{report.displayTime}}
+          </text>
+          <text wx:if="{{report.resolvedTime}}">
+            处理于 {{report.resolvedTime}}
+          </text>
+        </view>
+        <view class="report-private-copy report-copy">
+          {{report.resultCopy}}
+        </view>
+        <button wx:if="{{report.status === 'pending'}}" class="secondary full report-state-gap" bindtap="load" hover-class="press" hover-start-time="0" hover-stay-time="120">
+          刷新处理状态
+        </button>
+      </view>
+      <view class="reading-panel">
+        <view class="report-heading">
+          我的补充说明
+        </view>
+        <view wx:if="{{report.evidenceExpired}}" class="notice">
+          结案已满30天，证据内容已清除，不再展示原文与自由说明。
+        </view>
+        <view wx:else class="report-private-copy" user-select>
+          {{report.detail || '未填写补充说明。'}}
+        </view>
+      </view>
+      <view wx:if="{{error}}" class="notice error" aria-role="alert">
+        {{error}}
+      </view>
+    </block>
+  </view>
+  <view wx:if="{{!loading}}" class="sticky-actions report-actions">
+    <button class="secondary" bindtap="back" hover-class="press" hover-start-time="0" hover-stay-time="120">
+      返回
+    </button>
+    <button class="primary" bindtap="wall" hover-class="press" hover-start-time="0" hover-stay-time="120">
+      返回论坛
+    </button>
+  </view>
+</view>

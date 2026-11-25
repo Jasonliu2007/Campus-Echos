@@ -1,16 +1,18 @@
 # 校园回声 cloud1 部署与复测
 
-目标 AppID：`wxa16f2146b48a2c2e`；环境：`cloud1-d7gueyve330686b55`；函数：`xiaopinWall`；版本：`wall-20261111-v1.1`。保留旧技术名，所有用户可见文案使用校园回声。
+目标AppID `wxa16f2146b48a2c2e`，环境`cloud1-d7gueyve330686b55`。本地v2.4期望配置以scripts/cloud-setup.json及implementation-v2.4/trade-deploy-manifest.json为准：Wall v1.4、Trade、PdfWorker与ReportCleanup共4函数、25业务集合、41期望索引。本轮4函数已部署并下载36源码hash一致；Wall真实session v1.4、Trade v1且付费关闭。论坛首轮19步及20+3分页/四类/并发赞/经验推荐通过；原创PDF上架到独立试读通过。Worker v1.2/Cleanup v2.1已修真实小写timer，Worker512MB与处理成功已证；图片回调、每日物理清理、跨账号水印及手机仍待。恢复后25集合客户端get/add/update共75项全部-502003拒绝；25集合41/41索引字段、方向及顺序实际读回匹配，缺0。
+
+本轮私有权限与索引门禁已通过，证据为verification-v2.4/恢复后25集合真实读写门禁.json、恢复后全部索引核对.json及索引补齐记录.json。原索引确认任务已核成功，勿重复提交；后续任务以后台任务.json实时记录为准。本轮部署前线上快照及初始管理员锁已核并保留；桌面点击由用户本人操作。预检valid不代表deployReady；脚本不查询云端，也不执行部署。真实云未通过项见verification-v2.4/README.md。付费保持关闭。
 
 ## 本地预检
 
-使用可用 Node 运行：`node --test tests/wall/wall.test.js`、`node scripts/cloud-setup.mjs`。后者只读取 manifest，不创建云资源。当前测试使用内存仓库及模拟审核，不能证明真实微信审核、事务和索引已经可用。
+使用可用 Node 运行：`node --test tests/wall/*.test.js tests/client/*.test.js tests/trade/*.test.js`、`node scripts/cloud-setup.mjs`、`node scripts/sync-report-cleanup.mjs --check`。部署清单检查只读取manifest；共享源码检查只做本地比对，均不创建云资源。当前测试使用内存仓库及模拟审核，不能证明真实微信审核、事务和索引已经可用。
 
 ## 集合与权限
 
-按 `scripts/cloud-setup.json` 创建三集合：`xiaopin_trial_posts`、`xiaopin_members`、`xiaopin_moderation_audit`。接手时结构存在性接口曾误报成功，必须以真实集合列表、查询及云函数访问交叉核实。已存在的集合先备份并检查，禁止删库重建。
+以下5个为既有基线集合；v2.4新增资源必须按完整预检清单逐项核对。既有集合：`xiaopin_trial_posts`、`xiaopin_members`、`xiaopin_moderation_audit`、`xiaopin_reports`、`xiaopin_report_evidence`。接手时结构存在性接口曾误报成功，必须以真实集合列表、查询及云函数访问交叉核实。已存在的集合先备份并检查，禁止删库重建。
 
-三集合的**客户端**安全规则统一：
+全部25个业务集合的**客户端**安全规则统一：
 
 ```json
 {"read":false,"write":false}
@@ -22,24 +24,37 @@
 
 ## 服务器配置与部署
 
-1. 在**云函数服务器配置**添加 `BOOTSTRAP_ADMIN_OPENID`，值为本轮已从小程序真实云上下文确认的当前用户身份。此值不得写到前端或开发日志；后台登录身份不是同一个值。无变量则不会初始化管理员。CLI不暴露环境变量时，可仅在隔离上传暂存目录生成 `deployment-config.json` 的 `bootstrapAdminOpenid`；此文件被Git忽略且不能进入前端包。环境变量优先，配置缺失关闭。
+1. 在**云函数服务器配置**添加 `BOOTSTRAP_ADMIN_OPENID`，值为本轮已从小程序真实云上下文确认的当前用户身份。此值不得写到前端或开发日志；后台登录身份不是同一个值。已存在一次性锁时沿用原初始管理员，不重复初始化，不删除或改写锁来转移权限。无变量且无锁则不会初始化管理员。CLI不暴露环境变量时，可仅在隔离上传暂存目录生成 `deployment-config.json` 的 `bootstrapAdminOpenid`；此文件被Git忽略且不能进入前端包。环境变量优先，配置缺失关闭。
 2. 保持环境 cloud1，给函数至少 20 秒超时以容纳安全审核和事务；使用环境支持的 Node 运行时，SDK 固定 `wx-server-sdk:3.0.1`。此版本兼容接手时 Node16，部署平台有支持的更高版本时可使用。
-3. 完整部署函数目录并远端安装依赖，上传 `index.js/service.js/repository.js/config.json/package.json`。`config.json` 保留 `security.msgSecCheck` 权限。
-4. 下载线上代码到独立临时目录并比对源文件；真实调用 session，确认 version、无身份泄露的返回、唯一管理员和一次性锁。首次成功后可移除 bootstrap 变量；不要删除锁。
+3. 完整部署函数目录并远端安装依赖，上传 `index.js/service.js/repository.js/reports.js/report-cleanup.js/config.json/package.json`。`config.json` 保留 `security.msgSecCheck` 权限。
+4. 下载线上代码到独立临时目录并比对源文件；真实调用 session，确认 version、无身份泄露的返回、唯一初始管理员及一次性锁；后续可由该初始管理员通过成员页面授予其他已批准成员管理权限。首次成功后可移除 bootstrap 变量；不要删除锁。
 5. 每次部署和配置变更追加开发日志，记录代码摘要、目标环境、结果、待测与回退。函数存在和 Active 不等于正确部署。
 
 数据库权限和函数配置不在现有 CLI 帮助中时，通过云开发控制台完成；不要增加公开 HTTP 管理口、客户端初始化接口或“测试免审核”分支绕过。
 
 ## 复测顺序
 
-1. 当前用户进入 session：应为唯一 approved admin；新账号进入：access none，不能读/发帖，申请后 pending。
+1. 初始管理员进入 session：应为 approved admin 且 canManageAdmins true；新账号进入：authenticated true、access none，不能读/发帖，申请后 pending。已授权的其他管理员可以并存，但 canManageAdmins false。
 2. 管理员通过申请，申请人重新进入后可读写；普通成员调用审核、成员管理均 FORBIDDEN。撤销后下一次请求 ACCESS_DENIED。
 3. 发布唯一文字测试帖；核对 postId、数据库记录、微信 requestID；刷新与退出重进仍能读到。相同请求并发重试只有一条帖子和一次 publish 审计。
 4. 微信 review/业务敏感词进入 pending，公开列表和其他成员详情不可见；管理员通过或驳回有状态与原因，重复处理返回 CONFLICT。通过复核仅微信pass可公开；review保留pending；risky落为rejected并留安全审核审计，不能再次通过。审核故障不能产生公开帖子。
 5. 下架公开帖后立即从公开列表消失；作者删除后标题正文清空，原请求重试不会复活帖子。
 6. 使用多个账号验证：伪造 payload 的 OPENID、authorId、role、status 均不改变服务端授权；其他人不能删帖或查私有内容。
-7. 三集合逐一从小程序客户端直接 get/add/update，均应权限拒绝（不要留下用于测试的私有记录）。管理员使用云函数相同业务仍正常。
+7. 全部25集合逐一从小程序客户端直接get/add/update均应权限拒绝；本轮75/75已验证且没有写入样本。管理员使用新云函数的业务仍需实际验证，不由拒绝证据代替。
 8. 至少 21 条测试记录验证翻页和等时间戳顺序；切换分区时不能沿用旧游标。
+
+## v2.3 登录与管理员授权复测
+
+本批不新增集合或索引。身份仍由微信云上下文取得；不要接入假登录、客户端 role 开关、公开初始化入口，或在前端保存 AppSecret/OpenID。保留已有 bootstrap 锁；不因为新增授权界面重新部署初始管理员配置。
+
+1. 从“我的”进入微信登录，确认真实 wx.login 成功且 session 返回有效身份；登录失败、无 code、断网均应留在页内并可重试。未批准账号仍只能申请资格。登录中离开后返回，不应用旧请求结果覆盖新页面。
+2. 由初始管理员先批准成员资格，再在已批准成员中选择“设为管理员”并确认。核对 setMemberRole 返回版本、目标成员 role/revision、最小审计记录；不写入前端身份。
+3. 对方使用同一微信账号重新进入或回到“我的”，无需另一套登录即出现管理入口。其审核/举报处理权限按服务端实时角色生效；调用 setMemberRole 或伪造 canManageAdmins 必须 FORBIDDEN。
+4. 初始管理员取消该成员管理权限，对方下一次管理请求必须 FORBIDDEN；仍可按原有成员资格读写校园墙。随后再撤销内测资格，读写须 ACCESS_DENIED。初始管理员自身的授权与资格不能在管理页修改。
+5. 同时授权、取消或处理资格时，旧 revision 必须 CONFLICT。超时、权限变化或冲突后页面锁定旧操作，成功重取 session 和成员列表后再确认；断网重读失败时不显示“权限已核对”。
+6. 小程序底栏切换保留当前列表、筛选、分页游标与滚动位置，返回时只静默核对权限；明确资格失效即清除受保护缓存，账号变化清旧数据。下拉刷新、筛选和分页仍读真实云；本机删除/下架已知帖子应立即从缓存移除。完全重启后重新首载。
+7. 确认发帖符号/分区模板/预览仍以纯文字发布；插入超长不丢原文，草稿和失败重试保持。资料目录和样章只展示明确标注的原创演示内容，下载与交易未开放。
+8. 真机分别核对底栏成功切换仅轻震一次；点当前项、取消滑动和切换失败不震。关闭“板块切换轻震”后无震动，设置与减弱动态独立。模拟器不能证明实际震感，键盘、安全区、大字体与双账号授权仍需真机记录。
 
 真实安全审核返回 review/risky 不能靠本地 mock 宣称验收。无法稳定复现的分支记录为“本地逻辑通过，真实审核待验证”，绝不临时绕过审核。
 
@@ -50,3 +65,34 @@
 ## 验证边界
 
 交付按“本地逻辑 / 模拟器真实云调用 / 真机”分别记录。账号、权限、真实审核与写读都需各自证据；模拟器 UI 成功截图不能替代数据库与权限结果。
+
+
+## v2.2 举报资源与独立清理
+
+新增私有集合`xiaopin_reports`及`xiaopin_report_evidence`；4个举报分页索引和1个expiry清理索引见manifest。两集合在2026-11-11创建时已选择禁止所有客户端读写，模拟器直接get/add/update六项均-502003；后续部署仍需核真实证据。
+
+独立函数目录`cloudfunctions/xiaopinReportCleanup/`，共享worker/repository须与Wall逐字一致（测试检查）。它不依赖Wall版本：回退Wall也保留此函数、定时触发器和私有集合。不得删除举报/审计/已清理占位记录恢复旧版。
+
+目标定时触发器`report-evidence-daily`，配置`0 10 3 * * * *`（按平台时区核实后记录实际时间），每日清理已结案且到期的证据全文；读取接口30天到期立即隐藏。函数超时目标60秒。`config.json`仅保存源配置，部署函数并不证明上传触发器成功，须在开发者工具对该函数目录执行“上传触发器”，并在实际云配置与运行日志确认。
+
+清理函数不提供客户端操作入口、不配HTTP访问。部署时核对平台调用权限，仅可信服务端任务运行；客户端传Type/TriggerName/time不能触发。实际调用源识别与平台权限验证未完成时不得宣称清理已上线。首次验证使用隔离编号/最小无个人内容样本，后台设真实到期时间，不给客户端增加时钟入口。检查前后样本内容清除、最小记录保留、日志成功以及安全重复运行。
+
+清理异常记录无内容错误码并令调用失败，已清记录可重复跳过；下次任务可安全继续。每日任务失败时应检查云日志并手动通过服务端受控方式重试，不能通过开放客户端调用解决。
+
+
+### 2026-11-11 本轮配置记录
+
+用户已确认对恢复每日表达式的config.json执行Upload Triggers并显示上传成功；无需重复上传。平台时区、实际云触发器配置读回和真实定时成功日志仍待独立核对。到期读取隐藏已验证，隔离证据物理清除未取得成功证据；不能记定时清理验收完成。清理容量为每次最多20批×100条、60秒超时，积压/失败需受控服务端重试并核日志，不开放客户端清理入口。详见`verification-v2.2/README.md`。
+
+
+## v2.3本批已核事实（2026-11-11）
+
+Wall v1.3部署返回success，7源文件下载与本地SHA256一致；真实session请求63d39c4a-4ea1-4ea7-8294-523a9ab460b7确认版本、authenticated与本人初管权限。清理函数和五集合权限未改，无新集合/索引。不再重复部署；双账号授权/撤销与实体震感仍待验，详细复测见`verification-v2.3/README.md`。
+
+## 私信和学校邮箱验证（Wall v1.10 候选）
+
+预备 `xiaopin_direct_threads`、`xiaopin_direct_messages`、`xiaopin_campus_email`，设置三张集合的客户端安全规则为 `{"read":false,"write":false}`，部署前使用开发者工具真实账号确认直读、直写皆拒绝。私信使用清单中的三个复合索引。邮箱验证仅通过云函数操作，用不可逆的带密钥摘要保存绑定标识，不保存邮箱明文或验证码。学校邮箱需为 `@mail.bnbu.edu.cn`，一个邮箱绑定一个已获内测资格的微信账号。
+
+使用腾讯云邮件推送，先验证自有发信域名，创建发信地址和通过审核的验证码模板。模板变量为 `{{code}}`，正文应注明「验证码 10 分钟内有效」。在 `xiaopinWall` 的服务端配置 `CAMPUS_SES_SECRET_ID`、`CAMPUS_SES_SECRET_KEY`、`CAMPUS_SES_REGION`、`CAMPUS_SES_FROM`、`CAMPUS_SES_TEMPLATE_ID` 和独立随机的 `CAMPUS_OTP_SECRET`（至少 32 字节，部署后稳定保存）。使用仅获发信授权的凭据，避免将配置写进前端包、Git 或日志。HMAC 密钥参与已绑定邮箱的唯一键，轮换须先设计迁移。
+
+使用真实可访问的学校邮箱完成一次验证码收取及绑定后，将 `CAMPUS_EMAIL_GATE` 设为 `true`，真实会话核对普通和匿名新帖均检查邮箱状态。客户端入口位于「我的 → 学校邮箱」，发帖遇到验证门禁时也可直接进入。

@@ -1,68 +1,38 @@
- .hero {
-   position: relative;
-   min-height: 346rpx;
-   overflow: hidden;
-   border-radius: 0 0 52rpx 52rpx;
-   background: #E4F3FC
- }
+@import "./display-font.wxss";
 
- .campus-image {
-   position: absolute;
-   width: 100%;
-   height: 100%;
-   inset: 0;
-   object-position: right center
- }
+.hero {
+  position: relative;
+  min-height: 330rpx;
+  overflow: hidden;
+  border: 2rpx solid rgba(255, 255, 255, .88);
+  border-top: 0;
+  border-radius: 0 0 48rpx 48rpx;
+  background: #D7EFFD;
+  box-shadow: 0 10rpx 30rpx rgba(49, 135, 184, .10), inset 0 -2rpx 0 rgba(255, 255, 255, .88);
+}
+.campus-image { position: absolute; width: 100%; height: 100%; left: 0; top: 0; }
+.overlay { position: absolute; left: 0; right: 0; top: 0; bottom: 0; background: linear-gradient(95deg, rgba(216, 240, 255, .92) 0%, rgba(219, 242, 255, .70) 35%, rgba(207, 237, 254, .08) 100%); }
+.light-wash { position: absolute; width: 480rpx; height: 330rpx; left: -150rpx; top: -170rpx; background: radial-gradient(ellipse, rgba(255, 255, 255, .75), rgba(255, 255, 255, 0) 72%); }
+.hero-copy { position: relative; padding: 28rpx 36rpx 66rpx; max-width: 94%; color: #102E49; z-index: 2; }
+.brand { display: flex; width: fit-content; align-items: center; gap: 10rpx; font-size: 23rpx; line-height: 1.5; font-weight: 600; color: #244F6F; padding: 7rpx 16rpx; border: 2rpx solid rgba(255, 255, 255, .85); border-radius: 42rpx; background: linear-gradient(150deg, rgba(255, 255, 255, .66), rgba(213, 240, 255, .45)); box-shadow: inset 0 2rpx 0 rgba(255, 255, 255, .9), 0 5rpx 12rpx rgba(61, 135, 177, .08); }
+.brand-icon { width: 28rpx; height: 28rpx; }
+.title { position: relative; display: table; max-width: 100%; font-size: 50rpx; line-height: 1.35; font-weight: 750; margin: 20rpx 0 12rpx; letter-spacing: -1rpx; overflow-wrap: anywhere; }
+.display-title { font-family: "Campus Echo Display", "PingFang SC", "Microsoft YaHei", sans-serif; font-size: 54rpx; line-height: 1.25; font-weight: 400; letter-spacing: 0; }
+.title-echo { position: absolute; right: 0; bottom: -8rpx; width: 100rpx; max-width: 60%; height: 12rpx; border-top: 3rpx solid rgba(76, 191, 244, .62); border-radius: 50%; transform: rotate(-4deg); }
+.subtitle { font-size: 27rpx; line-height: 1.6; color: #3D6684; max-width: 540rpx; }
+.wave { position: absolute; height: 150rpx; width: 115%; border-top: 2rpx solid rgba(255, 255, 255, .9); background: linear-gradient(180deg, rgba(241, 251, 255, .44), rgba(216, 244, 255, .06)); border-radius: 50% 50% 0 0; z-index: 1; pointer-events: none; }
+.wave-back { left: -28%; bottom: -106rpx; transform: rotate(10deg); }
+.wave-front { right: -50%; bottom: -72rpx; transform: rotate(-17deg); background: linear-gradient(180deg, rgba(242, 252, 255, .46), rgba(235, 250, 255, .06)); }
+.small { min-height: 278rpx; }
+.small .hero-copy { padding-bottom: 50rpx; }
+.small .title { font-size: 44rpx; }
 
- .overlay {
-   position: absolute;
-   inset: 0;
-   background: linear-gradient(90deg, rgba(232, 246, 255, .98), rgba(232, 246, 255, .94) 38%, rgba(232, 246, 255, .25) 100%)
- }
+.solid .brand { background:#F9FCFF; border-color:#C6DCEC; }
+.solid .wave { display:none; }
+@media(max-width:350px) { .hero-copy {padding-left:28rpx;padding-right:28rpx;} .hero:not(.small) .title {font-size:48rpx;} }
 
- .hero-copy {
-   position: relative;
-   padding: 38rpx 32rpx 48rpx;
-   max-width: 85%;
-   color: #102D46
- }
+.campus-image,.overlay,.light-wash { pointer-events:none; }
 
- .brand {
-   display: flex;
-   align-items: center;
-   gap: 12rpx;
-   font-size: 24rpx;
-   font-weight: 600;
-   color: #376C91
- }
-
- .brand-icon {
-   width: 32rpx;
-   height: 32rpx
- }
-
- .title {
-   font-size: 48rpx;
-   line-height: 1.35;
-   font-weight: 700;
-   margin: 22rpx 0 14rpx
- }
-
- .subtitle {
-   font-size: 26rpx;
-   line-height: 1.6;
-   color: #416783;
-   max-width: 520rpx
- }
-
- .small {
-   min-height: 300rpx
- }
-
- .small .hero-copy {
-   padding-bottom: 34rpx
- }
-
- .small .title {
-   font-size: 44rpx
- }
+.compact { min-height: 294rpx; }
+.compact .hero-copy { padding-top: 22rpx; padding-bottom: 42rpx; }
+.compact .title { margin-top: 16rpx; }

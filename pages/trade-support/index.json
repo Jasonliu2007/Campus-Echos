@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "售后与协调",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  }
+}

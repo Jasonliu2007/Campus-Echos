@@ -199,7 +199,12 @@ test('申请未提交时提醒离开，失败保留输入；提交成功后清�
   const p = r.page('access/index');
   p.setData({ access: 'none' });
   p.input(input('nickname', '申请同学'));
-  p.input(input('reason', '希望参与校园墙内测'));
+  for (const value of ['1', '11', '114', '1145', '希望参与校园墙内测']) {
+    p.input(input('reason', value));
+    assert.equal(p.data.reason, value);
+    assert.equal(p.data.focusReason, undefined);
+  }
+  assert.equal(r.alerts.length, 1);
   p.setData({ terms: true });
   assert.match(r.alerts.at(-1), /尚未提交/);
   let pending = p.submit();
@@ -262,21 +267,24 @@ test('设置存储失败恢复原值并报错，重试成功不影响另一设�
   assert.equal(p.data.settingsError, '');
 });
 
-test('快速连续导航不重复跳转，完成后解锁并同步两个辅助设置', () => {
+test('连续导航在滑块落定后提交最后选择，完成同步辅助设置', () => {
   const r = runtime();
   r.storage.set('campusReducedTransparency', true);
   const p = r.tab();
   p.switchTab(event({ path: 'pages/materials/index' }));
+  r.advance(100);
   p.switchTab(event({ path: 'pages/partners/index' }));
+  r.advance(259);
+  assert.equal(r.switches.length, 0);
+  r.advance(1);
   assert.equal(r.switches.length, 1);
+  assert.equal(r.switches[0].url, '/pages/partners/index');
   r.switches[0].success();
   r.switches[0].complete();
-  assert.equal(p.data.active, 'pages/materials/index');
+  assert.equal(p.data.selected, 'pages/partners/index');
+  assert.equal(p.data.active, 'pages/campus-wall/index');
   assert.equal(p.data.reducedTransparency, true);
   assert.equal(p.data.reducedMotion, false);
-  p.switchTab(event({ path: 'pages/partners/index' }));
-  assert.equal(r.switches.length, 2);
-  r.switches[1].complete();
   assert.equal(p._switching, false);
 });
 

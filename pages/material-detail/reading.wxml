@@ -1,0 +1,8 @@
+<template name="material-heading">
+  <image wx:if="{{material.sampleCover}}" class="material-sample-photo" src="{{material.sampleCover}}" mode="aspectFill" aria-label="资料随拍风示意图"/>
+  <view class="material-cover"><view class="cover-top"><image src="/static/campus/book.svg" aria-hidden="true"/><text>{{material.type}} / PDF</text></view><view class="cover-course">{{material.course}}</view><view class="material-title">{{material.title}}</view><view class="cover-bottom"><text>{{material.pageCount}}页 · {{material.displayPrice}}</text></view></view>
+      <view class="material-summary"><view class="summary-text">{{material.description}}</view></view>
+</template>
+<template name="material-contents">
+  <view id="contents" class="reading-panel contents-panel"><view class="panel-heading"><view class="grow"><view class="panel-title">章节目录</view></view></view><view wx:for="{{material.catalog}}" wx:key="index" class="toc-row"><text class="toc-number">{{index + 1}}</text><text class="grow">{{item.title}}</text><text class="sub">P.{{item.page}}</text></view><view wx:if="{{!material.catalog.length}}" class="sub">目录待发布者确认。</view></view>
+</template>

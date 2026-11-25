@@ -1,4 +1,6 @@
-const categories = ['失物招领', '吐槽树洞', '学习互助', '闲置转让'];
+const Layout = require('./post-layout');
+
+const categories = ['校园生活墙', '表白墙', 'AI论坛墙', '申研实习墙'];
 const statusLabels = {
   published: '已发布',
   pending: '待审核',
@@ -35,8 +37,34 @@ async function callWall(action, data = {}) {
     error.code = result && result.code ? result.code : 'SERVICE_ERROR';
     throw error;
   }
+  if (['publish', 'editPost'].includes(action)) markWallChanged(data.postId, action === 'editPost');
+  if (['deletePost', 'hidePost', 'reviewPost'].includes(action)) markWallChanged(data.postId, action !== 'reviewPost' || data.decision !== 'approve');
+  if (action === 'resolveReport') markWallChanged(result.report && result.report.postId, result.report && ['hidden', 'unavailable'].includes(result.report.status));
   return result;
 }
+
+function markWallChanged(postId, remove = false) {
+  const pages = typeof getCurrentPages === 'function' ? getCurrentPages() : [];
+  pages.filter(page => ['pages/campus-wall/index', 'pages/experience/index'].includes(page.route)).forEach(page => {
+    const patch = { wallNotice: remove ? '已更新这条帖子的状态，其余内容保持原位。' : '论坛有内容更新，可下拉查看。当前阅读位置已保留。' };
+    if (remove && postId) {
+      page._listSeq = (page._listSeq || 0) + 1;
+      patch.items = (page.data.items || []).filter(post => (post._id || post.id) !== postId);
+      Object.values(page._filterCache || {}).forEach(cached => { cached.items = (cached.items || []).filter(post => (post._id || post.id) !== postId); });
+      patch.loading = false;
+      patch.loadingMore = false;
+    }
+    page.setData(patch);
+  });
+}
+
+function getTabHaptics() {
+  try { return wx.getStorageSync('campusTabHaptics') !== false; }
+  catch (error) { return true; }
+}
+
+function setTabHaptics(value) { wx.setStorageSync('campusTabHaptics', value === true); }
+
 
 function getReducedMotion() {
   try {
@@ -63,11 +91,10 @@ function setReducedTransparency(value) {
 }
 
 function syncTab(page, route) {
-  if (typeof page.getTabBar === 'function' && page.getTabBar()) page.getTabBar().setData({
-    active: route,
-    reducedMotion: getReducedMotion(),
-    reducedTransparency: getReducedTransparency()
-  });
+  const tab = typeof page.getTabBar === 'function' && page.getTabBar();
+  if (!tab) return;
+  if (typeof tab.syncRoute === 'function') tab.syncRoute(route);
+  else tab.setData({ active: route, reducedMotion: getReducedMotion(), reducedTransparency: getReducedTransparency() });
 }
 
 function formatTime(value) {
@@ -80,6 +107,9 @@ function formatTime(value) {
 function formatPost(post) {
   return {
     ...post,
+    contentBlocks: Layout.blocks(post.content),
+    category: post.community === 'experience' ? '经验分享' : categories.includes(post.category) ? post.category : '校园生活墙',
+    canEdit: post.isOwner === true && !['deleted', 'hidden'].includes(post.status) && Date.now() < post.editDeadline,
     displayTime: formatTime(post.createdAt),
     statusLabel: statusLabels[post.status] || '处理中'
   };
@@ -99,7 +129,7 @@ function showUnavailable(eventOrLabel) {
   const label = typeof eventOrLabel === 'string' ? eventOrLabel : (eventOrLabel.currentTarget.dataset.label || '此功能');
   return wx.showModal({
     title: `${label}尚未开放`,
-    content: '当前页面为演示内容。校园墙文字发帖正在封闭内测，其他功能将分批开放。',
+    content: '此操作尚未开放。论坛与真实资料正在封闭内测；演示数据会单独标明。',
     showCancel: false,
     confirmText: '知道了',
     confirmColor: '#0878BD'
@@ -128,6 +158,9 @@ module.exports = {
   statusLabels,
   accessLabels,
   callWall,
+  markWallChanged,
+  getTabHaptics,
+  setTabHaptics,
   getReducedMotion,
   setReducedMotion,
   getReducedTransparency,

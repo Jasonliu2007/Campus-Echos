@@ -1,5 +1,6 @@
 @import "../../components/campus-ui/page.wxss";
-
-.role-tags {
-  margin-top: 24rpx
-}
+.role-tags { margin-top: 24rpx; gap: 12rpx; }
+.activity-card { padding: 30rpx; }
+.activity-card .card-title { font-size: 34rpx; margin-top: 24rpx; }
+.activity-card .role-tags .tag { border: 2rpx solid #DBEAF5; background: #F3FAFF; color: #3F6480; }
+.activity-card .rule { margin-top: 28rpx; margin-bottom: 20rpx; }

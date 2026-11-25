@@ -1,0 +1,204 @@
+.report-reasons {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 16rpx;
+}
+
+.report-option {
+  min-height: 48px;
+  padding: 20rpx 22rpx;
+  background: #FCFEFF;
+  border: 2rpx solid #C3DCEC;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  color: #18344F;
+  font-size: 28rpx;
+  transition: background-color 160ms,color 160ms,transform 120ms cubic-bezier(.22,1,.36,1);
+}
+
+.report-option.active {
+  background: #E2F3FF;
+  color: #0769AD;
+  border-color: #1689D5;
+}
+
+.report-radio {
+  width: 24rpx;
+  height: 24rpx;
+  border: 3rpx solid #98B6CC;
+  border-radius: 50%;
+  margin-left: 16rpx;
+  flex: none;
+}
+
+.active .report-radio {
+  border: 7rpx solid #0878BD;
+  background: #fff;
+}
+
+.report-post-summary {
+  padding: 24rpx;
+  background: #EAF5FC;
+  border: 2rpx solid #D7EAF5;
+  border-radius: 26rpx;
+  margin: 24rpx 0;
+  word-break: break-word;
+}
+
+.report-post-title {
+  font-weight: 600;
+  margin-top: 10rpx;
+}
+
+.report-number {
+  font-size: 24rpx;
+  letter-spacing: 1rpx;
+  color: #4D6E88;
+  word-break: break-all;
+}
+
+.report-record {
+  margin-top: 20rpx;
+  display: flex;
+  flex-direction: column;
+  gap: 8rpx;
+}
+
+.report-card .card-title {
+  margin-top: 20rpx;
+}
+
+.report-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8rpx;
+  min-height: 44px;
+  margin-top: 12rpx;
+}
+
+.report-card .between {
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.report-overdue {
+  font-size: 24rpx;
+  padding: 8rpx 14rpx;
+  border-radius: 18rpx;
+  background: #FFF5DC;
+  color: #775A1E;
+  display: flex;
+  gap: 8rpx;
+  align-items: center;
+}
+
+.report-overdue image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.report-heading {
+  font-size: 34rpx;
+  font-weight: 700;
+  line-height: 1.5;
+  margin-bottom: 20rpx;
+}
+
+.report-snapshot {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.85;
+  margin: 22rpx 0;
+}
+
+.report-private-copy {
+  white-space: pre-wrap;
+  word-break: break-word;
+  line-height: 1.8;
+}
+
+.report-actions {
+  position: sticky;
+  bottom: calc(12rpx + env(safe-area-inset-bottom));
+  left: auto;
+  right: auto;
+  margin: 0 24rpx 12rpx;
+}
+
+.report-content {
+  padding-bottom: 28rpx;
+}
+
+.report-actions .secondary {
+  flex: 0 0 28%;
+}
+
+.report-decision {
+  display: flex;
+  flex-direction: column;
+  gap: 16rpx;
+  margin: 24rpx 0;
+}
+
+.report-fixed {
+  padding: 24rpx;
+  background: #EAF5FC;
+  border-radius: 26rpx;
+  margin-bottom: 24rpx;
+}
+
+.report-state-gap {
+  margin-top: 24rpx;
+}
+
+.report-copy {
+  margin-top: 16rpx;
+}
+
+.report-retry {
+  margin: 12rpx 0 0;
+}
+
+.report-form-error {
+  min-height: 36rpx;
+}
+
+.report-filter {
+  display: flex;
+  gap: 16rpx;
+  padding: 16rpx 4rpx 32rpx;
+}
+
+.report-filter .chip {
+  flex: none;
+}
+
+.report-filter-scroll {
+  width: 100%;
+  white-space: nowrap;
+}
+
+.reduced .report-option {
+  transition: none;
+}
+
+.solid .report-option {
+  background: #fff;
+}
+
+.solid .report-option.active {
+  background: #E2F3FF;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .report-option { transition: none; }
+}
+@media (max-width: 350px) {
+  .report-option { padding: 18rpx; font-size: 26rpx; }
+  .report-reasons { gap: 12rpx; }
+  .report-actions { gap: 12rpx; padding: 18rpx; }
+  .report-actions > button { padding: 20rpx 14rpx; }
+}

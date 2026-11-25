@@ -1,0 +1,31 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view wx:if="{{!material}}" class="content"><campus-state title="这份演示资料不存在" description="返回资料广场，选择另一份样章。" action="返回资料广场" bind:action="back" reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" /></view>
+  <block wx:else>
+    <view class="content with-actions material-content">
+      <view class="notice">原创演示样章</view>
+      <view class="material-cover {{material.color}}">
+        <view class="cover-top"><image src="/static/campus/book.svg" aria-hidden="true" /><text>学习资料 / {{material.type}}</text></view>
+        <view class="cover-course">{{material.course}}</view><view class="material-title">{{material.title}}</view>
+        <view class="cover-bottom"><text>{{material.badge}}</text><text>封面示例 · {{material.pages}} 页</text></view>
+      </view>
+      <view class="material-summary"><text class="section-caption">认真整理，让学习有迹可循</text><view class="summary-text">{{material.summary}}</view><view class="sub">{{material.author}} · 演示作者 / {{material.type}}</view></view>
+      <view class="row material-jumps"><button class="secondary grow" bindtap="contents" hover-class="press" hover-start-time="0" hover-stay-time="120">章节目录</button><button class="secondary grow" bindtap="preview" hover-class="press" hover-start-time="0" hover-stay-time="120">预览样章</button></view>
+      <view id="contents" class="reading-panel contents-panel">
+        <view class="panel-heading"><text class="section-number">01</text><view class="grow"><view class="panel-title">章节目录</view><view class="sub">三节精选样章，点击直接阅读</view></view></view>
+        <button wx:for="{{chapters}}" wx:key="id" class="toc-row {{selected === index ? 'selected' : ''}}" data-index="{{index}}" bindtap="preview" aria-label="预览第{{index + 1}}节，{{item.title}}" hover-class="press" hover-start-time="0" hover-stay-time="120"><text class="toc-number">{{item.number}}</text><text class="grow">{{item.title}}</text><image src="/static/campus/next.svg" aria-hidden="true" /></button>
+      </view>
+      <view class="section-head preview-heading"><view class="section-title">翻开，一页好笔记</view><text class="demo">样章示例</text></view>
+      <view wx:if="{{error}}" class="notice error">{{error}}</view>
+      <view wx:for="{{chapters}}" wx:key="id" id="sample-{{index}}" class="sample-paper">
+        <view class="paper-running"><text>{{material.course}} / 学习手记</text><text>样章 {{item.number}}</text></view>
+        <view class="paper-number">{{item.number}}</view><view class="paper-title">{{item.title}}</view>
+        <view class="paper-paragraph">{{item.paragraph}}</view>
+        <view class="paper-note">{{item.note}}</view>
+        <view class="paper-label">阅读时，留意这两点</view>
+        <view wx:for="{{item.points}}" wx:for-item="point" wx:for-index="pointIndex" wx:key="*this" class="paper-point"><text class="point-number">{{pointIndex + 1}}</text><text class="grow">{{point}}</text></view>
+        <view class="paper-footer"><text>校园回声 · 原创示例</text><text>{{index + 1}} / {{chapters.length}}</text></view>
+      </view>
+    </view>
+    <view class="sticky-actions"><button class="secondary" bindtap="unavailable" data-label="资料下载" hover-class="press" hover-start-time="0" hover-stay-time="120">下载尚未开放</button><button class="primary" bindtap="contents" hover-class="press" hover-start-time="0" hover-stay-time="120">回到目录</button></view>
+  </block>
+</view>

@@ -1,3 +1,4 @@
+<view class="legacy-notice" aria-role="text">历史模板 · 未启用。现行入口请使用校园回声四个主页面。</view>
 <t-navbar title="数据中心" left-arrow />
 <view class="data-center">
   <view class="card first">

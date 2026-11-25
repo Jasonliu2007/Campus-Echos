@@ -19,6 +19,23 @@ function runtime() {
   const alerts = [];
   const navigation = [];
   const switches = [];
+  const toasts = [];
+  let now = 0, timerId = 0;
+  const wallClock = Date.now();
+  class RuntimeDate extends Date {
+    static now() { return wallClock + now; }
+  }
+  const timers = new Map();
+  const schedule = (fn, delay = 0) => { const id = ++timerId; timers.set(id, { at: now + delay, fn }); return id; };
+  function advance(ms) {
+    const end = now + ms;
+    for (;;) {
+      const next = [...timers].filter(([, t]) => t.at <= end).sort((a, b) => a[1].at - b[1].at || a[0] - b[0])[0];
+      if (!next) break;
+      now = next[1].at; timers.delete(next[0]); next[1].fn();
+    }
+    now = end;
+  }
   let definition;
   const state = { storageFails: false, alertsDisabled: 0 };
   const wx = {
@@ -42,7 +59,7 @@ function runtime() {
     enableAlertBeforeUnload: options => alerts.push(options.message),
     disableAlertBeforeUnload() { state.alertsDisabled += 1; },
     showModal: options => modals.push(options),
-    showToast() {},
+    showToast(options) { toasts.push(options); },
     stopPullDownRefresh() {},
     navigateBack: options => navigation.push({ kind: 'back', options }),
     navigateTo: options => navigation.push({ kind: 'to', options }),
@@ -52,8 +69,11 @@ function runtime() {
     wx,
     Page(value) { definition = value; },
     Component(value) { definition = value; },
-    getCurrentPages: () => [{}, {}],
+    getCurrentPages: () => state.pages || [{}, {}],
     console,
+    Date: RuntimeDate,
+    setTimeout: schedule,
+    clearTimeout: id => timers.delete(id),
   });
   const cache = new Map();
   function load(relative) {
@@ -75,7 +95,7 @@ function runtime() {
     return {
       ...value,
       data: structuredClone(value.data),
-      setData(patch) { Object.assign(this.data, patch); },
+      setData(patch, done) { Object.assign(this.data, patch); if (done) done(); },
     };
   }
   function page(route) {
@@ -87,9 +107,11 @@ function runtime() {
   }
   function tab() {
     load('custom-tab-bar/index.js');
-    return { ...instance(definition), ...definition.methods };
+    const bar = { ...instance(definition), ...definition.methods };
+    bar.syncRoute('pages/campus-wall/index');
+    return bar;
   }
-  return { wx, state, storage, requests, modals, alerts, navigation, switches, load, page, list, tab };
+  return { wx, state, storage, requests, modals, alerts, navigation, switches, toasts, advance, now: () => RuntimeDate.now(), load, page, list, tab };
 }
 
 const tick = () => new Promise(resolve => setImmediate(resolve));

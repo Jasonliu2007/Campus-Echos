@@ -1,5 +1,7 @@
 Component({
   properties: {
+    reducedMotion: Boolean,
+    reducedTransparency: Boolean,
     kind: {
       type: String,
       value: 'empty'

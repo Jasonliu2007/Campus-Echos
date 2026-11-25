@@ -1,29 +1,29 @@
-<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
-  <view class="content">
-    <campus-state wx:if="{{loading}}" kind="loading" title="正在读取帖子" description="请稍候。" />
-    <campus-state wx:elif="{{error && !post}}" kind="error" title="暂时无法查看这条帖子" description="{{error}}"
-      action="重新加载" bind:action="load" />
-    <block wx:elif="{{post}}">
-      <campus-state wx:if="{{post.status === 'deleted'}}" title="这条内容已删除" description="内容不再展示，你可以返回校园墙看看其他内容。"
-        action="返回校园墙" bind:action="wall" />
-      <block wx:else>
-        <view class="meta">
-          <view class="avatar" aria-hidden="true">{{post.authorName[0]}}</view>
-          <view>
-            <view class="name">{{post.authorName}}</view>
-            <view class="sub">{{post.displayTime}} · {{post.category}}</view>
-          </view>
-        </view>
-        <view wx:if="{{post.status !== 'published'}}" class="notice warning status-block">{{post.statusLabel}} ·
-          内容尚未公开。{{post.reviewReason}}</view>
-        <view class="detail-title">{{post.title}}</view><text class="tag {{post.status}}">{{post.statusLabel}}</text>
-        <view class="detail-body" user-select>{{post.content}}</view>
-        <view class="rule" />
-        <view class="sub">图片、匿名、评论与点赞将在后续开放。</view>
-        <view wx:if="{{error}}" class="notice error">{{error}}</view>
-        <button wx:if="{{post.isOwner}}" class="text-button danger-text full" bindtap="remove" loading="{{deleting}}"
-          disabled="{{deleting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">删除我的帖子</button>
-      </block>
-    </block>
-  </view>
+<import src="../../components/campus-post/content.wxml" />
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}"><view class="content with-actions thread-content">
+<campus-state wx:if="{{loading && !post}}" kind="loading" title="正在读取帖子"/><campus-state wx:elif="{{error && !post}}" kind="error" title="暂时无法查看" description="{{error}}" action="重新加载" bind:action="load"/>
+<block wx:elif="{{post}}"><campus-state wx:if="{{post.status === 'deleted'}}" title="该内容已删除" description="原文与图片不再展示，已关闭新互动。已有评论保留删除占位。"/>
+<view wx:else class="reading-panel thread-root">
+<template is="post-author" data="{{...post}}" />
+<view wx:if="{{post.status !== 'published'}}" class="notice warning">{{post.statusLabel}} · 尚未公开。{{post.reviewReason}}</view><view wx:if="{{post.recommended}}" class="tag">管理员推荐 · 真实经验</view><view class="post-thread-body"><template is="post-body" data="{{title: post.hideTitle ? '' : post.title, blocks: post.contentBlocks, coverId: post.coverId, images: images, stickerId: post.stickerId, location: post.location}}" /></view>
+<view wx:if="{{post.poll}}" class="thread-poll-preview">
+  <button wx:for="{{post.poll.options}}" wx:key="*this" class="thread-poll-option" data-choice="{{index}}" data-option="{{item}}" bindtap="votePost" disabled="{{voteBusy || post.status !== 'published' || voteChoice >= 0}}">
+    <text>{{item}}</text><text>{{post.poll.counts[index]}} 票</text>
+  </button>
 </view>
+<view wx:if="{{post.quote}}" class="quote-card post-thread-body" bindtap="openQuote"><view class="sub">{{post.quote.authorName || '引用'}}</view><text>{{post.quote.title || '原帖暂不可查看'}}</text></view>
+<view wx:if="{{post.status === 'published'}}" class="thread-actions">
+  <button class="thread-icon {{liked ? 'is-liked' : ''}}" bindtap="like" disabled="{{likeBusy}}" aria-label="{{liked ? '取消点赞' : '点赞'}} {{post.likeCount}}"><image src="/static/campus/{{liked ? 'heart-liked' : 'heart'}}.svg" aria-hidden="true" /><text wx:if="{{post.likeCount}}">{{post.likeCount}}</text></button>
+  <button wx:if="{{post.canReply !== false}}" class="thread-icon" bindtap="focusReply" aria-label="回复 {{post.commentCount}}"><image src="/static/campus/wall.svg" aria-hidden="true" /><text wx:if="{{post.commentCount}}">{{post.commentCount}}</text></button>
+  <button wx:if="{{!post.isAnonymous && !post.isOwner && !post.samplePost}}" class="thread-icon" bindtap="openDirect">私信作者</button>
+  <button class="thread-icon" open-type="share" aria-label="分享"><image src="/static/campus/share.svg" aria-hidden="true" /></button>
+</view>
+<button wx:if="{{post.isOwner || post.status === 'published'}}" class="thread-icon thread-more" bindtap="morePost" aria-label="更多操作">···</button>
+<view wx:if="{{post.canRecommend}}" class="notice"><view class="section-title">经验推荐管理</view><view class="sub">只推荐当前已公开且安全审核通过的版本，编辑后需重新核对。</view><button class="secondary full" bindtap="recommend" loading="{{recommending}}" disabled="{{recommending}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{post.recommended ? '取消管理员推荐' : '加入管理员推荐'}}</button></view><view wx:if="{{error}}" class="notice error">{{error}}<button wx:if="{{post.canRecommend}}" class="text-button" bindtap="load">重新加载文章</button></view></view>
+<view class="reading-panel thread-replies"><view class="section-title">回复</view><view wx:if="{{commentsLoading && !comments.length}}" class="notice">正在读取评论</view><view wx:if="{{commentsError}}" class="notice error">{{commentsError}}<button class="text-button" bindtap="retryComments" hover-class="press" hover-start-time="0" hover-stay-time="120">重试读取评论</button></view><view wx:if="{{!comments.length && !commentsLoading}}" class="sub">还没有公开评论。</view>
+<view wx:for="{{comments}}" wx:key="_id" class="comment-row">
+  <image wx:if="{{item.status !== 'deleted'}}" class="comment-avatar" src="/static/presets/{{item.avatarId || (post.isAnonymous && item.isPostAuthor ? 'anonymous' : item.isPostAuthor && post.avatarId ? post.avatarId : 'avatar-1')}}.jpg" mode="aspectFill" aria-hidden="true" />
+  <view class="comment-main"><view class="comment-byline"><text class="name">{{item.authorName}}</text><text class="sub">{{item.displayTime}}</text></view><view wx:if="{{item.status === 'deleted'}}" class="notice">这条评论已删除</view><block wx:else><view wx:if="{{item.replyToName}}" class="sub">回复 {{item.replyToName}}</view><text class="comment-copy" user-select>{{item.content}}</text><view wx:if="{{item.status !== 'published'}}" class="notice warning">{{item.statusLabel}} · {{item.reviewReason}}</view><view class="row-wrap"><button wx:if="{{item.canReview}}" class="text-button" data-id="{{item._id}}" data-decision="approve" bindtap="decideReply">通过</button><button wx:if="{{item.canReview}}" class="text-button" data-id="{{item._id}}" data-decision="reject" bindtap="decideReply">拒绝</button><button wx:if="{{post.status === 'published' && post.canReply !== false && item.status === 'published'}}" class="text-button" data-id="{{item._id}}" bindtap="reply" disabled="{{commentSubmitting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">回复</button><button wx:if="{{item.isOwner}}" class="text-button" data-id="{{item._id}}" bindtap="deleteComment" hover-class="press" hover-start-time="0" hover-stay-time="120">删除</button><button wx:elif="{{item.status === 'published'}}" class="text-button" data-id="{{item._id}}" bindtap="reportComment" hover-class="press" hover-start-time="0" hover-stay-time="120">举报</button></view></block></view></view>
+<button wx:if="{{commentHasMore}}" class="secondary full" bindtap="moreComments" disabled="{{commentsLoading}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{commentsLoading ? '加载中' : '更多评论'}}</button>
+</view>
+<view wx:if="{{post.status === 'published' && post.canReply !== false}}" class="thread-reply-bar {{keyboardHeight ? 'keyboard-open' : ''}}" style="bottom:{{keyboardHeight}}px;"><view wx:if="{{replyToName}}" class="notice">回复 {{replyToName}}<button class="text-button" bindtap="cancelReply" disabled="{{commentSubmitting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">取消回复</button></view><view class="thread-reply-row"><textarea id="comment-input" class="reply-input" style="height: {{commentLines * 20 + 14}}px;" value="{{comment}}" bindinput="inputComment" bindlinechange="commentLineChange" focus="{{commentFocus}}" maxlength="-1" disabled="{{commentSubmitting}}" placeholder="回复这条帖子…" aria-label="评论内容最多500字" adjust-position="{{false}}" show-confirm-bar="{{false}}" bindkeyboardheightchange="keyboardChange" bindblur="blurComment"/><button class="primary thread-send" bindtap="sendComment" loading="{{commentSubmitting}}" disabled="{{commentSubmitting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{commentSubmitting ? '审核中' : '回复'}}</button></view><view wx:if="{{commentInfo}}" class="sub">{{commentInfo}}</view><view wx:if="{{commentsError}}" class="sub" role="alert">{{commentsError}}</view></view></block>
+</view></view>

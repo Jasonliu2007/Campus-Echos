@@ -1,0 +1,57 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="content discover">
+    <view class="discover-search">
+      <image src="/static/campus/search.svg" aria-hidden="true" />
+      <input id="forum-query" value="{{query}}" bindinput="input" bindfocus="focus" bindblur="blur" bindconfirm="search" confirm-type="search" maxlength="-1" aria-label="搜索关键词最多60字" placeholder="{{community === 'experience' ? '搜索真实经验' : '搜索校园回声'}}" />
+      <button wx:if="{{query}}" class="discover-icon" bindtap="clearQuery" aria-label="清空关键词"><image src="/static/campus/x.svg" /></button>
+    </view>
+    <button wx:if="{{query}}" class="discover-submit text-button" bindtap="search" disabled="{{loading || loadingMore}}">搜索</button>
+    <block wx:if="{{!query || (focused && !searched && !loading)}}">
+      <view wx:if="{{history.length}}" class="discover-section">
+        <view class="section-head"><text class="discover-title">最近搜索</text><button class="text-button" bindtap="clearHistory">清除</button></view>
+        <view wx:for="{{history}}" wx:key="*this" class="discover-row">
+          <button class="discover-link" data-query="{{item}}" bindtap="chooseQuery"><image src="/static/campus/clock.svg" aria-hidden="true" /><text>{{item}}</text></button>
+          <button class="discover-icon" data-query="{{item}}" bindtap="removeHistory" aria-label="删除搜索记录{{item}}"><image src="/static/campus/x.svg" /></button>
+        </view>
+      </view>
+      <block wx:if="{{!query}}">
+        <view class="discover-section">
+          <view class="section-head"><text class="discover-title">今日趋势</text></view>
+          <view wx:if="{{discoveryLoading && !trends.length}}" class="discover-muted">正在发现校园话题…</view>
+          <view wx:elif="{{!trends.length && !discoveryError}}" class="discover-muted">{{trendsAvailable ? '今天还没有趋势话题' : '今日趋势暂未开放'}}</view>
+          <button wx:for="{{trends}}" wx:key="query" class="discover-topic" data-query="{{item.query}}" data-today="{{true}}" bindtap="chooseQuery">
+            <view class="discover-topic-copy"><view class="discover-name">{{item.query}}</view><view class="sub">{{item.count}} 条今日讨论</view></view>
+            <image src="/static/campus/next.svg" aria-hidden="true" />
+          </button>
+        </view>
+        <view wx:if="{{recommended.length}}" class="discover-section">
+          <view class="section-head"><text class="discover-title">{{history.length ? '为你推荐' : '推荐讨论'}}</text></view>
+          <button wx:for="{{recommended}}" wx:key="_id" class="discover-post" data-id="{{item._id}}" bindtap="open">
+            <image class="discover-avatar" src="/static/presets/{{item.isAnonymous ? 'anonymous' : item.avatarId || 'avatar-1'}}.jpg" mode="aspectFill" aria-hidden="true" />
+            <view class="discover-topic-copy"><view class="sub">{{item.authorName}} · {{item.category}}</view><view class="discover-name">{{item.title}}</view><view class="discover-excerpt">{{item.discoveryExcerpt}}</view></view>
+          </button>
+        </view>
+        <view wx:if="{{discoveryError}}" class="notice error">{{discoveryError}}<button class="text-button" bindtap="loadDiscovery">重试</button></view>
+      </block>
+    </block>
+    <block wx:if="{{query}}">
+      <view wx:if="{{searched || loading}}" class="discover-section">
+        <view class="section-head"><text class="discover-title">{{range === 3 ? '今日讨论' : '帖子'}}</text></view>
+        <view wx:if="{{needsSearch}}" class="discover-muted">按搜索更新结果</view>
+        <view wx:if="{{loading && !items.length}}" class="discover-muted">搜索中…</view>
+        <view wx:elif="{{searched && !items.length && !error && !needsSearch}}" class="discover-muted">暂无相关帖子</view>
+        <button wx:for="{{items}}" wx:key="_id" class="discover-post" data-id="{{item._id}}" bindtap="open">
+          <image class="discover-avatar" src="/static/presets/{{item.isAnonymous ? 'anonymous' : item.avatarId || 'avatar-1'}}.jpg" mode="aspectFill" aria-hidden="true" />
+          <view class="discover-topic-copy">
+            <view class="sub">{{item.authorName}} · {{item.displayTime}}</view>
+            <view class="discover-name"><text wx:for="{{item.titleSegments}}" wx:for-item="part" wx:key="index" class="{{part.hit ? 'highlight' : ''}}">{{part.text}}</text></view>
+            <view class="discover-excerpt"><text wx:for="{{item.summarySegments}}" wx:for-item="part" wx:key="index" class="{{part.hit ? 'highlight' : ''}}">{{part.text}}</text></view>
+          </view>
+        </button>
+      </view>
+      <view wx:if="{{error}}" class="notice error">{{error}}</view>
+      <view wx:if="{{pageError}}" class="notice warning">{{pageError}}<button class="text-button" bindtap="search">刷新搜索</button></view>
+      <button wx:if="{{hasMore && !needsSearch}}" class="text-button full" bindtap="loadMore" disabled="{{loading || loadingMore}}">{{loadingMore ? '正在加载' : '查看更多'}}</button>
+    </block>
+  </view>
+</view>

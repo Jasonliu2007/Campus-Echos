@@ -1,0 +1,26 @@
+<template name="post-author">
+  <view class="post-author">
+    <image class="post-avatar" mode="aspectFill" src="/static/presets/{{avatarId || 'avatar-1'}}.jpg" aria-hidden="true" />
+    <view class="post-author-copy">
+      <view class="name">{{authorName || '校园同学'}}</view>
+      <view class="sub">{{displayTime}}{{displayTime && category ? ' · ' : ''}}{{category}}</view>
+    </view>
+  </view>
+</template>
+
+<template name="post-body">
+  <view wx:if="{{title}}" class="detail-title">{{title}}</view>
+  <view class="post-blocks">
+    <view wx:for="{{blocks}}" wx:key="id" class="post-block {{item.kind}}"><text user-select>{{item.text}}</text></view>
+  </view>
+  <image wx:if="{{stickerId}}" class="thread-sticker" src="/static/stickers/{{stickerId}}.webp" mode="aspectFit" aria-label="校园贴纸" />
+  <view wx:if="{{location}}" class="sub thread-location">⌖ {{location}}</view>
+  <view wx:if="{{poll.length}}" class="thread-poll-preview"><view wx:for="{{poll}}" wx:key="*this" class="thread-poll-option">{{item}}</view></view>
+  <view wx:if="{{coverId || images.length}}" class="post-images">
+    <image wx:if="{{coverId}}" src="/static/presets/{{coverId}}.jpg" mode="widthFix" data-cover="{{coverId}}" catchtap="previewImage" aria-label="帖子配图" />
+    <view wx:for="{{images}}" wx:key="key">
+      <image wx:if="{{item.path || item.url}}" src="{{item.path || item.url}}" mode="widthFix" data-id="{{item.mediaId}}" data-key="{{item.key}}" bindtap="previewImage" aria-label="帖子图片{{index + 1}}" />
+      <view wx:elif="{{item.label}}" class="sub">{{item.label}}</view>
+    </view>
+  </view>
+</template>

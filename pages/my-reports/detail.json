@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "举报结果",
+  "navigationStyle": "default",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  },
+  "enablePullDownRefresh": false
+}

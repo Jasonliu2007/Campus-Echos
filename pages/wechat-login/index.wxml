@@ -1,0 +1,25 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="content login-content">
+    <view class="login-emblem"><image src="/static/campus/user.svg" aria-hidden="true" /></view>
+    <view class="login-eyebrow">校园回声</view><view class="login-title">用微信，连接校园</view>
+    <view class="login-subtitle">一个账号，留住你的校园日常。</view>
+    <view class="form-panel login-panel">
+      <block wx:if="{{!result}}">
+        <view class="panel-title">微信账号登录</view>
+        <view class="help-copy">使用当前微信账号识别身份，无需手机号、密码或头像授权。</view>
+        <view class="rule" />
+        <view class="result-line"><text class="section-number">01</text><view class="grow"><view class="name">你的账号，你的资格</view><view class="sub">登录后可查看当前内测状态。</view></view></view>
+        <view class="result-line"><text class="section-number">02</text><view class="grow"><view class="name">获授权，直接管理</view><view class="sub">管理员使用同一微信账号，无需另外登录。</view></view></view>
+        <view wx:if="{{error}}" class="notice error" aria-role="text">{{error}}</view>
+        <button class="primary full" bindtap="login" disabled="{{submitting}}" loading="{{submitting}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{submitting ? '正在连接微信…' : error ? '重试微信登录' : '微信一键登录'}}</button>
+      </block>
+      <block wx:else>
+        <text class="tag success">微信登录成功</text>
+        <view class="login-result-title">{{result.admin ? '管理工作台已就绪' : '欢迎回到校园回声'}}</view>
+        <view class="help-copy">{{result.admin ? '当前微信账号已获管理员授权，前往“我的”即可开始管理。' : '当前状态：' + result.label + '。登录成功与内测资格分别核对。'}}</view>
+        <button class="primary full" bindtap="mine" hover-class="press" hover-start-time="0" hover-stay-time="120">{{result.admin ? '进入管理工作台' : '进入我的主页'}}</button>
+        <button wx:if="{{result.access !== 'approved'}}" class="text-button full" bindtap="access" hover-class="press" hover-start-time="0" hover-stay-time="120">查看或申请内测资格</button>
+      </block>
+    </view>
+  </view>
+</view>

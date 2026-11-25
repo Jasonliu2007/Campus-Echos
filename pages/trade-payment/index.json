@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "私有收款与凭证",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  }
+}

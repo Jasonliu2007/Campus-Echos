@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "上架PDF资料",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  }
+}

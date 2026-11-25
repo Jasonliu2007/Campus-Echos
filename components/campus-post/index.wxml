@@ -1,16 +1,37 @@
-<view class="card {{reducedMotion ? 'reduced' : ''}}">
-  <view class="meta">
-    <view class="avatar" aria-hidden="true">{{post.authorName ? post.authorName[0] : '同'}}</view>
-    <view class="grow">
-      <view class="name">{{post.authorName || '内测成员'}}</view>
-      <view class="sub">{{post.displayTime}}</view>
-    </view><text class="tag {{showStatus ? post.status : ''}}">{{showStatus ? post.statusLabel : post.category}}</text>
-  </view>
-  <view class="card-title">{{post.title || '这条帖子已删除'}}</view>
-  <view class="excerpt">{{post.content || (post.status === 'deleted' ? '内容已删除，不再展示。' : '')}}</view>
-  <view wx:if="{{post.reviewReason}}" class="reason">处理说明：{{post.reviewReason}}</view>
-  <view class="post-footer"><text class="sub">{{showStatus ? post.category : '校园回声 · 文字帖'}}</text>
-    <button class="text-button" bindtap="open" aria-label="查看帖子：{{post.title}}" hover-class="press" hover-start-time="0" hover-stay-time="120">查看全文<image class="icon-small"
-        src="/static/campus/next.svg" aria-hidden="true" /></button>
+<view class="feed-post {{reducedMotion ? 'reduced' : ''}}">
+  <image class="post-avatar" mode="aspectFill" src="/static/presets/{{post.isAnonymous ? 'anonymous' : post.avatarId || 'avatar-1'}}.jpg" aria-hidden="true" />
+  <view class="grow">
+    <view class="feed-heading">
+      <view class="name">{{post.authorName || '校园同学'}}</view>
+      <text class="sub feed-time">{{post.displayTime}}</text>
+      <button wx:if="{{interactive && post.status === 'published'}}" class="feed-icon feed-more" bindtap="more" aria-label="更多操作">···</button>
+    </view>
+    <view class="sub feed-topic">{{post.category}}</view>
+    <view wx:if="{{showStatus}}" class="tag {{post.status}}">{{post.statusLabel}}</view>
+    <view wx:if="{{post.community === 'experience' && post.recommended}}" class="tag">管理员推荐</view>
+    <view wx:if="{{!post.hideTitle}}" class="card-title" bindtap="open">{{post.title || '这条帖子已删除'}}</view>
+    <view class="excerpt" bindtap="open">{{post.content || (post.status === 'deleted' ? '内容已删除，不再展示。' : '')}}</view>
+    <image wx:if="{{post.stickerId}}" class="thread-sticker" src="/static/stickers/{{post.stickerId}}.webp" mode="aspectFit" />
+    <view wx:if="{{post.poll || post.location}}" class="sub" bindtap="open">{{post.poll ? '投票' : ''}}{{post.poll && post.location ? ' · ' : ''}}{{post.location}}</view>
+    <image wx:if="{{post.coverId || thumbnail}}" class="feed-image" src="{{post.coverId ? '/static/presets/' + post.coverId + '.jpg' : thumbnail}}" mode="aspectFill" lazy-load catchtap="previewPhoto" aria-label="查看帖子图片" />
+    <view wx:if="{{post.quote}}" class="quote-card" bindtap="openQuote"><view class="sub">{{post.quote.authorName || '引用'}}</view><text>{{post.quote.title || '原帖暂不可查看'}}</text></view>
+    <view wx:if="{{showStatus && post.reviewReason}}" class="reason">处理说明：{{post.reviewReason}}</view>
+    <view wx:if="{{interactive && post.status === 'published'}}" class="feed-actions">
+      <button class="feed-icon {{liked ? 'is-liked' : ''}}" bindtap="toggleLike" disabled="{{likeBusy}}" aria-label="{{liked ? '取消点赞' : '点赞'}} {{likeCount}}">
+        <image src="/static/campus/{{liked ? 'heart-liked' : 'heart'}}.svg" aria-hidden="true" /><text wx:if="{{likeCount}}">{{likeCount}}</text>
+      </button>
+      <button wx:if="{{post.canReply !== false}}" class="feed-icon" bindtap="reply" aria-label="回复 {{post.commentCount || 0}}">
+        <image src="/static/campus/wall.svg" aria-hidden="true" /><text wx:if="{{post.commentCount}}">{{post.commentCount}}</text>
+      </button>
+      <button wx:if="{{post.canReply !== false && post.community !== 'experience'}}" class="feed-icon" bindtap="quote" aria-label="引用"><image src="/static/campus/quote.svg" aria-hidden="true" /></button>
+      <button class="feed-icon" open-type="share" data-id="{{post._id}}" aria-label="分享"><image src="/static/campus/share.svg" aria-hidden="true" /></button>
+    </view>
+    <view wx:else class="post-footer">
+      <view wx:if="{{post.status !== 'deleted'}}" class="sub feed-counts">
+        <image src="/static/campus/heart.svg" aria-hidden="true" />{{post.likeCount || 0}}
+        <image src="/static/campus/wall.svg" aria-hidden="true" />{{post.commentCount || 0}}
+      </view>
+      <button class="text-button" bindtap="open" aria-label="查看帖子：{{post.title}}">查看全文</button>
+    </view>
   </view>
 </view>

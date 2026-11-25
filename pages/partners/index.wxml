@@ -1,7 +1,7 @@
 <view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
-  <campus-hero title="从一件事，找到同路人" subtitle="比赛、活动和课题，一起做成。" icon="users" />
+  <campus-hero reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" title="从一件事，找到同路人" subtitle="比赛、活动和课题，一起做成。" icon="users" />
   <view class="content tab-content">
-    <view class="notice">演示内容 · 活动与参与者为示例，创建、加入和邀约尚未开放。</view>
+    <view class="notice">活动示例</view>
     <view class="toolbar"><text class="section-title">正在找队友</text>
       <button class="text-button" bindtap="unavailable" data-label="创建活动" hover-class="press" hover-start-time="0" hover-stay-time="120">创建活动</button>
     </view>
@@ -11,8 +11,8 @@
           data-value="{{item}}" aria-label="{{item}}，{{filter === item ? '已选择' : '未选择'}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{item}}</button>
       </view>
     </scroll-view>
-    <campus-state wx:if="{{!items.length}}" title="暂时没有这类演示" description="试试其他活动分区。" />
-    <view wx:for="{{items}}" wx:key="id" class="card">
+    <campus-state reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" wx:if="{{!items.length}}" title="暂时没有这类演示" description="试试其他活动分区。" />
+    <view wx:for="{{items}}" wx:key="id" class="card activity-card">
       <view class="between"><text class="tag">{{item.type}}</text><text class="demo">演示活动</text></view>
       <view class="card-title">{{item.title}}</view>
       <view class="card-copy">{{item.description}}</view>

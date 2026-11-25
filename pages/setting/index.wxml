@@ -1,6 +1,9 @@
 <view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
   <view class="content">
+    <view class="page-intro"><view class="intro-icon"><image src="/static/campus/settings.svg" aria-hidden="true" /></view><view class="grow"><view class="intro-title">让体验更适合你</view><view class="sub">显示偏好与使用帮助。</view></view></view>
     <view class="section-head"><text class="section-title">体验设置</text></view>
+    <view class="function-group preference-group">
+    <label class="list-link" for="tab-haptics"><view class="grow"><view class="name">切换时轻振</view><view class="sub">成功切换底部板块时轻振一次，可随时关闭</view></view><switch id="tab-haptics" checked="{{tabHaptics}}" bindchange="haptics" color="#0878BD" aria-label="切换时轻振" /></label>
     <label class="list-link" for="motion-preference">
       <view class="grow">
         <view class="name">减弱动态效果</view>
@@ -15,19 +18,21 @@
       </view>
       <switch id="transparency-preference" checked="{{reducedTransparency}}" bindchange="transparency" color="#0878BD" aria-label="减少透明度" />
     </label>
+    </view>
     <view wx:if="{{settingsError}}" class="notice error" aria-role="text">{{settingsError}}</view>
-    <view class="help-copy">
+    <view class="help-copy help-panel">
       <view class="help-heading">关于校园回声</view>
       <view>面向本校同学的校园信息、学习资料和活动组队平台，目前处于指定账号封闭内测阶段。</view>
       <view class="help-heading">哪些功能使用真实数据？</view>
-      <view>文字校园墙、内测资格、人工审核接入云服务。学习资料、AI 推荐与找搭子均明确标为演示内容。</view>
+      <view>目前开放论坛和免费资料。AI 挑笔记与找搭子为演示功能。</view>
       <view class="help-heading">发帖后为什么看不到？</view>
-      <view>需要人工复核的内容不会直接公开。请前往“我的帖子”查看待审核、未通过或下架原因。审核异常时内容不会公开，输入保留后可重试。</view>
+      <view>在「我的帖子」查看审核进度和处理原因。</view>
       <view class="help-heading">内容与隐私</view>
       <view>不发布他人学号、手机号、宿舍号等敏感信息，不发布违规内容、代写或考试答案。封闭内测资格不等于学生实名认证。</view>
       <view class="help-heading">遇到问题怎么反馈？</view>
-      <view>向项目负责人说明页面、操作与发生时间，无需重复提交相同帖子。此版本尚未开放图片、搜索、匿名、评论点赞、编辑与举报。</view>
+      <view>反馈问题时请附页面、操作和发生时间。在「我的举报」查看处理结果。</view>
     </view>
-    <view class="footnote">校园回声 · 界面 v1.1</view>
+    <view class="help-copy help-panel"><view class="help-heading">切换后，从刚才继续</view><view>切换底部板块会保留列表、分区、分页和阅读位置。重新启动小程序后首次进入会重新加载；也可主动下拉刷新。身份与管理权限仍由云端核对。</view><view class="help-heading">轻振反馈</view><view>轻振与减弱动态效果分别设置。设备不支持震动时仍可正常切换。</view></view>
+    <view class="footnote">校园回声 · 封闭内测 v2.4</view>
   </view>
 </view>

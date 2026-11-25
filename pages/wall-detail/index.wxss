@@ -1,1 +1,29 @@
+@import "../../components/campus-post/content.wxss";
 @import "../../components/campus-ui/page.wxss";
+.post-images image{display:block;width:100%;border-radius:28rpx;margin:20rpx 0}.comment-row{border-top:2rpx solid #DCEAF4;padding:28rpx 0}.comment-copy{display:block;font-size:29rpx;line-height:1.85;white-space:pre-wrap;word-break:break-word;margin-top:12rpx}.comment-row .text-button{min-height:44px}.post-images{margin:28rpx 0}
+.thread-root, .thread-replies { position: relative; background: transparent; box-shadow: none; border: 0; border-radius: 0; padding: 16rpx 4rpx; margin: 0; }
+.thread-root .post-author { padding-right: 88rpx; }
+.thread-actions, .thread-reply-row { display: flex; align-items: center; gap: 8rpx; }
+.thread-actions { margin-left: 70rpx; }
+.thread-icon { display: inline-flex; align-items: center; justify-content: center; gap: 8rpx; padding: 0 10rpx; min-width: 44px; min-height: 44px; background: transparent; color: #18344F; font-size: 24rpx; }
+.thread-icon image { width: 34rpx; height: 34rpx; }
+.thread-more { position: absolute; right: 0; top: 0; font-size: 36rpx; }
+.thread-icon.is-liked { color: #0878BD; }
+.thread-replies { border-top: 1px solid #D5E7F1; }
+.thread-replies .section-title { font-size: 29rpx; margin-bottom: 14rpx; }
+.thread-reply-bar { position: fixed; z-index: 5; left: 0; right: 0; bottom: 0; padding: 14rpx 24rpx calc(14rpx + env(safe-area-inset-bottom)); background: #F1F9FE; border-top: 1px solid #D5E7F1; }
+.thread-reply-row { align-items: flex-end; }
+.reply-input { box-sizing: border-box; flex: 1; min-width: 0; width: auto; padding: 7px 13px; margin: 0; border-radius: 17px; background: #E5F1FA; color: #18344F; font-size: 15px; line-height: 20px; }
+.thread-reply-row .thread-send { display: grid; place-items: center; min-height: 34px; padding: 0 15px; font-size: 14px; border-radius: 17px; }
+.comment-row { display: flex; align-items: flex-start; gap: 16rpx; padding: 18rpx 0 8rpx; }
+.comment-avatar { flex: none; width: 60rpx; height: 60rpx; border-radius: 50%; background: #DBEDF9; }
+.comment-main { flex: 1; min-width: 0; overflow-wrap: anywhere; }
+.comment-byline { display: flex; gap: 12rpx; align-items: baseline; flex-wrap: wrap; }
+.comment-copy { margin-top: 4rpx; line-height: 1.55; }
+.comment-main .row-wrap { gap: 12rpx; }
+.comment-main .text-button { justify-content: flex-start; padding-left: 0; }
+.thread-send { flex: none; margin: 0; }
+
+.thread-reply-bar.keyboard-open { padding-bottom: 14rpx; }
+.thread-reply-row .reply-input { display: block; line-height: 20px; }
+.thread-reply-row .thread-send { height: 34px; line-height: 34px; }

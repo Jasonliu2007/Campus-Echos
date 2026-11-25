@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "搜索论坛",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index",
+    "campus-post": "/components/campus-post/index"
+  }
+}

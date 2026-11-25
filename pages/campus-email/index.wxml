@@ -1,0 +1,35 @@
+<view class="page">
+  <view class="content">
+    <view class="form-panel">
+      <view class="panel-title">学校邮箱验证</view>
+      <view wx:if="{{loading}}" class="sub">正在核对当前微信账号</view>
+      <block wx:elif="{{verified}}">
+        <view class="sub email-description">学校邮箱已绑定到当前微信账号，可以发布实名帖和匿名帖。</view>
+        <button class="primary full" bindtap="done">完成</button>
+      </block>
+      <block wx:elif="{{error && !access}}">
+        <view class="field-error" role="alert">{{error}}</view>
+        <button class="secondary full" bindtap="load">重试</button>
+      </block>
+      <block wx:elif="{{access !== 'approved'}}">
+        <view class="sub email-description">请先开通内测资格。</view>
+        <button class="secondary full" bindtap="goAccess">查看内测资格</button>
+      </block>
+      <view wx:elif="{{!available}}" class="sub email-description">验证码服务暂不可用，请稍后再试。</view>
+      <block wx:else>
+        <view class="sub email-description">验证学校邮箱后即可发帖。</view>
+        <label class="label" for="campus-email-input">学校邮箱</label>
+        <input id="campus-email-input" class="input" value="{{account}}" placeholder="账号或完整学校邮箱" maxlength="81" disabled="{{busy}}" bindinput="inputAccount" aria-describedby="campus-email-domain" />
+        <view class="sub email-description" id="campus-email-domain">仅支持 @mail.bnbu.edu.cn</view>
+        <button class="secondary full" disabled="{{busy || !account}}" bindtap="send">{{sent ? '重新发送验证码' : '发送验证码'}}</button>
+        <block wx:if="{{sent}}">
+          <label class="label" for="campus-email-code">验证码</label>
+          <input id="campus-email-code" class="input" type="number" value="{{code}}" maxlength="6" disabled="{{busy}}" placeholder="6 位数字" bindinput="inputCode" />
+          <button class="primary full" disabled="{{busy || code.length !== 6}}" bindtap="verify">验证并绑定</button>
+        </block>
+        <view wx:if="{{notice}}" class="notice" aria-live="polite">{{notice}}</view>
+        <view wx:if="{{error}}" class="field-error" role="alert">{{error}}</view>
+      </block>
+    </view>
+  </view>
+</view>

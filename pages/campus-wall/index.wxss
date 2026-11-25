@@ -1,1 +1,16 @@
 @import "../../components/campus-ui/page.wxss";
+@import "../../components/campus-hero/display-font.wxss";
+
+.forum-head { display: grid; grid-template-columns: 88rpx minmax(0,1fr) 88rpx; align-items: center; padding: 6rpx 22rpx; background: #E8F5FC; }
+.forum-brand { font-family: "Campus Echo Display", sans-serif; font-size: 44rpx; text-align: center; }
+.forum-icon { display: grid; place-items: center; min-width: 44px; min-height: 44px; background: transparent; }
+.forum-icon image { width: 38rpx; height: 38rpx; }
+.forum-content { padding-top: 0; padding-left: 24rpx; padding-right: 24rpx; }
+.forum-content .chip-scroll { margin: 0; border-bottom: 1px solid #D4E6F2; }
+.forum-content .chip-list { gap: 12rpx; }
+.forum-content .chip { background: transparent; box-shadow: none; border: 0; border-radius: 0; white-space: nowrap; color: #4D6E88; border-bottom: 3rpx solid transparent; }
+.forum-content .chip.active { border-bottom-color: #0A6EAC; color: #0A6199; font-weight: 700; }
+.forum-compose { display: flex; align-items: center; text-align: left; width: 100%; min-height: 96rpx; padding: 14rpx 0; gap: 18rpx; color: #4D6E88; background: transparent; border-radius: 0; border-bottom: 1px solid #D4E6F2; }
+.compose-avatar { flex: none; width: 66rpx; height: 66rpx; border-radius: 50%; }
+.compose-plus { width: 38rpx; height: 38rpx; }
+.experience-recommended { display: flex; align-items: center; min-height: 44px; color: #0A6199; font-size: 26rpx; }

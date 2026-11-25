@@ -1,31 +1,68 @@
-<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
-  <campus-hero title="学习资料广场" subtitle="让认真整理的笔记，被需要的人找到。" icon="book" />
-  <view class="content tab-content">
-    <view class="notice">演示内容 · 资料、价格与人物仅用于展示，交易尚未开放。</view>
-    <button class="search" bindtap="unavailable" data-label="资料搜索" hover-class="press" hover-start-time="0" hover-stay-time="120"><image class="icon" src="/static/campus/search.svg"
-        aria-hidden="true" /><text>搜索课程、笔记</text></button>
-    <view class="toolbar"><text class="section-title">全部资料</text>
-      <button class="text-button" bindtap="unavailable" data-label="上传资料" hover-class="press" hover-start-time="0" hover-stay-time="120">上传资料</button>
+<template name="material-card">
+  <button class="market-card {{tall ? 'market-card-tall' : ''}}" data-id="{{item._id}}" bindtap="openMaterial" hover-class="market-press" hover-start-time="0" hover-stay-time="90" aria-label="查看{{item.title}}，{{item.displayPrice}}，目录与试读">
+    <view class="market-cover">
+      <image class="market-cover-image" src="{{item.cover}}" mode="aspectFill" lazy-load aria-hidden="true" />
+      <text class="market-cover-type">{{item.type || '学习资料'}}</text>
     </view>
-    <button class="list-link ai-entry" bindtap="goAI" hover-class="press" hover-start-time="0" hover-stay-time="120"><image class="icon" src="/static/campus/spark.svg"
-        aria-hidden="true" />
-      <view class="grow">
-        <view class="name">AI 帮我挑笔记</view>
-        <view class="sub">按学习目的，挑适合你的资料</view>
-      </view><image class="icon-small" src="/static/campus/next.svg" aria-hidden="true" />
-    </button>
-    <view class="grid-two">
-      <view wx:for="{{materials}}" wx:key="id" class="card resource-card">
-        <view class="book-cover {{item.color}}"><image class="icon" src="/static/campus/book.svg"
-            aria-hidden="true" /><text class="book-cover-title">{{item.course}}</text><text class="sub">原创学习笔记</text>
-        </view>
-        <view class="book-info">
-          <view class="card-title">{{item.title}}</view><text class="sub">{{item.badge}} · {{item.pages}} 页</text>
-          <view class="between"><text class="price">¥{{item.price}}</text>
-            <button class="text-button" bindtap="unavailable" data-label="资料试读" hover-class="press" hover-start-time="0" hover-stay-time="120">试读</button>
-          </view>
-        </view>
+    <view class="market-card-body">
+      <view class="market-card-title">{{item.title}}</view>
+      <view class="market-course">{{item.course}}</view>
+      <view class="market-card-meta">
+        <text class="market-price">{{item.displayPrice}}</text>
+        <text wx:if="{{item.pageCount}}" class="market-pages">{{item.pageCount}} 页 · PDF</text>
       </view>
+    </view>
+  </button>
+</template>
+
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="market-content tab-content">
+    <view class="market-head">
+      <view class="market-heading">学习资料</view>
+      <view class="market-head-actions">
+        <button class="market-orders" bindtap="orders">订单</button>
+        <button class="market-upload" bindtap="upload"><image src="/static/campus/plus.svg" aria-hidden="true" />上架</button>
+      </view>
+    </view>
+    <view class="market-search">
+      <input value="{{query}}" bindinput="inputQuery" bindconfirm="search" confirm-type="search" maxlength="60" placeholder="搜资料、课程或关键词" aria-label="搜索学习资料" />
+      <button wx:if="{{query}}" class="market-clear" bindtap="clearSearch" aria-label="清空搜索"><image src="/static/campus/x.svg" aria-hidden="true" /></button>
+      <button class="market-search-button" bindtap="search" aria-label="搜索"><image src="/static/campus/search.svg" aria-hidden="true" /></button>
+    </view>
+    <scroll-view class="market-category-scroll" scroll-x>
+      <view class="market-categories">
+        <button wx:for="{{categories}}" wx:key="*this" class="market-category {{selectedType === item ? 'is-selected' : ''}}" data-type="{{item}}" bindtap="selectType" aria-label="{{item || '全部'}}{{selectedType === item ? '，已选中' : ''}}">{{item || '全部'}}</button>
+      </view>
+    </scroll-view>
+
+    <view wx:if="{{sessionNotice}}" class="notice">{{sessionNotice}}</view>
+    <campus-state wx:if="{{(loading || loadingMore) && !leftCards.length}}" kind="loading" title="正在读取资料" reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" />
+    <campus-state wx:elif="{{error}}" kind="error" title="资料暂时无法读取" description="{{error}}" action="重新加载" bind:action="retry" reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}" />
+    <view wx:elif="{{!leftCards.length && !hasMore && !pageError}}" class="market-empty">
+      <image src="/static/campus/book.svg" aria-hidden="true" />
+      <view class="market-empty-title">{{submittedQuery || selectedType ? '没有匹配的资料' : '还没有上架资料'}}</view>
+      <button wx:if="{{submittedQuery || selectedType}}" class="text-button" bindtap="resetFilters">查看全部资料</button>
+      <button wx:else class="text-button" bindtap="upload">上架原创资料</button>
+    </view>
+
+    <view wx:if="{{leftCards.length}}" class="market-grid">
+      <view class="market-column">
+        <template wx:for="{{leftCards}}" wx:key="_id" is="material-card" data="{{item: item, tall: index % 2 === 1}}" />
+      </view>
+      <view class="market-column">
+        <template wx:for="{{rightCards}}" wx:key="_id" is="material-card" data="{{item: item, tall: index % 2 === 0}}" />
+      </view>
+    </view>
+    <view wx:if="{{pageError}}" class="notice error" aria-role="alert">{{pageError}}</view>
+    <button wx:if="{{hasMore}}" class="text-button full market-more" bindtap="loadMore" loading="{{loadingMore}}" disabled="{{loading || loadingMore}}">{{pageError ? '重试' : !leftCards.length ? '继续查找' : '加载更多'}}</button>
+
+    <view class="market-tools">
+      <button class="text-button" bindtap="goAI">学习模式</button>
+      <button class="text-button" bindtap="toggleDemo">{{demo ? '收起版式演示' : '版式演示'}}</button>
+    </view>
+    <view wx:if="{{demo}}" class="reading-panel">
+      <view class="sub">版式演示 · 示例资料</view>
+      <button wx:for="{{demos}}" wx:key="id" class="list-link" data-id="{{item.id}}" bindtap="openDemo"><text class="grow">{{item.title}}</text><text class="tag">演示</text></button>
     </view>
   </view>
 </view>

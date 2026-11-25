@@ -1,0 +1,2 @@
+@import "../../components/campus-ui/page.wxss";
+.comment-copy{display:block;white-space:pre-wrap;word-break:break-word;font-size:30rpx;line-height:1.8;margin:24rpx 0}

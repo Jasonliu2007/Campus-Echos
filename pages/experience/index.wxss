@@ -1,0 +1,4 @@
+@import "../../components/campus-ui/page.wxss";
+.experience-head { background: #EDF8FF; border: 2rpx solid #fff; border-radius: 32rpx; padding: 26rpx; }
+.experience-actions { margin-top: 20rpx; }
+.experience-filters { gap: 14rpx; margin: 24rpx 0 14rpx; }

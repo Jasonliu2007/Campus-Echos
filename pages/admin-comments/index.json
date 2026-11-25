@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "评论审核",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  }
+}

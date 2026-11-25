@@ -1,0 +1,11 @@
+.post-author { display: flex; align-items: flex-start; gap: 16rpx; min-width: 0; }
+.post-avatar { flex: none; width: 66rpx; height: 66rpx; border-radius: 50%; background: #DBEDF9; }
+.post-author-copy { min-width: 0; overflow-wrap: anywhere; }
+.post-images image { display: block; width: 100%; border-radius: 22rpx; margin: 14rpx 0; }
+.post-images { margin: 16rpx 0; }
+.post-thread-body { margin-left: 82rpx; min-width: 0; }
+.quote-card { margin-top: 14rpx; border: 1px solid #CADFEB; border-radius: 22rpx; padding: 14rpx 18rpx; background: #F1F8FD; overflow-wrap: anywhere; }
+.thread-sticker { display:block; width:128rpx; height:128rpx; margin:10rpx 0; }
+.thread-location { margin:8rpx 0; }
+.thread-poll-preview { display:flex; flex-direction:column; gap:10rpx; margin:12rpx 0; }
+.thread-poll-option { display:flex; justify-content:space-between; align-items:center; gap:12rpx; min-height:44px; padding:8rpx 16rpx; border:1px solid #D2E5F1; border-radius:18rpx; background:#F3FAFF; color:#18344F; text-align:left; }

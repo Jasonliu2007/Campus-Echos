@@ -2,7 +2,6 @@
   "navigationBarTitleText": "校园回声",
   "navigationStyle": "default",
   "usingComponents": {
-    "campus-hero": "/components/campus-hero/index",
     "campus-state": "/components/campus-state/index",
     "campus-post": "/components/campus-post/index"
   },

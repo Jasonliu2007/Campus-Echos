@@ -1,0 +1,50 @@
+<import src="../material-detail/reading.wxml" />
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+ <view class="content with-actions trade-wrap">
+  <campus-state wx:if="{{loading}}" kind="loading" title="正在核对资料资格" reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}"/>
+  <block wx:else>
+   <view wx:if="{{previewMaterial && access === 'approved'}}" class="material-content">
+    <view class="between"><text class="tag">预览</text><button class="text-button" bindtap="toggleMaterialPreview">返回编辑</button></view>
+    <template is="material-heading" data="{{material: previewMaterial}}" />
+    <template is="material-contents" data="{{material: previewMaterial}}" />
+    <view class="sub">资料发布后可通过详情打开独立试读。</view>
+   </view>
+   <block wx:else>
+   <view class="trade-head"><view class="section-caption">校园回声 / 原创PDF</view><view class="trade-title">把知识整理成<br/>值得阅读的样子</view><view class="trade-note">先封存文件并确认目录，再提交人工全量核查。</view></view>
+   <button class="secondary full" bindtap="toggleMaterialPreview" disabled="{{!!busy || access !== 'approved'}}">预览资料页</button>
+   <view class="notice">首轮仅未加密PDF，最多20MiB、200页。资料必须人工放行；付费入口暂未开放。</view>
+   <view wx:if="{{material}}" class="trade-panel"><view class="trade-row"><text class="trade-status">{{material.statusLabel}}</text><text class="sub">云端版本 {{material.revision}}</text><button class="text-button" bindtap="retry" disabled="{{!!busy}}">刷新状态</button></view><view wx:if="{{material.reviewReason}}" class="notice warning">审核说明：{{material.reviewReason}}</view><view wx:if="{{material.status === 'processing' || material.status === 'pending'}}" class="trade-note">资料尚未公开，当前提交处理完成前不能修改或替换文件。</view><view wx:if="{{material.status === 'held'}}" class="notice warning">资料正在版权或安全核查，暂停新售卖与文件签发，请等待处理。</view><view wx:if="{{material.status === 'published' || material.status === 'offline'}}" class="trade-row"><button class="secondary grow" bindtap="availability" disabled="{{!!busy || conflict}}" loading="{{busy === 'availability'}}">{{material.status === 'published' ? '下架以修改文件' : '恢复已审核版本上架'}}</button></view><view class="trade-note">改价只影响新订单；替换文件需产生新版本并重新审核，既有订单保持购买时的版本。</view></view>
+   <view wx:if="{{notice}}" class="notice">{{notice}}</view><view wx:if="{{error}}" class="notice error" aria-role="alert">{{error}}</view>
+   <view wx:if="{{conflict}}" class="trade-panel"><view class="trade-note">资料已更新，请核对最新版本。</view><button class="secondary full" bindtap="reloadLatest" disabled="{{!!busy}}">核对并载入最新资料</button></view>
+   <view wx:if="{{access !== 'approved'}}" class="notice warning">当前资格无法进行资料提交。已有输入仍保留在本机。</view>
+   <view class="trade-panel">
+    <view class="section-title">01 / 资料信息</view>
+    <label class="trade-label" for="material-title">资料标题</label><input id="material-title" class="trade-input" data-key="title" value="{{title}}" bindinput="input" disabled="{{!!busy || !canEdit}}" maxlength="-1" aria-label="资料标题，最多60字"/><view class="trade-counter">{{titleCount}} / 60</view><view wx:if="{{fieldErrors.title}}" class="notice error">{{fieldErrors.title}}</view>
+    <label class="trade-label" for="material-course">课程</label><input id="material-course" class="trade-input" data-key="course" value="{{course}}" bindinput="input" disabled="{{!!busy || !canEdit}}" maxlength="-1" aria-label="课程，最多60字"/><view wx:if="{{fieldErrors.course}}" class="notice error">{{fieldErrors.course}}</view>
+    <view class="trade-label">资料类型</view><picker range="{{types}}" bindchange="type" disabled="{{!!busy || !canEdit}}"><view class="trade-input trade-row">{{type}}<text class="grow"/><image class="icon-small" src="/static/campus/next.svg" aria-hidden="true"/></view></picker>
+    <label class="trade-label" for="material-description">说明与适用范围</label><textarea id="material-description" class="trade-textarea" data-key="description" value="{{description}}" bindinput="input" disabled="{{!!busy || !canEdit}}" maxlength="-1" adjust-position="{{true}}" cursor-spacing="28" aria-label="资料描述，2到2000字"/><view class="trade-counter">{{descriptionCount}} / 2000</view><view wx:if="{{fieldErrors.description}}" class="notice error">{{fieldErrors.description}}</view>
+    <view class="trade-label">适合的学习模式</view><view class="trade-grid"><button wx:for="{{modeOptions}}" wx:key="value" class="trade-chip {{item.selected ? 'selected' : ''}}" data-value="{{item.value}}" bindtap="mode" disabled="{{!!busy || !canEdit}}" aria-pressed="{{item.selected}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{item.value}}</button></view><view wx:if="{{fieldErrors.learningModes}}" class="notice error">{{fieldErrors.learningModes}}</view><view class="trade-note">按发布者标签进行规则匹配，不代表AI分析或成绩保证。</view>
+    <label class="trade-label" for="material-price">价格（元）</label><input id="material-price" class="trade-input" type="digit" data-key="price" value="{{price}}" bindinput="input" disabled="{{!!busy || access !== 'approved'}}" aria-label="价格，0表示免费"/><view wx:if="{{fieldErrors.price}}" class="notice error">{{fieldErrors.price}}</view><view class="trade-note">0表示免费；金额由服务端以整数分确认。付费暂未启用。</view><button wx:if="{{material}}" class="secondary full" bindtap="changePrice" disabled="{{!!busy || conflict || access !== 'approved' || material.status === 'held'}}" loading="{{busy === 'price'}}">仅更新新订单价格</button>
+    <button wx:if="{{canEdit}}" class="secondary full" bindtap="saveDraft" disabled="{{!!busy || conflict}}" loading="{{busy === 'save'}}">保存资料信息</button>
+   </view>
+   <view class="trade-panel">
+    <view class="section-title">02 / PDF文件</view><view wx:if="{{fileName}}" class="file-summary"><image class="icon" src="/static/campus/file.svg" aria-hidden="true"/><view class="grow"><view class="trade-value">{{fileName}}</view><view class="trade-note">{{fileSize}} bytes · {{uploadStatus || '尚未上传'}}</view></view></view>
+    <view wx:if="{{busy === 'upload' || percent > 0}}" class="trade-progress"><view class="trade-progress-fill" style="transform:scaleX({{percent / 100}})"/></view><view wx:if="{{busy === 'upload'}}" class="trade-note" aria-live="polite">正在上传 {{percent}}%，请勿重复提交。</view>
+    <button wx:if="{{canEdit}}" class="secondary full" bindtap="choose" disabled="{{!!busy || conflict}}" loading="{{busy === 'choose'}}">{{fileName ? '选择另一份PDF（新上传）' : '选择PDF并开始上传'}}</button>
+    <button wx:if="{{canEdit && fileName && (!uploadStatus || uploadStatus === 'uploading')}}" class="secondary full" bindtap="retryUpload" disabled="{{!!busy || conflict}}" loading="{{busy === 'upload'}}">继续上传缺失分块</button>
+    <button wx:if="{{uploadId}}" class="secondary full" bindtap="checkUpload" disabled="{{!!busy}}" loading="{{busy === 'status'}}">刷新文件处理状态</button>
+    <view wx:if="{{uploadStatus === 'queued' || uploadStatus === 'processing'}}" class="notice">服务端正在处理，尚未审核通过。任务会定时推进，请稍后刷新。</view>
+    <view wx:if="{{pageCount}}" class="file-record"><view class="trade-row"><text class="grow">服务端页数</text><text>{{pageCount}}页</text></view><view class="trade-note">SHA256 · {{sha256}}</view></view>
+    <view class="trade-footer">上传分块24小时后到期；未提交且无有效引用的封存文件7天后清理。解析、重建失败或检测到不支持内容时拒收。</view>
+   </view>
+   <view wx:if="{{uploadStatus === 'ready'}}" class="trade-panel">
+    <view class="section-title">03 / 确认目录与独立试读</view><view class="trade-note">书签仅生成建议，需逐项核对。没有书签时手动填写，每行“章节标题 | 页码”，最多80项。</view>
+    <label class="trade-label" for="material-catalog">章节目录</label><textarea id="material-catalog" class="trade-textarea catalog-input" data-key="catalogInput" value="{{catalogInput}}" bindinput="input" disabled="{{!!busy || !canEdit}}" maxlength="-1" cursor-spacing="28" adjust-position="{{true}}" aria-label="章节目录，每行标题竖线页码"/>
+    <label class="trade-label" for="material-preview">试读页码</label><input id="material-preview" class="trade-input" data-key="previewInput" value="{{previewInput}}" bindinput="input" disabled="{{!!busy || !canEdit}}" placeholder="例如：1,2" aria-label="1到2个试读页码，用逗号分隔"/><view class="trade-note">服务端将只抽取这1–2页生成独立试读PDF，未购买者不会拿到完整原件。</view>
+    <checkbox-group bindchange="original"><label class="trade-check"><checkbox value="confirmed" checked="{{originalConfirmed}}" disabled="{{!!busy || !canEdit}}" color="#0878BD"/><text>我确认拥有原创或合法发布权利，不包含未经授权试卷、第三方作品或个人隐私。</text></label></checkbox-group>
+   </view>
+   </block>
+  </block>
+ </view>
+ <view wx:if="{{!previewMaterial || access !== 'approved'}}" class="sticky-actions"><button class="secondary" bindtap="cancel" disabled="{{!!busy}}">保留并离开</button><button class="primary" bindtap="submit" disabled="{{!!busy || !canSubmit || conflict}}" loading="{{busy === 'submit'}}">{{busy === 'submit' ? '正在提交' : '提交人工核查'}}</button></view>
+</view>

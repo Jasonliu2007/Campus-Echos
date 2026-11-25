@@ -1,0 +1,12 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}"><view class="content">
+<view class="experience-head">
+  <view class="section-title">学长学姐经验社区</view>
+  <view class="sub">升学、实习、竞赛与课程经验</view>
+  <view class="row experience-actions"><button class="secondary grow" bindtap="search">搜索经验</button><button class="primary grow" bindtap="publish">分享经验</button></view>
+</view>
+<view class="row experience-filters" role="tablist" aria-label="经验筛选">
+  <button class="chip {{filter !== 'recommended' ? 'active' : ''}}" data-value="" bindtap="changeFilter" aria-selected="{{filter !== 'recommended'}}">全部</button>
+  <button class="chip {{filter === 'recommended' ? 'active' : ''}}" data-value="recommended" bindtap="changeFilter" aria-selected="{{filter === 'recommended'}}">推荐</button>
+</view>
+<campus-state wx:if="{{loading && !items.length}}" kind="loading" title="正在读取经验"/><campus-state wx:elif="{{error}}" kind="error" title="暂时无法读取" description="{{error}}" action="重试" bind:action="retry"/><campus-state wx:elif="{{access !== 'approved'}}" kind="access" title="需要获准内测资格" action="查看资格" bind:action="goAccess"/><campus-state wx:elif="{{!items.length}}" title="{{filter === 'recommended' ? '暂时没有管理员推荐' : '暂无经验分享'}}"  action="投稿" bind:action="publish"/>
+<view wx:if="{{wallNotice || sessionNotice}}" class="notice">{{wallNotice || sessionNotice}}</view><campus-post wx:for="{{items}}" wx:key="_id" post="{{item}}" reduced-motion="{{reducedMotion}}" bind:open="openPost"/><view wx:if="{{pageError}}" class="notice error">{{pageError}}</view><button wx:if="{{hasMore}}" class="secondary full" bindtap="loadMore" disabled="{{loadingMore}}" hover-class="press" hover-start-time="0" hover-stay-time="120">{{loadingMore ? '加载中' : '加载更多'}}</button></view></view>

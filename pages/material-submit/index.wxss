@@ -1,0 +1,3 @@
+@import "../material-detail/reading.wxss";
+@import "../../components/campus-ui/trade.wxss";
+.file-summary{display:flex;align-items:flex-start;gap:20rpx;margin:24rpx 0;padding:24rpx;border:2rpx solid #D2E4F0;border-radius:24rpx;background:#F5FAFE;word-break:break-word}.file-record{padding:20rpx;background:#F4F9FD;border-radius:20rpx;margin-top:20rpx}.file-record .trade-note{font-size:23rpx;word-break:break-all}.catalog-input{min-height:340rpx}.trade-panel>.full{margin-top:20rpx}.trade-check checkbox{flex:none}.trade-grid .trade-chip{transition:background-color 160ms ease-out,transform 120ms ease-out,opacity 120ms ease-out}.reduced .trade-chip{transition:none}@media(prefers-reduced-motion:reduce){.trade-grid .trade-chip{transition:none}}

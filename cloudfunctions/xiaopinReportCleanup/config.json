@@ -1,0 +1,5 @@
+{
+  "triggers": [
+    { "name": "report-evidence-daily", "type": "timer", "config": "0 10 3 * * * *" }
+  ]
+}

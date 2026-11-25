@@ -1,0 +1,13 @@
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}"><view class="content trade-wrap"><view class="trade-head"><view class="trade-title">我上架的资料</view><view class="trade-note">文件替换产生新版本，旧订单仍保留购买时的版本。</view></view><button class="primary full" bindtap="create">新建原创PDF资料</button><view wx:if="{{!loading && !error}}" class="trade-panel">
+  <view class="section-title">卖家工具包服务费</view>
+  <view class="trade-note">按预计成交额的 5% 计费。</view>
+  <input class="trade-input" type="digit" maxlength="11" value="{{expectedSales}}" bindinput="updateExpectedSales" placeholder="预计成交额（元）" aria-label="预计成交额（元）" />
+  <button class="secondary full" bindtap="quoteFee" loading="{{feeBusy}}" disabled="{{feeBusy}}">计算服务费</button>
+  <view wx:if="{{feeQuote}}" class="trade-note">预计成交额 {{feeQuote.sales}} · 平台服务费 {{feeQuote.fee}}</view>
+  <button wx:if="{{feeQuote.checkout && feeStatus !== 'paid'}}" class="primary full" bindtap="paySellerFee" disabled="{{feeBusy}}">微信支付 {{feeQuote.fee}}</button>
+  <view wx:elif="{{feeQuote && !feeQuote.checkout}}" class="trade-note">当前金额暂未开放购买。</view>
+  <view wx:if="{{feeOrderId}}" class="trade-note">{{feeStatus === 'paid' ? '服务费已付款' : feeStatus === 'refunded' ? '服务费已退款' : feeStatus === 'closed' ? '订单已关闭' : '待微信确认付款'}}</view>
+  <button wx:if="{{feeOrderId && feeStatus === 'pending'}}" class="secondary full" bindtap="refreshFeePayment" disabled="{{feeBusy}}">查询付款结果</button>
+  <view wx:if="{{feeError}}" class="notice warning">{{feeError}}</view>
+</view>
+<campus-state wx:if="{{loading}}" kind="loading" title="正在读取资料"/><campus-state wx:elif="{{error}}" kind="error" title="读取失败" description="{{error}}" action="重试" bind:action="retry"/><campus-state wx:elif="{{!items.length}}" title="还没有资料" description="先准备未加密PDF及原创声明，再填写目录与试读页。"/><button wx:for="{{items}}" wx:key="_id" class="trade-list" data-id="{{item._id}}" bindtap="open"><view class="trade-status">{{item.statusLabel}}</view><view class="trade-list-title">{{item.title}}</view><view class="trade-note">{{item.course}} · {{item.displayPrice}}</view><view wx:if="{{item.reviewReason}}" class="notice warning">{{item.reviewReason}}</view></button><button wx:if="{{hasMore}}" class="secondary full" bindtap="more" disabled="{{loadingMore}}" loading="{{loadingMore}}">加载更多</button></view></view>

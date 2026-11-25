@@ -46,23 +46,17 @@ Page({
     }
   },
   input(e) {
-    const key = e.currentTarget.dataset.key,
-      max = key === 'nickname' ? 16 : 200;
-    const value = e.detail.value;
-    this.setData({
-      [key]: value,
-      error: '',
-      [key+'Error']:'',
-      focusNickname:false,
-      focusReason:false
-    });
+    const key = e.currentTarget.dataset.key;
+    if (!['nickname', 'reason'].includes(key)) return;
+    this.setData({ [key]: e.detail.value, error: '', [key + 'Error']: '' });
     this.updateLeaveAlert();
-    return value
   },
   updateLeaveAlert() {
-    const dirty=this.data.access==='none' && (this.data.nickname.trim() || this.data.reason.trim());
-    if(dirty && wx.enableAlertBeforeUnload) wx.enableAlertBeforeUnload({message:'内测申请尚未提交，离开会丢失本次输入。'});
-    else if(wx.disableAlertBeforeUnload) wx.disableAlertBeforeUnload();
+    const dirty = this.data.access === 'none' && !!(this.data.nickname.trim() || this.data.reason.trim());
+    if (dirty === this._leaveAlertArmed) return;
+    this._leaveAlertArmed = dirty;
+    if (dirty) wx.enableAlertBeforeUnload?.({ message: '内测申请尚未提交。' });
+    else wx.disableAlertBeforeUnload?.();
   },
   terms(e) {
     this.setData({
@@ -70,7 +64,7 @@ Page({
     })
   },
   explain() {
-    wx.showModal({ title:'资格重新核对', content:'请向项目负责人说明情况。管理员核对后可重新批准当前账号；此页不会重复提交或覆盖原申请。', showCancel:false, confirmColor:'#0878BD' });
+    wx.showModal({ title:'资格重新核对', content:'请向项目负责人说明情况。管理员核对后可重新批准当前账号。', showCancel:false, confirmColor:'#0878BD' });
   },
   async submit() {
     if (this.data.submitting) return;
@@ -79,7 +73,7 @@ Page({
     const nicknameError = Array.from(nickname).length < 2 || Array.from(nickname).length > 16 ? '昵称请填写 2–16 字。' : '';
     const reasonError = Array.from(reason).length < 2 || Array.from(reason).length > 200 ? '申请说明请填写 2–200 字。' : '';
     if (nicknameError || reasonError || !this.data.terms) {
-      this.setData({nicknameError,reasonError,error:!this.data.terms?'请阅读并勾选内测规则。':'请检查标出的字段，输入会保留。',focusNickname:!!nicknameError,focusReason:!nicknameError && !!reasonError});
+      this.setData({nicknameError,reasonError,error:!this.data.terms?'请阅读并勾选内测规则。':'请检查标出的字段。'});
       return;
     }
     this.setData({

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我上架的资料",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  }
+}

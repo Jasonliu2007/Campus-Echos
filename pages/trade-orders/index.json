@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "买入与卖出",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  }
+}

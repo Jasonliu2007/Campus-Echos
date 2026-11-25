@@ -1,0 +1,2 @@
+@import "../../components/campus-ui/trade.wxss";
+.trade-title{margin:16rpx 0}.trade-panel>.trade-value{margin:20rpx 0}.trade-panel>.full{margin-top:24rpx}.trade-check checkbox{flex:none}.trade-row{word-break:break-word}.trade-note{overflow-wrap:anywhere}

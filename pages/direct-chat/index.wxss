@@ -1,0 +1,71 @@
+@import "../../components/campus-ui/page.wxss";
+
+page { height: 100%; }
+.chat-page { height: 100%; display: flex; flex-direction: column; }
+.chat-head {
+  display: flex; align-items: center; gap: 18rpx; padding: 12rpx 24rpx;
+  min-height: 88rpx; background: #E8F5FC; border-bottom: 1px solid #D4E6F2;
+}
+.face { width: 58rpx; height: 58rpx; border-radius: 50%; flex: none; }
+.peer { min-width: 0; flex: 1; font-weight: 650; overflow-wrap: anywhere; }
+.more {
+  min-width: 44px; min-height: 44px; padding: 0;
+  font-size: 36rpx; background: transparent; color: var(--ce-ink);
+}
+.history { flex: 1; min-height: 0; }
+.message { display: flex; align-items: flex-end; gap: 12rpx; margin: 18rpx 22rpx; }
+.message.mine { justify-content: flex-end; }
+.tiny { width: 42rpx; height: 42rpx; }
+.bubble {
+  max-width: 76%; min-width: 0; padding: 16rpx 22rpx;
+  background: var(--ce-reading); border: 1px solid #D4E6F2; border-radius: 26rpx;
+  line-height: 1.45; overflow-wrap: anywhere; white-space: pre-wrap;
+}
+.mine .bubble { background: #D5EBFA; border-color: #BDDDF2; }
+.compose-bar, .request {
+  background: var(--ce-content); border-top: 1px solid #D4E6F2;
+}
+@supports ((-webkit-backdrop-filter: blur(18px)) or (backdrop-filter: blur(18px))) {
+  .compose-bar, .request {
+    background: var(--ce-glass); -webkit-backdrop-filter: blur(18px); backdrop-filter: blur(18px);
+  }
+}
+.solid .compose-bar, .solid .request {
+  background: var(--ce-content); -webkit-backdrop-filter: none; backdrop-filter: none;
+}
+@media (prefers-reduced-transparency: reduce) {
+  .compose-bar, .request {
+    background: var(--ce-content); -webkit-backdrop-filter: none; backdrop-filter: none;
+  }
+}
+.composer {
+  display: flex; align-items: center; gap: 12rpx;
+}
+.compose-bar { padding: 14rpx 22rpx; padding-bottom: calc(14rpx + env(safe-area-inset-bottom)); }
+.compose-bar.keyboard { padding-bottom: 14rpx; }
+.compose-input {
+  flex: 1; min-width: 0; height: 44px; padding: 0 23rpx; font-size: max(16px, 30rpx);
+  background: #EAF4FC; border: 1px solid #D4E6F2; border-radius: 36rpx;
+}
+.direct-placeholder, .chat-feedback, .request { color: var(--ce-muted); }
+.small {
+  min-height: 44px; padding: 0 24rpx; line-height: 44px; border-radius: 32rpx;
+  background: #E8F3FB; color: var(--ce-ink);
+}
+.small.accent { background: #0769AD; color: #fff; }
+.small[disabled] { background: #DFECF5; color: var(--ce-muted); opacity: 1; }
+.chat-feedback, .request { padding: 18rpx 22rpx; }
+
+.request-actions { display: flex; gap: 14rpx; margin-top: 12rpx; }
+
+.small.attach { width: 44px; padding: 0; border-radius: 50%; flex: none; font-size: 38rpx; }
+.attachment-draft { display: flex; align-items: center; gap: 10rpx; margin-bottom: 12rpx; color: var(--ce-muted); font-size: 24rpx; }
+.attachment-draft image { width: 62rpx; height: 62rpx; border-radius: 12rpx; }
+.attachment-draft .small { padding: 0 12rpx; }
+.attachment-link { color: #0769AD; background: transparent; min-height: 44px; padding: 0; }
+.history { padding-top: 22rpx; box-sizing: border-box; }
+.trade-context, .quote-message { color: var(--ce-ink); background: #E8F5FC; text-align: left; }
+.trade-context { display: flex; justify-content: space-between; min-height: 44px; border-radius: 0; padding: 14rpx 24rpx; }
+.quote-message { display: flex; flex-direction: column; align-items: flex-start; gap: 6rpx; min-height: 44px; padding: 10rpx 14rpx; }
+.quote-amount { font-size: 36rpx; font-weight: 700; color: #0769AD; }
+.quote-action { margin-bottom: 8rpx; }

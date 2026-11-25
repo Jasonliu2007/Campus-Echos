@@ -1,0 +1,35 @@
+<view class="chat-page {{reducedTransparency ? 'solid' : ''}}" style="padding-bottom:{{keyboard}}px">
+  <view wx:if="{{thread}}" class="chat-head">
+    <image class="face" src="/static/presets/avatar-1.jpg" mode="aspectFill" />
+    <text class="peer">{{thread.name}}</text>
+    <button wx:if="{{thread.status !== 'new'}}" class="more" bindtap="more" aria-label="会话操作">···</button>
+  </view>
+  <button wx:if="{{trade}}" class="trade-context" data-type="{{trade.type}}" data-id="{{trade.id}}" bindtap="openTrade">
+    <text>{{trade.type === 'order' ? '订单' : '学习资料'}} · {{trade.title}}</text><text aria-hidden="true">›</text>
+  </button>
+  <view wx:if="{{error}}" class="chat-feedback" role="alert">{{error}}<button wx:if="{{!thread}}" class="small" bindtap="load">重试</button></view>
+  <scroll-view class="history" scroll-y scroll-into-view="{{anchor}}">
+    <view wx:for="{{messages}}" wx:key="id" id="message-{{item.id}}" class="message {{item.mine ? 'mine' : ''}}">
+      <image wx:if="{{!item.mine}}" class="face tiny" src="/static/presets/avatar-1.jpg" mode="aspectFill" />
+      <view class="bubble">
+        <button wx:if="{{item.quote}}" class="quote-message" data-type="{{item.quote.type}}" data-id="{{item.quote.id}}" bindtap="openTrade"><text class="sub">报价 · {{item.quote.title}}</text><text class="quote-amount">¥{{item.quoteAmount}}</text></button>
+        <text wx:if="{{item.content}}" user-select>{{item.content}}</text>
+        <button wx:if="{{item.hasAttachment}}" class="attachment-link" data-id="{{item.id}}" bindtap="openAttachment">查看图片</button>
+      </view>
+    </view>
+  </scroll-view>
+  <view wx:if="{{thread}}" class="compose-bar {{keyboard ? 'keyboard' : ''}}">
+    <view wx:if="{{attachment}}" class="attachment-draft">
+      <image src="{{attachment.path}}" mode="aspectFill" />
+      <text>{{attachment.status === 'approved' ? '图片' : attachment.status === 'checking' || attachment.status === 'uploading' ? '图片审核中' : '请更换图片'}}</text>
+      <button wx:if="{{attachment.status === 'checking' || attachment.status === 'uploading'}}" class="small" bindtap="checkAttachment">刷新</button>
+      <button class="small" bindtap="removeAttachment" aria-label="移除图片">移除</button>
+    </view>
+    <button wx:if="{{trade}}" class="text-button quote-action" bindtap="quote" disabled="{{!canSend || busy || selecting}}">发送报价</button>
+    <view class="composer">
+      <button class="small attach" bindtap="addAttachment" disabled="{{!canSend || busy || selecting}}" aria-label="添加图片">＋</button>
+      <input class="compose-input" value="{{draft}}" bindinput="input" placeholder="{{canSend ? '发消息…' : '收到回复后可继续发送'}}" placeholder-class="direct-placeholder" aria-label="私信内容" maxlength="500" disabled="{{!canSend || busy}}" adjust-position="{{false}}" bindkeyboardheightchange="keyboard" bindblur="blur" confirm-type="send" bindconfirm="send" />
+      <button class="small accent" bindtap="send" disabled="{{!canSend || busy || selecting || (!draft && !attachment) || (attachment && attachment.status !== 'approved')}}" loading="{{busy}}">发送</button>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "资料详情",
+  "usingComponents": {
+    "campus-state": "/components/campus-state/index"
+  }
+}

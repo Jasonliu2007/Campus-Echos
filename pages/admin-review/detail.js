@@ -1,10 +1,11 @@
 const C = require('../../utils/campus');
+const Media = require('../../utils/forum-media');
 Page({
   data: {
     loading: true,
     error: '',
     post: null,
-    reason: '',
+    reason: '', images: [], identity: null, identityReason: '', identityBusy: false,
     processing: false,
     admin: false,
     reducedMotion: false,
@@ -14,6 +15,7 @@ Page({
     this.postId = q.id
   },
   onShow() {
+    this._visible = true;
     this.setData({
       reducedMotion: C.getReducedMotion(),
       reducedTransparency: C.getReducedTransparency()
@@ -23,12 +25,14 @@ Page({
   async load() {
     if (this._loading) return;
     this._loading = true;
+    const epoch = this._epoch = (this._epoch || 0) + 1;
     this.setData({
       loading: true,
       error: ''
     });
     try {
       const s = await C.callWall('session');
+      if (this._visible === false || epoch !== this._epoch) return;
       const isAdmin = s.access === 'approved' && s.member.role === 'admin';
       this.setData({
         admin: isAdmin
@@ -37,21 +41,34 @@ Page({
       const r = await C.callWall('getPost', {
         postId: this.postId
       });
-      this.setData({
-        post: C.formatPost(r.post)
-      })
+      const images = await Media.hydrate(r.post);
+      if (this._visible === false || epoch !== this._epoch) return;
+      this.setData({ post: C.formatPost(r.post), images });
     } catch (e) {
+      if (this._visible === false || epoch !== this._epoch) return;
       this.setData({
         error: e.message,
         post: null
       })
     } finally {
+      if (this._visible === false || epoch !== this._epoch) return;
       this._loading = false;
       this.setData({
         loading: false
       })
     }
   },
+  identityInput(e) { this.setData({ identityReason: e.detail.value }); return e.detail.value; },
+  async inspectIdentity() {
+    if (this.data.identityBusy || !this.data.admin) return;
+    const reason = this.data.identityReason.trim(); if (Array.from(reason).length < 2 || Array.from(reason).length > 200) { this.setData({ error: '核查身份前请填写2–200字原因。' }); return; }
+    const epoch = this._epoch;
+    this.setData({ identityBusy: true, error: '' });
+    try { const result = await C.callWall('getPostAuthor', { postId: this.postId, reason }); if (this._visible === false || epoch !== this._epoch) return; this.setData({ identity: result.author }); }
+    catch (error) { if (this._visible !== false && epoch === this._epoch) this.setData({ error: error.message, identity: null }); }
+    finally { if (this._visible !== false && epoch === this._epoch) this.setData({ identityBusy: false }); }
+  },
+  previewImage(e) { const row = this.data.images.find(x => x.mediaId === e.currentTarget.dataset.id); if (row?.url) wx.previewImage({ current: row.url, urls: this.data.images.map(x => x.url).filter(Boolean) }); },
   updateReasonLeaveAlert() {
     const dirty = !!this.data.reason.trim();
     if (dirty && wx.enableAlertBeforeUnload) {
@@ -62,7 +79,9 @@ Page({
       this._reasonLeaveAlert = false;
     }
   },
+  onHide() { this._visible = false; this._epoch = (this._epoch || 0) + 1; this._loading = false; this.setData({ identity: null, identityBusy: false, processing: false }); },
   onUnload() {
+    this.onHide();
     if (this._reasonLeaveAlert && wx.disableAlertBeforeUnload) wx.disableAlertBeforeUnload();
     this._reasonLeaveAlert = false;
   },
@@ -79,6 +98,7 @@ Page({
   },
   async decide(e) {
     if (this.data.processing || this._confirming || !this.data.post) return;
+    const epoch = this._epoch;
     const decision = e.currentTarget.dataset.decision,
       reason = this.data.reason.trim();
     if (decision !== 'approve' && (Array.from(reason).length < 2 || Array.from(reason).length > 200)) {
@@ -102,7 +122,7 @@ Page({
       confirmColor: decision === 'approve' ? '#0878BD' : '#B83D49'
     });
     this._confirming = false;
-    if (!yes) return;
+    if (!yes || this._visible === false || epoch !== this._epoch) return;
     this.setData({
       processing: true,
       error: ''
@@ -116,6 +136,7 @@ Page({
           decision
         })
       });
+      if (this._visible === false || epoch !== this._epoch) return;
       wx.showToast({
         title: '已' + labels[decision],
         icon: 'success'
@@ -126,6 +147,7 @@ Page({
       this.updateReasonLeaveAlert();
       await this.load()
     } catch (e) {
+      if (this._visible === false || epoch !== this._epoch) return;
       if (e.code === 'CONFLICT' || e.code === 'CONTENT_REJECTED') {
         await this.load();
         this.setData({
@@ -135,7 +157,7 @@ Page({
         error: e.message
       })
     } finally {
-      this.setData({
+      if (this._visible !== false) this.setData({
         processing: false
       })
     }

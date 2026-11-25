@@ -1,0 +1,19 @@
+<import src="./reading.wxml" />
+<view class="page {{reducedMotion ? 'reduced' : ''}} {{reducedTransparency ? 'solid' : ''}}">
+  <view class="content with-actions material-content">
+    <campus-state wx:if="{{loading}}" kind="loading" title="正在读取资料" reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}"/>
+    <campus-state wx:elif="{{!material}}" kind="error" title="资料暂不可查看" description="{{error}}" action="重新加载" bind:action="load" reduced-motion="{{reducedMotion}}" reduced-transparency="{{reducedTransparency}}"/>
+    <block wx:else>
+      <template is="material-heading" data="{{material: material}}" />
+      <view wx:if="{{material.reviewReason}}" class="notice warning">审核说明：{{material.reviewReason}}</view>
+      <view class="row material-jumps"><button class="secondary grow" bindtap="contents">章节目录</button><button class="secondary grow" bindtap="preview" loading="{{busy === 'preview'}}" disabled="{{!!busy}}">打开独立试读</button></view>
+      <button wx:if="{{!material.isOwner && material.status === 'published'}}" class="secondary full" bindtap="contactSeller">私信发布者</button>
+      <template is="material-contents" data="{{material: material}}" />
+      <view class="reading-panel"><view class="panel-title">适合怎样学习</view><picker range="{{modes}}" bindchange="mode"><view class="list-link">{{selectedMode || '选择学习模式'}}<image class="icon-small" src="/static/campus/next.svg" aria-hidden="true"/></view></picker><view class="summary-text">{{matching.reason}}</view><view wx:for="{{matching.details}}" wx:key="*this" class="paper-point"><text>{{index + 1}}. {{item}}</text></view><view class="sub">{{matching.source}}</view></view>
+      <view class="notice">完整原件保持私有，领取的是带随机购买者代号与订单短号的专属副本。已下载文件无法远程收回。</view>
+      <view wx:if="{{!paidEnabled && material.priceCents > 0}}" class="notice warning">付费入口暂未开放，可查看目录与试读。</view><view wx:if="{{error}}" class="notice error" aria-role="alert">{{error}}</view>
+      <button wx:if="{{!material.isOwner}}" class="text-button full" bindtap="report">资料版权或安全投诉</button>
+    </block>
+  </view>
+  <view wx:if="{{material}}" class="sticky-actions"><button class="secondary" bindtap="contents">回到目录</button><button wx:if="{{material.isOwner}}" class="primary" bindtap="edit">管理我的资料</button><button wx:else class="primary" bindtap="acquire" loading="{{busy === 'acquire'}}" disabled="{{!!busy || material.status !== 'published' || (material.priceCents > 0 && !paidEnabled)}}">{{material.priceCents === 0 ? '领取专属PDF' : paidEnabled ? '创建订单' : '付费暂未开放'}}</button></view>
+</view>

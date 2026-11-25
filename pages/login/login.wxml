@@ -1,6 +1,7 @@
+<view class="legacy-notice" aria-role="text">历史模板 · 未启用。现行入口请使用校园回声四个主页面。</view>
 <t-navbar left-arrow />
 <view class="page login">
-  <view class="login__title"> 欢迎登录 TDsign </view>
+  <view class="login__title"> 欢迎登录 校园回声 </view>
   <view class="login__content">
     <view class="login__input">
       <view class="login__password" wx:if="{{isPasswordLogin}}">

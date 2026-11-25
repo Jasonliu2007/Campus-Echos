@@ -7,27 +7,56 @@
     "pages/notes-ai/index",
     "pages/wall-publish/index",
     "pages/wall-detail/index",
+    "pages/direct-inbox/index",
+    "pages/direct-chat/index",
     "pages/my-posts/index",
     "pages/access/index",
     "pages/admin-review/index",
     "pages/admin-review/detail",
     "pages/admin-members/index",
-    "pages/setting/index"
+    "pages/setting/index",
+    "pages/report-post/index",
+    "pages/my-reports/index",
+    "pages/my-reports/detail",
+    "pages/admin-reports/index",
+    "pages/admin-reports/detail",
+    "pages/wechat-login/index",
+    "pages/material-detail/index",
+    "pages/material-demo/index",
+    "pages/material-submit/index",
+    "pages/my-materials/index",
+    "pages/trade-orders/index",
+    "pages/trade-order/index",
+    "pages/trade-support/index",
+    "pages/trade-payment/index",
+    "pages/admin-trade/index",
+    "pages/admin-material/index",
+    "pages/wall-search/index",
+    "pages/experience/index",
+    "pages/admin-comments/index",
+    "pages/campus-email/index"
   ],
   "usingComponents": {},
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#fff",
+    "navigationBarBackgroundColor": "#E4F3FD",
     "navigationBarTitleText": "校园回声",
     "navigationBarTextStyle": "black",
-    "backgroundColor": "#F4F9FC"
+    "backgroundColor": "#DFEFFA",
+    "backgroundColorTop": "#DFEFFA",
+    "backgroundColorBottom": "#DFEFFA"
   },
   "tabBar": {
     "custom": true,
+    "backgroundColor": "#DFEFFA",
     "list": [
       {
         "pagePath": "pages/campus-wall/index",
-        "text": "校园墙"
+        "text": "论坛"
+      },
+      {
+        "pagePath": "pages/direct-inbox/index",
+        "text": "私信"
       },
       {
         "pagePath": "pages/materials/index",
